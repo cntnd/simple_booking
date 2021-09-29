@@ -13,5 +13,5 @@ ALTER TABLE `cntnd_simple_booking_config`
   ADD KEY `idart` (`idart`);
 
 ALTER TABLE `cntnd_simple_booking_config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 COMMIT;
