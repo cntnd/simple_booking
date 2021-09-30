@@ -14,6 +14,10 @@ $subject_reserved = "CMS_VALUE[6]";
 if (empty($subject_reserved)){
     $subject_reserved = mi18n("DEFAULT_SUBJECT_RESERVED");
 }
+$recurrent = "CMS_VALUE[7]";
+if (!is_bool($recurrent)){
+    $recurrent = true;
+}
 
 // other/vars
 
@@ -60,6 +64,11 @@ cInclude('module', 'includes/style.cntnd_simple_booking_input.php');
     </div>
 
     <input id="reset_config" type="hidden" name="CMS_VAR[2]" value="" />
+  </div>
+
+  <div class="form-check form-check-inline">
+    <input id="recurrent" class="form-check-input" type="checkbox" name="CMS_VAR[7]" data-day="6" value="true" <?php if($recurrent){ echo 'checked'; } ?> />
+    <label for="recurrent" class="form-check-label"><?= mi18n("RECURRENT") ?></label>
   </div>
 
   <hr />

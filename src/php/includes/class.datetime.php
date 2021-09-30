@@ -41,6 +41,29 @@ class DateTimeUtil
         return array(new DateTime($dates[0]), new DateTime($dates[1]));
     }
 
+    public static function getDateFromDaterange($daterange, $index)
+    {
+        $dates = self::getDatesFromDaterange($daterange);
+        if ($index>0){
+            $date = $dates[0];
+            $date->modify('+'.$index.' day');
+            return $date;
+        }
+        return $dates[0];
+    }
+
+    public static function getFirstDateFromDaterange($daterange)
+    {
+        var_dump($daterange);
+        return self::getDateFromDaterange($daterange,0);
+    }
+
+    public static function getLastDateFromDaterange($daterange)
+    {
+        $dates = self::getDatesFromDaterange($daterange);
+        return $dates[1];
+    }
+
     public static function getStringsFromDaterange($daterange)
     {
         return explode(" - ", $daterange);
@@ -74,7 +97,10 @@ class DateTimeUtil
 
     public static function getIndexFromDate($date)
     {
-        $dt = new DateTime($date);
+        $dt = $date;
+        if (!$date instanceof DateTime) {
+            $dt = new DateTime($date);
+        }
         return ($dt->format("Ymd"));
     }
 
@@ -91,6 +117,12 @@ class DateTimeUtil
         return date("YmdHi", $datetime);
     }
 
+    public static function getRecurrentIndexFromDate($date)
+    {
+        $dt = new DateTime($date);
+        return ($dt->format("w"));
+    }
+
     public static function getReadableTime($seconds)
     {
         $time = self::getHourMinute($seconds);
@@ -100,6 +132,13 @@ class DateTimeUtil
     public static function getReadableTimeFromDate($date)
     {
         $dt = self::checkDateTime($date);
+        return $dt->format('H:i');
+    }
+
+    public static function getReadableTimeFromTime($time)
+    {
+        $d = self::getInsertDate(new DateTime());
+        $dt = new DateTime($d." ".$time);
         return $dt->format('H:i');
     }
 
@@ -117,6 +156,18 @@ class DateTimeUtil
 
     public static function getWeekday($date)
     {
+        $dt = self::checkDateTime($date);
+        return self::getWeekdayByIndex($dt->format('w'));
+    }
+
+    public static function getWeekdayIndex($date)
+    {
+        $dt = self::checkDateTime($date);
+        return $dt->format('w');
+    }
+
+    public static function getWeekdayByIndex($index)
+    {
         $wtag[0] = "So.";
         $wtag[1] = "Mo.";
         $wtag[2] = "Di.";
@@ -124,8 +175,29 @@ class DateTimeUtil
         $wtag[4] = "Do.";
         $wtag[5] = "Fr.";
         $wtag[6] = "Sa.";
-        $dt = self::checkDateTime($date);
-        return $wtag[$dt->format('w')];
+        return $wtag[$index];
+    }
+
+    public static function getLongWeekdayByIndex($index)
+    {
+        $wtag[0] = "Sonntag";
+        $wtag[1] = "Montag";
+        $wtag[2] = "Dienstag";
+        $wtag[3] = "Mittwoch";
+        $wtag[4] = "Donnerstag";
+        $wtag[5] = "Freitag";
+        $wtag[6] = "Samstag";
+        return $wtag[$index];
+    }
+
+    public static function getIndexFromWeekday($weekday){
+        if ($weekday==0){
+            return 7;
+        }
+        else {
+            $index = $weekday - 1;
+            return $index;
+        }
     }
 
     public static function getReadableDate($date)
@@ -209,6 +281,16 @@ class DateTimeUtil
         $d = self::getInsertDate($date);
         $datetime = strtotime($d." ".$time);
         return date("Y-m-d H:i:s", $datetime);
+    }
+
+    public static function getInsertTimeOrNull($time)
+    {
+        if (!empty($time)) {
+            $d = self::getInsertDate(new DateTime());
+            $datetime = strtotime($d . " " . $time);
+            return date("Y-m-d H:i:s", $datetime);
+        }
+        return NULL;
     }
 
     public static function getInsertDay($date)

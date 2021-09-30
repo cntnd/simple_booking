@@ -1,13 +1,13 @@
 <?php
 
-namespace Cntnd;
+//namespace Cntnd\SimpleBooking;
 
 /**
  * cntnd Util Class
  */
 class CntndUtil {
 
-  // JSON Data
+  // Data
 
   public static function escapeData($string){
     $specialchars = htmlspecialchars($string, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
@@ -22,6 +22,23 @@ class CntndUtil {
     }
     $decode = json_decode($base64, true);
     return $decode;
+  }
+
+    public static function emptyIfNull($value, $empty = ""){
+        if (empty($value)){
+            return $empty;
+        }
+        return $value;
+  }
+
+  public static function emptyIfNullObject($object, $key, $empty = array()){
+      if (array_key_exists($key, $object)){
+          if (is_object($object[$key]) || is_array($object[$key])){
+              return $object[$key];
+          }
+          return self::emptyIfNull($object[$key], "");
+      }
+      return $empty;
   }
 
   // endregion
@@ -91,6 +108,14 @@ class CntndUtil {
       return false;
     }
     return false;
+  }
+
+  public static function boolToInt($value){
+      $value = self::toBool($value);
+      if ($value){
+          return 1;
+      }
+      return 0;
   }
 
   // endregion

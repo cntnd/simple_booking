@@ -18,6 +18,7 @@ $subject = array(
     'default'=>$subject_default,
     'declined'=>$subject_declined,
     'reserved'=>$subject_reserved);
+$recurrent = "CMS_VALUE[7]";
 
 $blocked_days[1] = (empty("CMS_VALUE[11]")) ? false : true;
 $blocked_days[2] = (empty("CMS_VALUE[12]")) ? false : true;
@@ -32,6 +33,7 @@ cInclude('module', 'includes/class.datetime.php');
 cInclude('module', 'includes/class.cntnd_simple_booking.php');
 if ($editmode){
   cInclude('module', 'includes/script.cntnd_simple_booking_output.php');
+  cInclude('module', 'includes/style.cntnd_simple_booking_output.php');
 }
 
 // other/vars
@@ -67,7 +69,7 @@ if ($editmode){
     }
   }
 
-  echo '<div class="content_box cntnd_booking"><label class="content_type_label">'.mi18n("MODULE").'</label>';
+  echo '<div class="content_box cntnd_simple-booking"><label class="content_type_label">'.mi18n("MODULE").'</label>';
   echo '<div class="cntnd_alert cntnd_alert-primary">'.mi18n("ADMIN_MODE").'</div>';
   if ($admin_success){
     echo '<hr />';
@@ -140,8 +142,9 @@ if ($editmode){
   echo '<div class="m-2">';
 
   echo '<form method="post" id="cntnd_booking-config" name="cntnd_booking-config">';
-  $simple_booking->renderConfig();
+  $simple_booking->renderConfig($recurrent);
   echo '<input type="hidden" name="cntnd_booking-config" value="save" />';
+  echo '<input type="hidden" name="cntnd_booking-recurrent" value="'.$recurrent.'" />';
   echo '</form>';
 
   echo '</div>';
@@ -158,7 +161,7 @@ else {
   if ($_POST){
     if (CntndSimpleBooking::validate($_POST, $_SESSION['rand'])){
       if (CntndSimpleBooking::validateFree($_POST, $idart)) {
-        $success = $simple_booking->store($_POST);
+        $success = $simple_booking->store($_POST, $recurrent);
         $error = !$success;
         $error_free=false;
       }
@@ -176,7 +179,7 @@ else {
 
   echo '<div class="cntnd_booking">';
   echo '<form method="post" id="cntnd_booking-reservation" name="cntnd_booking-reservation">';
-  $simple_booking->render();
+  $simple_booking->render($recurrent);
 
   // show messages
   $failureMsg=($failure) ? '' : 'hide';
@@ -197,7 +200,12 @@ else {
     echo '<div class="cntnd_alert cntnd_alert-danger">'.mi18n("VALIDATION_FREE_SLOTS").'</div>';
   }
   // use template to display formular
-  $smarty->display('formular_reservation.html');
+  if ($recurrent) {
+    $smarty->display('formular_reservation-recurrent.html');
+  }
+  else {
+    $smarty->display('formular_reservation.html');
+  }
   echo '<button type="submit" class="btn btn-primary">'.mi18n("SAVE").'</button>';
   echo '<button type="reset" class="btn">'.mi18n("RESET").'</button>';
   echo '<input type="hidden" name="required" id="cntnd_booking-required" />';
