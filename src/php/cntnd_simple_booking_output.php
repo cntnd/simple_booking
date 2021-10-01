@@ -18,7 +18,9 @@ $subject = array(
     'default'=>$subject_default,
     'declined'=>$subject_declined,
     'reserved'=>$subject_reserved);
-$recurrent = "CMS_VALUE[7]";
+$recurrent = (bool) "CMS_VALUE[7]";
+$one_click = (bool) "CMS_VALUE[8]";
+$show_daterange = "CMS_VALUE[9]";
 
 $blocked_days[1] = (empty("CMS_VALUE[11]")) ? false : true;
 $blocked_days[2] = (empty("CMS_VALUE[12]")) ? false : true;
@@ -38,7 +40,7 @@ if ($editmode){
 
 // other/vars
 $smarty = cSmartyFrontend::getInstance();
-$simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $subject, $blocked_days, $lang, $client, $idart);
+$simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $subject, $blocked_days, $one_click, $show_daterange, $lang, $client, $idart);
 
 $has_config = $simple_booking->hasConfig();
 
@@ -177,11 +179,26 @@ else {
   $rand = mt_rand();
   $_SESSION['rand']=$rand;
 
+  if ($success){
+    echo '<div class="cntnd_alert cntnd_alert-primary">'.mi18n("SUCCESS").'</div>';
+  }
   echo '<div class="cntnd_booking">';
   echo '<form method="post" id="cntnd_booking-reservation" name="cntnd_booking-reservation">';
-  $simple_booking->render($recurrent);
+
+  $data = $simple_booking->renderData($recurrent);
+  $smarty->assign('data', $data);
+  $smarty->assign('pagination', ($show_daterange!="all"));
+  if ($recurrent) {
+    $smarty->display('reservation_liste-recurrent.html');
+  }
+  else {
+    $smarty->display('reservation_liste.html');
+  }
 
   // show messages
+  if ($_POST && !$success){
+    echo '<div id="cntnd_booking-form"></div>';
+  }
   $failureMsg=($failure) ? '' : 'hide';
   echo '<div class="cntnd_alert cntnd_alert-danger cntnd_booking-validation '.$failureMsg.'">';
   echo mi18n("VALIDATION");
@@ -190,9 +207,6 @@ else {
   echo '<li class="cntnd_booking-validation-dates">'.mi18n("VALIDATION_DATES").'</li>';
   echo '</ul>';
   echo '</div>';
-  if ($success){
-    echo '<div class="cntnd_alert cntnd_alert-primary">'.mi18n("SUCCESS").'</div>';
-  }
   if ($error){
     echo '<div class="cntnd_alert cntnd_alert-danger">'.mi18n("FAILURE").'</li></div>';
   }
@@ -210,6 +224,7 @@ else {
   echo '<button type="reset" class="btn">'.mi18n("RESET").'</button>';
   echo '<input type="hidden" name="required" id="cntnd_booking-required" />';
   echo '<input type="hidden" name="fields" id="cntnd_booking-fields" />';
+  echo '<input type="hidden" name="one_click_booking" value="'.$one_click.'" id="cntnd_booking-one_click_booking" />';
   echo '<input type="hidden" name="rand" value="'.$rand.'" />';
   echo '</form>';
   echo '</div>';

@@ -14,10 +14,15 @@ $subject_reserved = "CMS_VALUE[6]";
 if (empty($subject_reserved)){
     $subject_reserved = mi18n("DEFAULT_SUBJECT_RESERVED");
 }
-$recurrent = "CMS_VALUE[7]";
+$recurrent = (bool) "CMS_VALUE[7]";
 if (!is_bool($recurrent)){
     $recurrent = true;
 }
+$one_click = (bool) "CMS_VALUE[8]";
+if (!is_bool($one_click)){
+    $one_click = false;
+}
+$show_daterange = "CMS_VALUE[9]";
 
 // other/vars
 
@@ -66,9 +71,37 @@ cInclude('module', 'includes/style.cntnd_simple_booking_input.php');
     <input id="reset_config" type="hidden" name="CMS_VAR[2]" value="" />
   </div>
 
-  <div class="form-check form-check-inline">
-    <input id="recurrent" class="form-check-input" type="checkbox" name="CMS_VAR[7]" data-day="6" value="true" <?php if($recurrent){ echo 'checked'; } ?> />
-    <label for="recurrent" class="form-check-label"><?= mi18n("RECURRENT") ?></label>
+  <div class="form-group">
+    <label for="show_daterange"><?= mi18n("SHOW_DATERANGE") ?></label>
+    <select id="show_daterange" name="CMS_VAR[9]" size="1">
+        <option value="all"><?= mi18n("SELECT_DATERANGE") ?></option>
+        <?php
+        for ($i=1;$i<5;$i++){
+            $selected = "";
+            $val='+'.$i.' week';
+            if ($val==$show_daterange){
+                $selected = 'selected="selected"';
+            }
+            echo '<option value="'.$val.'" '.$selected.'> '.$i.' Woche(n) </option>';
+        }
+        ?>
+    </select>
+  </div>
+
+  <hr />
+
+  <div class="form-group">
+      <div class="form-check form-check-inline">
+        <input id="recurrent" class="form-check-input" type="checkbox" name="CMS_VAR[7]" data-day="6" value="true" <?php if($recurrent){ echo 'checked'; } ?> />
+        <label for="recurrent" class="form-check-label"><?= mi18n("RECURRENT") ?></label>
+      </div>
+  </div>
+
+  <div class="form-group">
+     <div class="form-check form-check-inline">
+       <input id="one_click" class="form-check-input" type="checkbox" name="CMS_VAR[8]" data-day="6" value="true" <?php if($one_click){ echo 'checked'; } ?> />
+       <label for="one_click" class="form-check-label"><?= mi18n("ONE_CLICK_BOOKING") ?></label>
+     </div>
   </div>
 
   <hr />

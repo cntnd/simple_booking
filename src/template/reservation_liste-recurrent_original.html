@@ -1,0 +1,40 @@
+<!-- cntnd_simple-booking/template/reservation_liste-recurrent.html -->
+{foreach name=reservation item=reservation from=$data}
+    {if $reservation.entries.dateConfigs|@count > 0}
+        <h6>{$reservation.entries.title}</h6>
+        <table class="table cntnd_booking-table">
+        <thead>
+        <tr>
+            <th width="25%">Datum</th>
+            <th>Reservation</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach name=config item=config from=$reservation.entries.dateConfigs}
+            <tr>
+                <td>
+                    <span class="cntnd_booking-date">{$config.time} bis {$config.time_until}</span>
+                    {if $config.comment neq ''}
+                        <small>{$config.comment}</small>
+                    {/if}
+                </td>
+                <td>
+                    <div class="d-flex">
+                        {foreach name=config item=booking from=$reservation.entries.bookings}
+                            {assign var="disabled" value=''}
+                            {if $booking neq 'free'}
+                                {assign var="disabled" value='disabled="disabled"'}
+                            {/if}
+                            <div class="w-auto cntnd_booking__slot" data-status="{$booking}">
+                                <input {$disabled} class="cntnd_booking-checkbox" name="bookings[{$reservation.dateIndex}][{$config.time_index}][]" type="checkbox" value="reserved"/>
+                            </div>
+                        {/foreach}
+                    </div>
+                </td>
+            </tr>
+        {/foreach}
+        </tbody>
+        </table>
+    {/if}
+{/foreach}
+<!-- /cntnd_simple-booking/template/reservation_liste-recurrent.html -->

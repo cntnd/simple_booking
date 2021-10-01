@@ -37,3 +37,6 @@ DEFAULT_SUBJECT_DECLINED=Ablehnung ihrer Reservation
 SUBJECT_RESERVED=E-Mail Betreff bei definitiver Reservation
 DEFAULT_SUBJECT_RESERVED=Ihre Reservationsbestätigung
 RECURRENT=Wiederkehrende/Tägliche Slots
+ONE_CLICK_BOOKING="One-Click" Reservation (nur eine Buchung möglich; Radio-Buttons)
+SHOW_DATERANGE=Anzeige Zeitraum
+SELECT_DATERANGE=- ganzer Zeitraum anzeigen -

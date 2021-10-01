@@ -35,6 +35,22 @@ class DateTimeUtil
         return $range;
     }
 
+    // todo blocked days
+    public static function getShowDaterange($daterange, $show_daterange)
+    {
+        $today = new DateTime();
+        $range = self::getDatesFromDaterange($daterange);
+        if ($show_daterange!="all") {
+            $d = $range[0];
+            if ($today > $range[0]) {
+                $d = $today;
+            }
+            $until = $d->modify($show_daterange);
+            return self::getIndexFromDate($until);
+        }
+        return self::getIndexFromDate($range[1]);
+    }
+
     public static function getDatesFromDaterange($daterange)
     {
         $dates = self::getStringsFromDaterange($daterange);
@@ -121,6 +137,22 @@ class DateTimeUtil
     {
         $dt = new DateTime($date);
         return ($dt->format("w"));
+    }
+
+    public static function getDateFromIndexDateTime($index)
+    {
+        $year=substr($index,0,4);
+        $month=substr($index,4,2);
+        $day=substr($index,6,2);
+        $hour=substr($index,8,2);
+        $minute=substr($index,-2);
+        return new DateTime($day.'.'.$month.'.'.$year.' '.$hour.':'.$minute);
+    }
+
+    public static function getTimeFromIndexDateTime($index)
+    {
+        $dt = self::getDateFromIndexDateTime($index);
+        return ($dt->format("H:i"));
     }
 
     public static function getReadableTime($seconds)

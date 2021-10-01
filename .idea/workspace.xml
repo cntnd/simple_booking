@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="extended simple booking">
+      <change afterPath="$PROJECT_DIR$/src/template/pagination.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/template/reservation_liste-recurrent.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/template/reservation_liste.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/cntnd_simple_booking.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/cntnd_simple_booking.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/cntnd_simple_booking.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/cntnd_simple_booking.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lang/lang_de_CH.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/lang/lang_de_CH.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_input.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_input.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/includes/class.datetime.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.datetime.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/cntnd_simple_booking.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/cntnd_simple_booking.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/cntnd_simple_booking_config.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/cntnd_simple_booking_config.sql" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1ynqkZikLT4gj9Bg2K75iyZgX6m" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/template" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\work\workspace\cntnd\simple_booking\src\template" />
+      <recent name="C:\work\workspace\cntnd\simple_booking\src\php\includes" />
+      <recent name="C:\work\workspace\cntnd\simple_booking" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="" />
+      <created>1632897843809</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632897843809</updated>
+      <workItem from="1632897845043" duration="9000" />
+      <workItem from="1632897959703" duration="1393000" />
+      <workItem from="1632904362173" duration="5000" />
+      <workItem from="1632930688234" duration="1900000" />
+      <workItem from="1632943466445" duration="35409000" />
+    </task>
+    <task id="LOCAL-00001" summary="init">
+      <created>1632898020246</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1632898020246</updated>
+    </task>
+    <task id="LOCAL-00002" summary="init">
+      <created>1632898067866</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1632898067866</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <MESSAGE value="crud" />
+    <MESSAGE value="extended simple booking" />
+    <option name="LAST_COMMIT_MESSAGE" value="extended simple booking" />
+  </component>
+</project>

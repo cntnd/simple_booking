@@ -11,6 +11,8 @@ class CntndSimpleBooking {
   private $mailto;
   private $subject;
   private $blocked_days;
+  private $one_click;
+  private $show_daterange;
 
   private $db;
   private $client;
@@ -27,11 +29,13 @@ class CntndSimpleBooking {
     )
   );
 
-  function __construct($daterange, $config_reset, $mailto, $subject, $blocked_days, $lang, $client, $idart) {
+  function __construct($daterange, $config_reset, $mailto, $subject, $blocked_days, $one_click, $show_daterange, $lang, $client, $idart) {
     $this->daterange=$daterange;
     $this->mailto=$mailto;
     $this->subject=$subject;
     $this->blocked_days=$blocked_days;
+    $this->one_click=$one_click;
+    $this->show_daterange=$show_daterange;
 
     $this->db = new cDb;
     $this->client = $client;
@@ -60,7 +64,7 @@ class CntndSimpleBooking {
           $config[$index][$rs->id] = array(
               'time' => DateTimeUtil::getReadableTimeFromDate($rs->time),
               'time_until' => $this->getTimeUntilOrEmpty($rs->time_until),
-              'slots' => $rs->slots,
+              'slots' => (int) $rs->slots,
               'comment' => $rs->comment,
               'recurrent' => $recurrent);
         }
@@ -166,7 +170,7 @@ class CntndSimpleBooking {
 
         echo '<tfoot><tr>';
         echo '<td colspan="4">';
-        echo '<button type="button" class="btn btn-sm btn-light cntnd_booking-config-add" data-date="' . $index . '">Zeit hinzufügen</button>&nbsp;';
+        echo '<button type="button" class="btn btn-sm btn-light cntnd_booking-recurrent-config-add" data-date="' . $index . '">Zeit hinzufügen</button>&nbsp;';
         echo '<button type="button" class="btn btn-sm btn-primary cntnd_booking-config-save">Speichern</button>';
         echo '</td>';
         echo '</tr></tfoot>';
@@ -309,133 +313,71 @@ class CntndSimpleBooking {
     return $this->daterange;
   }
 
-  public function render($recurrent){
-    if ($recurrent){
-      $this->recurrentBody();
-    }
-    else {
-      $this->customBody();
-    }
-  }
-
-  private function reccurentIndexByDate($date){
+  private function recurrentIndexByDate($date){
     $weekday = DateTimeUtil::getWeekdayIndex($date);
     return $this->reccurentIndexByWeekday($weekday);
   }
 
-  private function recurrentBody(){
+  public function renderData($recurrent){
+    $displayData = array();
     $daterange = DateTimeUtil::getDaterange($this->daterange,$this->blocked_days);
     $data = $this->load($this->daterange);
     $config = $this->config();
 
     foreach ($daterange as $date) {
-      $index = $this->reccurentIndexByDate($date[0]);
       $dateIndex = DateTimeUtil::getIndexFromDate($date[0]);
+      $index = $dateIndex;
+      if ($recurrent) {
+        $index = $this->recurrentIndexByDate($date[0]);
+      }
+      $entries = array();
 
       if (!is_null($config) && array_key_exists($index, $config)) {
-        echo '<h6>' . $date[1] . '</h6>';
-        echo '<table class="table cntnd_booking-table">';
-        echo '<thead><tr>';
-        echo '<th width="25%">Zeit</th>';
-        echo '<th>Reservation</th>';
-        echo '</tr></thead>';
-        echo '<tbody>';
-
+        $dateConfigs = array();
         foreach ($config[$index] as $dateConfig){
           $dt = DateTimeUtil::getIndexFromDateAndTime($date[0], $dateConfig['time']);
           $time=substr($dt, -4);
+          $dateConfig['time_index']=$time;
+          $dateConfig['time_value']=$dt;
           $bookings = array();
           if (array_key_exists($dateIndex, $data) && array_key_exists($time, $data[$dateIndex])){
             foreach ($data[$dateIndex][$time] as $slots){
-              for($i=0;$i<$slots['amount'];$i++){
+              $amount = $slots['amount'];
+              if ($recurrent){
+                $amount = 1;
+              }
+              for($i=0;$i<$amount;$i++){
                 $bookings[]=$slots['status'];
               }
             }
           }
-          $comment = "";
-          if (!empty($dateConfig['comment'])){
-            $comment = $dateConfig['comment'];
-          }
-          echo '<tr>';
-          echo '<td><span class="cntnd_booking-date">'.$dateConfig['time'].' '.$comment.'</span></td>';
-          echo '<td><div class="d-flex">';
+
           for ($i=0;$i<$dateConfig['slots'];$i++){
-            $disabled='';
             if (empty($bookings[$i])){
               $bookings[$i]="free";
             }
-            else if ($bookings[$i]!="free"){
-              $disabled='disabled="disabled"';
-            }
-            echo '<div class="w-auto cntnd_booking__slot" data-status="'.$bookings[$i].'">';
-            echo '<input class="cntnd_booking-checkbox" name="bookings['.$dateIndex.']['.$time.'][]" type="checkbox" value="reserved" '.$disabled.' />';
-            echo '</div>';
           }
-          echo '</div></td>';
-          echo '</tr>';
+          $dateConfig['bookings']=$bookings;
+          $dateConfigs[$time]=$dateConfig;
         }
 
-        echo '</tbody>';
-        echo '</table>';
+        asort($dateConfigs);
+
+        $entries = array(
+            "title" => $date[1],
+            "dateConfigs" => $dateConfigs
+        );
       }
+
+      $displayData[] = array(
+          "index" => $index,
+          "dateIndex" => $dateIndex,
+          "showDaterange" => DateTimeUtil::getShowDaterange($this->daterange, $this->show_daterange),
+          "entries" => $entries
+      );
     }
-  }
 
-  private function customBody(){
-    $daterange = DateTimeUtil::getDaterange($this->daterange,$this->blocked_days);
-    $data = $this->load($this->daterange);
-    $config = $this->config();
-
-    foreach ($daterange as $date) {
-      $index = DateTimeUtil::getIndexFromDate($date[0]);
-
-      if (!is_null($config) && array_key_exists($index, $config)) {
-        echo '<h6>' . $date[1] . '</h6>';
-        echo '<table class="table cntnd_booking-table">';
-        echo '<thead><tr>';
-        echo '<th width="25%">Zeit</th>';
-        echo '<th>Reservation</th>';
-        echo '</tr></thead>';
-        echo '<tbody>';
-
-        foreach ($config[$index] as $dateConfig){
-          $dt = DateTimeUtil::getIndexFromDateAndTime($date[0], $dateConfig['time']);
-          $time=substr($dt, -4);
-          $bookings = array();
-          if (array_key_exists($index, $data) && array_key_exists($time, $data[$index])){
-            foreach ($data[$index][$time] as $slots){
-              for($i=0;$i<$slots['amount'];$i++){
-                $bookings[]=$slots['status'];
-              }
-            }
-          }
-          $comment = "";
-          if (!empty($dateConfig['comment'])){
-            $comment = $dateConfig['comment'];
-          }
-          echo '<tr>';
-          echo '<td><span class="cntnd_booking-date">'.$dateConfig['time'].' '.$comment.'</span></td>';
-          echo '<td><div class="d-flex">';
-          for ($i=0;$i<$dateConfig['slots'];$i++){
-            $disabled='';
-            if (empty($bookings[$i])){
-              $bookings[$i]="free";
-            }
-            else if ($bookings[$i]!="free"){
-              $disabled='disabled="disabled"';
-            }
-            echo '<div class="w-auto cntnd_booking__slot" data-status="'.$bookings[$i].'">';
-            echo '<input class="cntnd_booking-checkbox" name="bookings['.$index.']['.$time.'][]" type="checkbox" value="reserved" '.$disabled.' />';
-            echo '</div>';
-          }
-          echo '</div></td>';
-          echo '</tr>';
-        }
-
-        echo '</tbody>';
-        echo '</table>';
-      }
-    }
+    return $displayData;
   }
 
   public static function validate($post, $rand){
@@ -446,9 +388,17 @@ class CntndSimpleBooking {
   }
 
   public static function validateFree($post, $idart){
-    $date = key($post['bookings']);
-    $time = key($post['bookings'][$date]);
-    $slots = count($post['bookings'][$date][$time]);
+    if (!self::isOneClick($post)) {
+      $date = key($post['bookings']);
+      $time = key($post['bookings'][$date]);
+      $slots = count($post['bookings'][$date][$time]);
+    }
+    else {
+      $booking = $post['booking'];
+      $date = DateTimeUtil::getDateFromIndexDateTime($booking);
+      $time = DateTimeUtil::getTimeFromIndexDateTime($booking);
+      $slots = 1;
+    }
 
     $db = new cDb;
     $sql = "SELECT amount FROM :table WHERE idart = :idart AND time = ':time'";
@@ -481,7 +431,19 @@ class CntndSimpleBooking {
   }
 
   private static function validateDates($post){
-    return (array_key_exists('bookings',$post) && is_array($post['bookings']));
+    if (!self::isOneClick($post)) {
+      return (array_key_exists('bookings', $post) && is_array($post['bookings']));
+    }
+    else {
+      return (array_key_exists('booking', $post));
+    }
+  }
+
+  private static function isOneClick($post){
+    if (array_key_exists('one_click_booking', $post)){
+      return (bool) $post['one_click_booking'];
+    }
+    return false;
   }
 
   private static function validateRequired($post){
@@ -501,9 +463,49 @@ class CntndSimpleBooking {
   }
 
   public function store($post, $recurrent){
+    if (!$this->one_click){
+      return $this->storeMany($post, $recurrent);
+    }
+    else {
+      return $this->storeOne($post, $recurrent);
+    }
+  }
+
+  private function storeMany($post, $recurrent){
     $date = key($post['bookings']);
     $time = key($post['bookings'][$date]);
     $amount = count($post['bookings'][$date][$time]);
+    if ($recurrent){
+      $amount = $post['personen'];
+    }
+
+    $sql = "INSERT INTO :table (idart, date, time, amount, name, address, po_box, email, phone, comment) VALUES (:idart, ':date', ':time', :amount, ':name', ':address', ':po_box', ':email', ':phone', ':comment')";
+    $values = array(
+        'table' => self::$_vars['db']['bookings'],
+        'idart' => cSecurity::toInteger($this->idart),
+        'date' => DateTimeUtil::getInsertDate($date),
+        'time'=> DateTimeUtil::getInsertDateTime($date, $time),
+        'amount'=> cSecurity::toInteger($amount),
+        'name'=> $this->escape($post['name']),
+        'address'=> $this->escape($post['adresse']),
+        'po_box'=> $this->escape($post['plz_ort']),
+        'email'=> $this->escape($post['email']),
+        'phone'=> $this->escape($post['telefon']),
+        'comment'=> $this->escape($post['bemerkungen'])
+    );
+    if ($this->db->query($sql, $values)){
+      $this->informationEmail($post, $date, $time, $amount);
+      return true;
+    }
+    return false;
+  }
+
+  private function storeOne($post, $recurrent){
+    $booking = $post['booking'];
+    $date = DateTimeUtil::getDateFromIndexDateTime($booking);
+    $time = DateTimeUtil::getTimeFromIndexDateTime($booking);
+
+    $amount = 1;
     if ($recurrent){
       $amount = $post['personen'];
     }

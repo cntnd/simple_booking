@@ -1,0 +1,43 @@
+<!-- cntnd_simple_booking/template/reservation_liste-recurrent.html -->
+<table class="table cntnd_booking-table">
+{foreach name=reservation item=reservation from=$data}
+    {if $reservation.entries.dateConfigs|@count > 0}
+        {assign var="show_date" value=''}
+        {if $reservation.dateIndex>$reservation.showDaterange}
+            {assign var="show_date" value='not-in-range hide'}
+        {/if}
+        <tr class="{$show_date}">
+            <th rowspan="2">{$reservation.entries.title}</th>
+            {foreach name=config item=config from=$reservation.entries.dateConfigs}
+            <td>
+                <span>{$config.time} bis {$config.time_until}</span>
+                {if $config.comment neq ''}
+                    <br /><small>{$config.comment}</small>
+                {/if}
+            </td>
+            {/foreach}
+        </tr>
+        <tr class="{$show_date}">
+            {foreach name=config item=config from=$reservation.entries.dateConfigs}
+            <td>
+                <div class="d-flex">
+                    {foreach name=booking item=booking from=$config.bookings}
+                        {assign var="disabled" value=''}
+                        {if $booking neq 'free'}
+                            {assign var="disabled" value='disabled="disabled"'}
+                        {/if}
+                        <div class="w-auto cntnd_booking__slot" data-status="{$booking}">
+                            <input {$disabled} class="cntnd_booking-radio" name="booking" type="radio" value="{$config.time_value}"/>
+                        </div>
+                    {/foreach}
+                </div>
+            </td>
+        {/foreach}
+        </tr>
+    {/if}
+{/foreach}
+</table>
+{if $pagination}
+{include file="cntnd_simple_booking/template/pagination.html"}
+{/if}
+<!-- /cntnd_simple_booking/template/reservation_liste-recurrent.html -->
