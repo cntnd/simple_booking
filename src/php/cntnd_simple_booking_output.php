@@ -23,9 +23,9 @@ $one_click = (bool) "CMS_VALUE[8]";
 $show_daterange = "CMS_VALUE[9]";
 $show_past = (bool) "CMS_VALUE[20]";
 $show_past_admin = (bool) "CMS_VALUE[21]";
-$booking_clients = "CMS_VALUE[30]";
-if (empty($booking_clients) && !is_array($booking_clients)){
-  $booking_clients[]=1;
+$amount_clients = (int) "CMS_VALUE[30]";
+if ($amount_clients==0 || !$recurrent){
+  $amount_clients=1;
 }
 
 $blocked_days[1] = (empty("CMS_VALUE[11]")) ? false : true;
@@ -105,10 +105,11 @@ if ($editmode){
   // CONTENT: ADMIN
   echo '<div  id="simple_booking_admin-content" class="tabs__content--pane '.($has_config ? "active" : "").'">';
 
+  echo '<div>TOOLBAR...??</div>';
+
   echo '<div class="d-flex pt-2">';
 
   echo '<div class="w-50 pr-10">';
-  echo '<div>TOOLBAR...??</div>';
   $smarty->assign('data', $simple_booking->listAll($show_past_admin));
   $smarty->display('admin-liste.html');
   echo '</div>';
@@ -197,7 +198,7 @@ else {
   echo '<div class="cntnd_booking">';
   echo '<form method="post" id="cntnd_booking-reservation" name="cntnd_booking-reservation">';
 
-  $data = $simple_booking->renderData($recurrent, $booking_clients);
+  $data = $simple_booking->renderData($recurrent, $amount_clients);
   $smarty->assign('clients', $data);
   $smarty->assign('recurrent', $recurrent);
   $smarty->assign('pagination', ($show_daterange != "all"));

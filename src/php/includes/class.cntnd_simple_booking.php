@@ -320,11 +320,11 @@ class CntndSimpleBooking {
     return $this->reccurentIndexByWeekday($weekday);
   }
 
-  public function renderData($recurrent, $booking_clients){
+  public function renderData($recurrent, $amount_clients = 1){
     $renderData = array();
 
-    foreach ($booking_clients as $booking_client){
-      $renderData[$booking_client]=$this->renderData($recurrent, $booking_client);
+    for ($booking_client=1;$booking_client<=$amount_clients;$booking_client++){
+      $renderData[$booking_client]=$this->loadRenderData($recurrent, $booking_client);
     }
 
     return $renderData;
