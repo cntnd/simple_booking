@@ -23,6 +23,10 @@ $one_click = (bool) "CMS_VALUE[8]";
 $show_daterange = "CMS_VALUE[9]";
 $show_past = (bool) "CMS_VALUE[20]";
 $show_past_admin = (bool) "CMS_VALUE[21]";
+$booking_clients = "CMS_VALUE[30]";
+if (empty($booking_clients) && !is_array($booking_clients)){
+  $booking_clients[]=1;
+}
 
 $blocked_days[1] = (empty("CMS_VALUE[11]")) ? false : true;
 $blocked_days[2] = (empty("CMS_VALUE[12]")) ? false : true;
@@ -104,6 +108,7 @@ if ($editmode){
   echo '<div class="d-flex pt-2">';
 
   echo '<div class="w-50 pr-10">';
+  echo '<div>TOOLBAR...??</div>';
   $smarty->assign('data', $simple_booking->listAll($show_past_admin));
   $smarty->display('admin-liste.html');
   echo '</div>';
@@ -192,15 +197,11 @@ else {
   echo '<div class="cntnd_booking">';
   echo '<form method="post" id="cntnd_booking-reservation" name="cntnd_booking-reservation">';
 
-  $data = $simple_booking->renderData($recurrent);
-  $smarty->assign('data', $data);
-  $smarty->assign('pagination', ($show_daterange!="all"));
-  if ($recurrent) {
-    $smarty->display('reservation_liste-recurrent.html');
-  }
-  else {
-    $smarty->display('reservation_liste.html');
-  }
+  $data = $simple_booking->renderData($recurrent, $booking_clients);
+  $smarty->assign('clients', $data);
+  $smarty->assign('recurrent', $recurrent);
+  $smarty->assign('pagination', ($show_daterange != "all"));
+  $smarty->display('booking.html');
 
   // show messages
   if ($_POST && !$success){
@@ -222,10 +223,10 @@ else {
   }
   // use template to display formular
   if ($recurrent) {
-    $smarty->display('formular_reservation-recurrent.html');
+    $smarty->display('booking_form-recurrent.html');
   }
   else {
-    $smarty->display('formular_reservation.html');
+    $smarty->display('booking_form.html');
   }
   echo '<button type="submit" class="btn btn-primary">'.mi18n("SAVE").'</button>';
   echo '<button type="reset" class="btn">'.mi18n("RESET").'</button>';

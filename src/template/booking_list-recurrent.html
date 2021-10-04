@@ -1,4 +1,4 @@
-<!-- cntnd_simple_booking/template/reservation_liste-recurrent.html -->
+<!-- cntnd_simple_booking/template/booking_list-recurrent.html -->
 <table class="table cntnd_booking-table">
 {foreach name=reservation item=reservation from=$data}
     {if $reservation.entries.dateConfigs|@count > 0}
@@ -27,7 +27,7 @@
                             {assign var="disabled" value='disabled="disabled"'}
                         {/if}
                         <div class="w-auto cntnd_booking__slot" data-status="{$booking}">
-                            <input {$disabled} class="cntnd_booking-radio" name="booking" type="radio" value="{$config.time_value}"/>
+                            <input {$disabled} class="cntnd_booking-radio" name="booking[{$booking_client}]" type="radio" value="{$config.time_value}"/>
                         </div>
                     {/foreach}
                 </div>
@@ -40,4 +40,4 @@
 {if $pagination}
 {include file="cntnd_simple_booking/template/pagination.html"}
 {/if}
-<!-- /cntnd_simple_booking/template/reservation_liste-recurrent.html -->
+<!-- /cntnd_simple_booking/template/booking_list-recurrent.html -->

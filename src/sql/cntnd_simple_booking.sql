@@ -1,6 +1,7 @@
 CREATE TABLE `cntnd_simple_booking` (
     `id` int(11) NOT NULL,
     `idart` int(11) NOT NULL,
+    `booking_client` int(11) NOT NULL,
     `date` date NOT NULL,
     `time` datetime NOT NULL,
     `amount` int(11) NOT NULL,

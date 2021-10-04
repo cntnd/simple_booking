@@ -1,4 +1,4 @@
-<!-- cntnd_simple_booking/template/reservation_liste.html -->
+<!-- cntnd_simple_booking/template/booking_list.html -->
 {foreach name=reservation item=reservation from=$data}
     {if $reservation.entries.dateConfigs|@count > 0}
         {assign var="show_date" value=''}
@@ -31,7 +31,7 @@
                                     {assign var="disabled" value='disabled="disabled"'}
                                 {/if}
                                 <div class="w-auto cntnd_booking__slot" data-status="{$booking}">
-                                    <input {$disabled} class="cntnd_booking-checkbox" name="bookings[{$reservation.dateIndex}][{$config.time_index}][]" type="checkbox" value="reserved"/>
+                                    <input {$disabled} class="cntnd_booking-checkbox" name="bookings[{$booking_client}][{$reservation.dateIndex}][{$config.time_index}][]" type="checkbox" value="reserved"/>
                                 </div>
                             {/foreach}
                         </div>

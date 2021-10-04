@@ -1,6 +1,7 @@
 CREATE TABLE `cntnd_simple_booking_config` (
   `id` int(11) NOT NULL,
   `idart` int(11) NOT NULL,
+  `booking_client` int(11) NOT NULL DEFAULT 1,
   `date` date,
   `time` datetime NOT NULL,
   `time_until` time,

@@ -320,10 +320,20 @@ class CntndSimpleBooking {
     return $this->reccurentIndexByWeekday($weekday);
   }
 
-  public function renderData($recurrent){
+  public function renderData($recurrent, $booking_clients){
+    $renderData = array();
+
+    foreach ($booking_clients as $booking_client){
+      $renderData[$booking_client]=$this->renderData($recurrent, $booking_client);
+    }
+
+    return $renderData;
+  }
+
+  private function loadRenderData($recurrent, $booking_client=1){
     $displayData = array();
     $daterange = DateTimeUtil::getDaterange($this->daterange,$this->blocked_days,$this->show_past);
-    $data = $this->load($this->daterange);
+    $data = $this->load($this->daterange, $booking_client);
     $config = $this->config();
 
     foreach ($daterange as $date) {
@@ -567,12 +577,14 @@ class CntndSimpleBooking {
     return $result;
   }
 
-  public function load($daterange){
+  public function load($daterange, $booking_client = 1){
     $dates = DateTimeUtil::getDatesFromDaterange($daterange, $this->show_past);
     $datum_von = DateTimeUtil::getInsertDate($dates[0]);
-    $sql = "SELECT * FROM :table WHERE date between ':datum_von' AND ':datum_bis' ORDER BY date, time";
+    $sql = "SELECT * FROM :table WHERE idart = :idart AND booking_client = :booking_client AND date between ':datum_von' AND ':datum_bis' ORDER BY date, time";
     $values = array(
       'table' => self::$_vars['db']['bookings'],
+      'idart' => $this->idart,
+      'booking_client' => $booking_client,
       'datum_von' => $datum_von,
       'datum_bis' => DateTimeUtil::getInsertDate($dates[1])
     );
@@ -622,6 +634,7 @@ class CntndSimpleBooking {
       }
       $data_detail = array(
         'id'=>$this->db->f('id'),
+        'booking_client'=>$this->db->f('booking_client'),
         'time'=>$readableTime,
         'name'=>$this->db->f('name'),
         'adresse'=>$this->db->f('address'),

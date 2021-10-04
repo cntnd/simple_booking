@@ -1,0 +1,9 @@
+<!-- cntnd_simple_booking/template/booking.html -->
+{foreach key=booking_client name=data item=data from=$clients}
+    {if $recurrent}
+        {include file="cntnd_simple_booking/template/booking_list-recurrent.html" data=$data pagination=$pagination booking_client=$booking_client}
+    {else}
+        {include file="cntnd_simple_booking/template/booking_list.html" data=$data pagination=$pagination booking_client=$booking_client}
+    {/if}
+{/foreach}
+<!-- cntnd_simple_booking/template/booking.html -->
