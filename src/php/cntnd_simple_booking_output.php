@@ -32,11 +32,16 @@ $blocked_days[5] = (empty("CMS_VALUE[15]")) ? false : true;
 $blocked_days[6] = (empty("CMS_VALUE[16]")) ? false : true;
 $blocked_days[0] = (empty("CMS_VALUE[10]")) ? false : true;
 
+$bootstrap_fallback = true;
+
 // includes
 cInclude('module', 'includes/class.datetime.php');
 cInclude('module', 'includes/class.cntnd_simple_booking.php');
 if ($editmode){
   cInclude('module', 'includes/script.cntnd_simple_booking_output.php');
+  if ($bootstrap_fallback){
+    cInclude('module', 'includes/style.cntnd_simple_booking_output-fallback.php');
+  }
   cInclude('module', 'includes/style.cntnd_simple_booking_output.php');
 }
 
