@@ -20,11 +20,11 @@ class DateTimeUtil
         return $range;
     }
 
-    public static function getDaterange($daterange, $blocked_days = false)
+    public static function getDaterange($daterange, $blocked_days = false, $past = true)
     {
         $range = [];
-        $dates = self::getDatesFromDaterange($daterange);
-        $max = self::getDaysFromDateRange($daterange);
+        $dates = self::getDatesFromDaterange($daterange,$past);
+        $max = self::getDaysFromDateRange($daterange,$past);
 
         for ($i = 0; $i <= $max; $i++) {
             if (!self::isBlockedDay($dates[0], $blocked_days)) {
@@ -51,15 +51,20 @@ class DateTimeUtil
         return self::getIndexFromDate($range[1]);
     }
 
-    public static function getDatesFromDaterange($daterange)
+    public static function getDatesFromDaterange($daterange, $past = true)
     {
         $dates = self::getStringsFromDaterange($daterange);
-        return array(new DateTime($dates[0]), new DateTime($dates[1]));
+        $date_from = new DateTime($dates[0]);
+        $date_now = new DateTime();
+        if (!$past && $date_from<$date_now){
+            $date_from = $date_now;
+        }
+        return array($date_from, new DateTime($dates[1]));
     }
 
-    public static function getDateFromDaterange($daterange, $index)
+    public static function getDateFromDaterange($daterange, $index, $past = true)
     {
-        $dates = self::getDatesFromDaterange($daterange);
+        $dates = self::getDatesFromDaterange($daterange, $past);
         if ($index>0){
             $date = $dates[0];
             $date->modify('+'.$index.' day');
@@ -68,26 +73,14 @@ class DateTimeUtil
         return $dates[0];
     }
 
-    public static function getFirstDateFromDaterange($daterange)
-    {
-        var_dump($daterange);
-        return self::getDateFromDaterange($daterange,0);
-    }
-
-    public static function getLastDateFromDaterange($daterange)
-    {
-        $dates = self::getDatesFromDaterange($daterange);
-        return $dates[1];
-    }
-
     public static function getStringsFromDaterange($daterange)
     {
         return explode(" - ", $daterange);
     }
 
-    public static function getDaysFromDateRange($daterange)
+    public static function getDaysFromDateRange($daterange, $past = true)
     {
-        $dates = self::getDatesFromDaterange($daterange);
+        $dates = self::getDatesFromDaterange($daterange, $past);
         $max = $dates[1]->diff($dates[0])->days;
         return $max;
     }
@@ -248,21 +241,6 @@ class DateTimeUtil
         }
     }
 
-    public static function isTimestamp($string)
-    {
-        try {
-            new DateTime('@' . $string);
-        } catch (Exception $e) {
-            return false;
-        }
-        return true;
-    }
-
-    public static function getToWithInterval($from, $interval)
-    {
-        return self::getReadableTime($from + $interval);
-    }
-
     public static function isBlockedDay($date, $blocked_days)
     {
         if (is_array($blocked_days)) {
@@ -275,32 +253,11 @@ class DateTimeUtil
         return false;
     }
 
-    public static function isInShowRange($daterange, $show_daterange, $date)
-    {
-        if (!empty($show_daterange)) {
-            $range = self::getFromDateFromDaterange($daterange);
-            $range->modify($show_daterange);
-            $dt = self::checkDateTime($date);
-            return ($dt < $range);
-        }
-        return true;
-    }
-
     public static function compare($date1, $date2)
     {
         $d1 = self::checkDateTime($date1);
         $d2 = self::checkDateTime($date2);
         return ($d1 == $d2);
-    }
-
-    public static function getInsertDates($dates)
-    {
-        sort($dates);
-        $datum = date("Y-m-d", $dates[0]);
-        $dat_email = self::getReadableDate($dates[0]);
-        $time_von = date("H:i", $dates[0]);
-        $time_bis = date("H:i", end($dates));
-        return array('datum' => $datum, 'dat_email' => $dat_email, 'time_von' => $time_von, 'time_bis' => $time_bis);
     }
 
     public static function getInsertDate($date)
@@ -328,5 +285,10 @@ class DateTimeUtil
     public static function getInsertDay($date)
     {
         return self::checkDateTime($date)->format("w");
+    }
+
+    public static function isPast($date){
+        $now = new DateTime();
+        return self::checkDateTime($date)<$now;
     }
 }

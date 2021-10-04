@@ -13,6 +13,7 @@ class CntndSimpleBooking {
   private $blocked_days;
   private $one_click;
   private $show_daterange;
+  private $show_past;
 
   private $db;
   private $client;
@@ -29,13 +30,14 @@ class CntndSimpleBooking {
     )
   );
 
-  function __construct($daterange, $config_reset, $mailto, $subject, $blocked_days, $one_click, $show_daterange, $lang, $client, $idart) {
+  function __construct($daterange, $config_reset, $mailto, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart) {
     $this->daterange=$daterange;
     $this->mailto=$mailto;
     $this->subject=$subject;
     $this->blocked_days=$blocked_days;
     $this->one_click=$one_click;
     $this->show_daterange=$show_daterange;
+    $this->show_past=$show_past;
 
     $this->db = new cDb;
     $this->client = $client;
@@ -320,7 +322,7 @@ class CntndSimpleBooking {
 
   public function renderData($recurrent){
     $displayData = array();
-    $daterange = DateTimeUtil::getDaterange($this->daterange,$this->blocked_days);
+    $daterange = DateTimeUtil::getDaterange($this->daterange,$this->blocked_days,$this->show_past);
     $data = $this->load($this->daterange);
     $config = $this->config();
 
@@ -566,12 +568,13 @@ class CntndSimpleBooking {
   }
 
   public function load($daterange){
-    $dates = DateTimeUtil::getDatesFromDaterange($daterange);
+    $dates = DateTimeUtil::getDatesFromDaterange($daterange, $this->show_past);
+    $datum_von = DateTimeUtil::getInsertDate($dates[0]);
     $sql = "SELECT * FROM :table WHERE date between ':datum_von' AND ':datum_bis' ORDER BY date, time";
     $values = array(
       'table' => self::$_vars['db']['bookings'],
-      'datum_von' => $dates[0]->format('Y-m-d'),
-      'datum_bis' => $dates[1]->format('Y-m-d')
+      'datum_von' => $datum_von,
+      'datum_bis' => DateTimeUtil::getInsertDate($dates[1])
     );
     $this->db->query($sql, $values);
     $data=[];
@@ -594,8 +597,11 @@ class CntndSimpleBooking {
     return $this->db->getResultObject();
   }
 
-  public function listAll(){
+  public function listAll($past=false){
     $sql = "SELECT * FROM :table WHERE idart = :idart AND date >= ':datum' ORDER BY date, time";
+    if ($past){
+      $sql = "SELECT * FROM :table WHERE idart = :idart ORDER BY date, time";
+    }
     $values = array(
         'table' => self::$_vars['db']['bookings'],
         'idart' => cSecurity::toInteger($this->idart),
@@ -604,6 +610,10 @@ class CntndSimpleBooking {
     $data=[];
     while ($this->db->next_record()) {
       $title='';
+      $is_past = false;
+      if ($past){
+        $is_past = DateTimeUtil::isPast($this->db->f('date'));
+      }
       $newDate = DateTimeUtil::getIndexFromDate($this->db->f('date'));
       $newTime = DateTimeUtil::getIndexFromDateTime($this->db->f('time'));
       $readableTime = DateTimeUtil::getReadableTimeFromDate($this->db->f('time'));
@@ -621,7 +631,8 @@ class CntndSimpleBooking {
         'telefon'=>$this->db->f('phone'),
         'personen'=>$this->db->f('amount'),
         'bemerkungen'=>$this->db->f('comment'),
-        'title'=>$title);
+        'title'=>$title,
+        'past'=>$is_past);
       $data[date('d.m.Y',strtotime($this->db->f('date')))][]=$data_detail;
       $time = DateTimeUtil::getIndexFromDateTime($this->db->f('time'));
       $date = DateTimeUtil::getIndexFromDate($this->db->f('date'));

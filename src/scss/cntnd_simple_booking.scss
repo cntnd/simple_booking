@@ -55,6 +55,10 @@
 	&.reserved .card-header {
 		background-color: $reserved;
 	}
+
+	&.past {
+		background: #eee;
+	}
 }
 
 .pt-10 {

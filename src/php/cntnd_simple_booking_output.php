@@ -21,6 +21,8 @@ $subject = array(
 $recurrent = (bool) "CMS_VALUE[7]";
 $one_click = (bool) "CMS_VALUE[8]";
 $show_daterange = "CMS_VALUE[9]";
+$show_past = (bool) "CMS_VALUE[20]";
+$show_past_admin = (bool) "CMS_VALUE[21]";
 
 $blocked_days[1] = (empty("CMS_VALUE[11]")) ? false : true;
 $blocked_days[2] = (empty("CMS_VALUE[12]")) ? false : true;
@@ -40,7 +42,7 @@ if ($editmode){
 
 // other/vars
 $smarty = cSmartyFrontend::getInstance();
-$simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $subject, $blocked_days, $one_click, $show_daterange, $lang, $client, $idart);
+$simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart);
 
 $has_config = $simple_booking->hasConfig();
 
@@ -97,7 +99,7 @@ if ($editmode){
   echo '<div class="d-flex pt-2">';
 
   echo '<div class="w-50 pr-10">';
-  $smarty->assign('data', $simple_booking->listAll());
+  $smarty->assign('data', $simple_booking->listAll($show_past_admin));
   $smarty->display('admin-liste.html');
   echo '</div>';
 
