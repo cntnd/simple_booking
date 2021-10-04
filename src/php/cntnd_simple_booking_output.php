@@ -194,6 +194,7 @@ else {
 
   $data = $simple_booking->renderData($recurrent);
   $smarty->assign('data', $data);
+  $smarty->assign('one_click', $one_click);
   $smarty->assign('pagination', ($show_daterange!="all"));
   if ($recurrent) {
     $smarty->display('reservation_liste-recurrent.html');

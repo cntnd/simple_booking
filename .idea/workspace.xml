@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="add bootstrap as fallback">
-      <change afterPath="$PROJECT_DIR$/src/php/includes/style.cntnd_simple_booking_output-fallback.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/template/reservation_liste-slot-oneclick.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/template/reservation_liste-slot.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/info.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/style.cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/style.cntnd_simple_booking_output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/reservation_liste-recurrent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/reservation_liste-recurrent.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,10 +24,11 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="feature/clients" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1ynqkZikLT4gj9Bg2K75iyZgX6m" />
   <component name="ProjectViewState">
@@ -36,7 +40,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/php/includes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/template" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -155,6 +159,7 @@
     <MESSAGE value="fix #4" />
     <MESSAGE value="v2.0.0" />
     <MESSAGE value="add bootstrap as fallback" />
-    <option name="LAST_COMMIT_MESSAGE" value="add bootstrap as fallback" />
+    <MESSAGE value="clients" />
+    <option name="LAST_COMMIT_MESSAGE" value="clients" />
   </component>
 </project>
