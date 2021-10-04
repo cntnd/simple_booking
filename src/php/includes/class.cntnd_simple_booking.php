@@ -570,9 +570,10 @@ class CntndSimpleBooking {
   public function load($daterange){
     $dates = DateTimeUtil::getDatesFromDaterange($daterange, $this->show_past);
     $datum_von = DateTimeUtil::getInsertDate($dates[0]);
-    $sql = "SELECT * FROM :table WHERE date between ':datum_von' AND ':datum_bis' ORDER BY date, time";
+    $sql = "SELECT * FROM :table WHERE idart = :idart AND date between ':datum_von' AND ':datum_bis' ORDER BY date, time";
     $values = array(
       'table' => self::$_vars['db']['bookings'],
+      'idart' => $this->idart,
       'datum_von' => $datum_von,
       'datum_bis' => DateTimeUtil::getInsertDate($dates[1])
     );
