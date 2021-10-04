@@ -1,5 +1,5 @@
 /* cntnd_booking */
-@import url('https://cdn.jsdelivr.net/gh/cntnd/core_style@0.1.0/dist/core_style.css');
+@import url('https://cdn.jsdelivr.net/gh/cntnd/core_style@0.1.3/dist/core_style.css');
 @import '_vars.scss';
 
 .content_box {
@@ -55,6 +55,10 @@
 	&.reserved .card-header {
 		background-color: $reserved;
 	}
+}
+
+.pt-10 {
+	padding-top: 10px;
 }
 
 .pr-10 {

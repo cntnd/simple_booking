@@ -4,11 +4,13 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="add some more features">
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/cntnd_simple_booking.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/cntnd_simple_booking.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/cntnd_simple_booking.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/includes/style.cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/style.cntnd_simple_booking_output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/cntnd_simple_booking.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/cntnd_simple_booking.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +38,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/template" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../toggle.js" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -76,6 +78,7 @@
       <workItem from="1632904362173" duration="5000" />
       <workItem from="1632930688234" duration="1900000" />
       <workItem from="1632943466445" duration="37578000" />
+      <workItem from="1633340324402" duration="6487000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1632898020246</created>
@@ -91,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632898067866</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fixes">
+      <created>1633340370573</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1633340370573</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,6 +124,7 @@
     <MESSAGE value="crud" />
     <MESSAGE value="extended simple booking" />
     <MESSAGE value="add some more features" />
-    <option name="LAST_COMMIT_MESSAGE" value="add some more features" />
+    <MESSAGE value="fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes" />
   </component>
 </project>

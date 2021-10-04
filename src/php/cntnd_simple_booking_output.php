@@ -35,7 +35,7 @@ cInclude('module', 'includes/class.datetime.php');
 cInclude('module', 'includes/class.cntnd_simple_booking.php');
 if ($editmode){
   cInclude('module', 'includes/script.cntnd_simple_booking_output.php');
-  //cInclude('module', 'includes/style.cntnd_simple_booking_output.php');
+  cInclude('module', 'includes/style.cntnd_simple_booking_output.php');
 }
 
 // other/vars
@@ -84,17 +84,17 @@ if ($editmode){
 
   // TABS
 
-  echo '<ul class="nav nav-tabs" id="simple_booking_admin" role="tablist">';
-  echo '<li class="nav-item" role="presentation"><button class="nav-link '.($has_config ? "active" : "").'" id="simple_booking_admin_tab-tab" data-bs-toggle="tab" data-bs-target="#simple_booking_admin_tab" type="button" role="tab" aria-controls="simple_booking_admin_tab" aria-selected="'.($has_config ? "true" : "false").'">Admin</button></li>';
-  echo '<li class="nav-item" role="presentation"><button class="nav-link '.(!$has_config ? "active" : "").'" id="simple_booking_config_tab-tab" data-bs-toggle="tab" data-bs-target="#simple_booking_config_tab" type="button" role="tab" aria-controls="simple_booking_config_tab" aria-selected="'.(!$has_config ? "true" : "false").'">Konfiguration</button></li>';
+  echo '<ul class="tabs" id="simple_booking_admin" role="tablist">';
+  echo '<li class="tabs__tab '.($has_config ? "active" : "").'" data-toggle="tabs" data-target="simple_booking_admin-content">Admin</li>';
+  echo '<li class="tabs__tab '.(!$has_config ? "active" : "").'" data-toggle="tabs" data-target="simple_booking_config_content">Konfiguration</li>';
   echo '</ul>';
 
   // CONTENT
-  echo '<div class="tab-content" id="simple_booking_admin-content">';
+  echo '<div class="tabs__content">';
   // CONTENT: ADMIN
-  echo '<div class="tab-pane fade '.($has_config ? "show active" : "").'" id="simple_booking_admin_tab" role="tabpanel" aria-labelledby="simple_booking_admin_tab-tab">';
+  echo '<div  id="simple_booking_admin-content" class="tabs__content--pane '.($has_config ? "active" : "").'">';
 
-  echo '<div class="d-flex m-2">';
+  echo '<div class="d-flex pt-2">';
 
   echo '<div class="w-50 pr-10">';
   $smarty->assign('data', $simple_booking->listAll());
@@ -139,7 +139,7 @@ if ($editmode){
   // endregion
 
   // CONTENT: CONFIG
-  echo '<div class="tab-pane fade '.(!$has_config ? "show active" : "").'" id="simple_booking_config_tab" role="tabpanel" aria-labelledby="simple_booking_config_tab-tab">';
+  echo '<div id="simple_booking_config_content" class="tabs__content--pane '.(!$has_config ? "active" : "").'">';
 
   echo '<div class="m-2">';
 
