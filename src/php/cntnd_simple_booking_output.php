@@ -35,7 +35,7 @@ cInclude('module', 'includes/class.datetime.php');
 cInclude('module', 'includes/class.cntnd_simple_booking.php');
 if ($editmode){
   cInclude('module', 'includes/script.cntnd_simple_booking_output.php');
-  cInclude('module', 'includes/style.cntnd_simple_booking_output.php');
+  //cInclude('module', 'includes/style.cntnd_simple_booking_output.php');
 }
 
 // other/vars

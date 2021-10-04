@@ -595,9 +595,10 @@ class CntndSimpleBooking {
   }
 
   public function listAll(){
-    $sql = "SELECT * FROM :table WHERE date >= ':datum' ORDER BY date, time";
+    $sql = "SELECT * FROM :table WHERE idart = :idart AND date >= ':datum' ORDER BY date, time";
     $values = array(
         'table' => self::$_vars['db']['bookings'],
+        'idart' => cSecurity::toInteger($this->idart),
         'datum' => date('Y-m-d'));
     $this->db->query($sql, $values);
     $data=[];
