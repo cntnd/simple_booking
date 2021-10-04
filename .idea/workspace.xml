@@ -4,16 +4,8 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="fix #1">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/css/cntnd_simple_booking.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/cntnd_simple_booking.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lang/lang_de_CH.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/lang/lang_de_CH.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_input.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_input.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/class.datetime.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.datetime.php" afterDir="false" />
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="v2.0.0">
       <change beforePath="$PROJECT_DIR$/src/scss/cntnd_simple_booking.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/cntnd_simple_booking.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/admin-liste.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/admin-liste.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +73,7 @@
       <workItem from="1632904362173" duration="5000" />
       <workItem from="1632930688234" duration="1900000" />
       <workItem from="1632943466445" duration="37578000" />
-      <workItem from="1633340324402" duration="10476000" />
+      <workItem from="1633340324402" duration="10813000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1632898020246</created>
@@ -111,7 +103,21 @@
       <option name="project" value="LOCAL" />
       <updated>1633373759791</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix #4">
+      <created>1633377564951</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1633377564951</updated>
+    </task>
+    <task id="LOCAL-00006" summary="v2.0.0">
+      <created>1633377620900</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1633377620900</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,6 +142,8 @@
     <MESSAGE value="add some more features" />
     <MESSAGE value="fixes" />
     <MESSAGE value="fix #1" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix #1" />
+    <MESSAGE value="fix #4" />
+    <MESSAGE value="v2.0.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="v2.0.0" />
   </component>
 </project>
