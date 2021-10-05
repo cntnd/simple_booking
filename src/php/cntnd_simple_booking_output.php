@@ -8,6 +8,7 @@ defined('CON_FRAMEWORK') || die('Illegal call: Missing framework initialization 
 $editmode = cRegistry::isBackendEditMode();
 
 // input/vars
+$booking_title = "CMS_VALUE[22]";
 $daterange = "CMS_VALUE[1]";
 $config_reset = "CMS_VALUE[2]";
 $mailto = "CMS_VALUE[3]";
@@ -15,6 +16,7 @@ $subject_default = "CMS_VALUE[4]";
 $subject_declined = "CMS_VALUE[5]";
 $subject_reserved = "CMS_VALUE[6]";
 $subject = array(
+    'booking_title'=>$booking_title,
     'default'=>$subject_default,
     'declined'=>$subject_declined,
     'reserved'=>$subject_reserved);
@@ -23,6 +25,9 @@ $one_click = (bool) "CMS_VALUE[8]";
 $show_daterange = "CMS_VALUE[9]";
 $show_past = (bool) "CMS_VALUE[20]";
 $show_past_admin = (bool) "CMS_VALUE[21]";
+if (empty($booking_title)){
+  $booking_title="booking";
+}
 
 $blocked_days[1] = (empty("CMS_VALUE[11]")) ? false : true;
 $blocked_days[2] = (empty("CMS_VALUE[12]")) ? false : true;

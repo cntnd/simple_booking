@@ -45,4 +45,4 @@ SHOW_PAST_ADMIN=Administration: Vergangene Termine laden
 DATERANGE_TITLE=Zeitraum
 RESERVATION_TITLE=Reservation
 EMAIL_TITLE=E-Mail Konfiguration
-BOOKING_TITLE=Technischer Name des Reservationssystem (default: booking)
+BOOKING_TITLE=Titel des Reservationssystem (default: booking)

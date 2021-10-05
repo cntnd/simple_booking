@@ -546,6 +546,7 @@ class CntndSimpleBooking {
     $smarty->assign('bemerkungen', $post['bemerkungen']);
     $smarty->assign('email', $post['email']);
     $smarty->assign('personen', $amount);
+    $smarty->assign('sauna', $this->subject['booking_title']);
     $body = $smarty->fetch('email_reservation.html');
 
     if (!$this->debug){
@@ -679,6 +680,7 @@ class CntndSimpleBooking {
     $smarty->assign('personen', $record->amount);
     $smarty->assign('bemerkungen', $record->comment);
     $smarty->assign('message', $post['bemerkungen']);
+    $smarty->assign('sauna', $this->subject['booking_title']);
     $body = $smarty->fetch('email_reservation-definitiv.html');
 
     if (!$this->debug){
@@ -710,6 +712,7 @@ class CntndSimpleBooking {
     $smarty->assign('personen', $record->amount);
     $smarty->assign('bemerkungen', $record->comment);
     $smarty->assign('message', $post['bemerkungen']);
+    $smarty->assign('sauna', $this->subject['booking_title']);
     $body = $smarty->fetch('email_reservation-abgelehnt.html');
 
     if (!$this->debug){
