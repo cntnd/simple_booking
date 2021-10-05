@@ -13,7 +13,11 @@
         {foreach name=config item=config from=$reservation.entries.dateConfigs}
             <tr>
                 <td>
-                    <span class="cntnd_booking-date">{$config.time} bis {$config.time_until}</span>
+                    {assign var="booking_date" value=''}
+                    {if !$one_click}
+                        {assign var="booking_date" value='cntnd_booking-date'}
+                    {/if}
+                    <span class="{$booking_date}">{$config.time} bis {$config.time_until}</span>
                     {if $config.comment neq ''}
                         <small>{$config.comment}</small>
                     {/if}
@@ -25,9 +29,11 @@
                             {if $booking neq 'free'}
                                 {assign var="disabled" value='disabled="disabled"'}
                             {/if}
-                            <div class="w-auto cntnd_booking__slot" data-status="{$booking}">
-                                <input {$disabled} class="cntnd_booking-checkbox" name="bookings[{$reservation.dateIndex}][{$config.time_index}][]" type="checkbox" value="reserved"/>
-                            </div>
+                            {if $one_click}
+                                {include file="cntnd_simple_booking/template/reservation_liste-slot-oneclick.html" status=$booking disabled=$disabled value=$config.time_value}
+                            {else}
+                                {include file="cntnd_simple_booking/template/reservation_liste-slot.html" status=$booking disabled=$disabled dateIndex=$reservation.dateIndex timeIndex=$config.time_index}
+                            {/if}
                         {/foreach}
                     </div>
                 </td>

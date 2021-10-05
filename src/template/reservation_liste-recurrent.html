@@ -11,10 +11,10 @@
             {foreach name=config item=config from=$reservation.entries.dateConfigs}
             <td>
                 {assign var="booking_date" value=''}
-                {if $booking neq 'free'}
-                    {assign var="booking_date" value='cntnd_booking-date'}
+                {if !$one_click}
+                    {assign var="booking_date" value='cntnd_booking-date_vertical'}
                 {/if}
-                <span class="{$booking_date}">{$config.time} bis {$config.time_until}</span>
+                <span class="{$booking_date}" data-slot="{$reservation.dateIndex}-{$config.time_index}">{$config.time} bis {$config.time_until}</span>
                 {if $config.comment neq ''}
                     <br /><small>{$config.comment}</small>
                 {/if}
@@ -24,7 +24,7 @@
         <tr class="{$show_date}">
             {foreach name=config item=config from=$reservation.entries.dateConfigs}
             <td>
-                <div class="d-flex">
+                <div class="d-flex cntnd_booking_slots--vertical" data-slot="{$reservation.dateIndex}-{$config.time_index}">
                     {foreach name=booking item=booking from=$config.bookings}
                         {assign var="disabled" value=''}
                         {if $booking neq 'free'}
@@ -32,9 +32,9 @@
                         {/if}
 
                         {if $one_click}
-                            {include file="cntnd_simple_booking/template/reservation_liste-slot.html" status=$booking disabled=$disabled value=$config.time_value}
+                            {include file="cntnd_simple_booking/template/reservation_liste-slot-oneclick.html" status=$booking disabled=$disabled value=$config.time_value}
                         {else}
-                            {include file="cntnd_simple_booking/template/reservation_liste-slot-oneclick.html" status=$booking disabled=$disabled dateIndex=$reservation.dateIndex timeIndex=$config.time_index}
+                            {include file="cntnd_simple_booking/template/reservation_liste-slot.html" status=$booking disabled=$disabled dateIndex=$reservation.dateIndex timeIndex=$config.time_index}
                         {/if}
                     {/foreach}
                 </div>

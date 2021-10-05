@@ -31,6 +31,10 @@ $show_past_admin = (bool) "CMS_VALUE[21]";
 if (!is_bool($show_past_admin)){
     $show_past_admin = false;
 }
+$booking_title = "CMS_VALUE[22]";
+if (empty($booking_title)){
+    $booking_title="booking";
+}
 
 // other/vars
 
@@ -40,6 +44,11 @@ cInclude('module', 'includes/script.cntnd_simple_booking_input.php');
 cInclude('module', 'includes/style.cntnd_simple_booking_input.php');
 ?>
 <div class="form-vertical">
+    <div class="form-group">
+        <label for="title"><?= mi18n("BOOKING_TITLE") ?></label>
+        <input id="title" type="text" name="CMS_VAR[22]" value="<?= $booking_title ?>" />
+    </div>
+
     <strong><?= mi18n("DATERANGE_TITLE") ?></strong>
     <div class="form-group">
         <label for="daterange"><?= mi18n("DATERANGE") ?></label>

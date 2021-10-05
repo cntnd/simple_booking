@@ -23,6 +23,7 @@
 
 /* OUTPUT */
 .cntnd_booking-date,
+.cntnd_booking-date_vertical,
 .cntnd_booking-more,
 .cntnd_booking-less {
 	cursor: pointer;
@@ -104,7 +105,8 @@ tr.highlight {
 	td {
 		background-color: rgba(50, 50, 50, 0.1);
 	}
-
+}
+.highlight {
 	.cntnd_booking-checkbox {
 		visibility: visible;
 	}

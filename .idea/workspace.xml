@@ -4,14 +4,17 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="add bootstrap as fallback">
-      <change afterPath="$PROJECT_DIR$/src/template/reservation_liste-slot-oneclick.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/template/reservation_liste-slot.html" afterDir="false" />
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="init #5">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/info.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/cntnd_simple_booking.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/cntnd_simple_booking.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/cntnd_simple_booking.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/cntnd_simple_booking.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lang/lang_de_CH.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/lang/lang_de_CH.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_input.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_input.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/cntnd_simple_booking.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/cntnd_simple_booking.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/template/reservation_liste-recurrent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/reservation_liste-recurrent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/reservation_liste-recurrent_original.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/reservation_liste-recurrent_original.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/reservation_liste-slot-oneclick.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/reservation_liste-slot-oneclick.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/reservation_liste-slot.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/reservation_liste-slot.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633378034105</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="init #5">
+      <created>1633384520367</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1633384520367</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,6 +170,7 @@
     <MESSAGE value="v2.0.0" />
     <MESSAGE value="add bootstrap as fallback" />
     <MESSAGE value="clients" />
-    <option name="LAST_COMMIT_MESSAGE" value="clients" />
+    <MESSAGE value="init #5" />
+    <option name="LAST_COMMIT_MESSAGE" value="init #5" />
   </component>
 </project>

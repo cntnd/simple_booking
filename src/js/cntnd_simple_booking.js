@@ -10,6 +10,16 @@ $(document).ready(function(){
     $(this).closest('tr').toggleClass('highlight');
   });
 
+  $('.cntnd_booking-date_vertical').click(function(){
+    $('.cntnd_booking-checkbox:checked').prop( "checked", false);
+    $('.cntnd_booking__slot').removeAttr('data-booking');
+
+    $('.cntnd_booking_slots--vertical').removeClass('highlight');
+
+    var slot = $(this).attr('data-slot');
+    $(".cntnd_booking_slots--vertical[data-slot='"+slot+"']").addClass('highlight');
+  });
+
   $('.cntnd_booking-checkbox').click(function(){
     if ($(this).is(':checked')){
       $(this).parents('div').attr('data-booking','blocked');
