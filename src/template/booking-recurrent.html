@@ -1,4 +1,4 @@
-<!-- cntnd_simple_booking/template/reservation_liste-recurrent.html -->
+<!-- cntnd_simple_booking/template/booking-recurrent.html -->
 <table class="table cntnd_booking-table">
 {foreach name=reservation item=reservation from=$data}
     {if $reservation.entries.dateConfigs|@count > 0}
@@ -32,9 +32,9 @@
                         {/if}
 
                         {if $one_click}
-                            {include file="cntnd_simple_booking/template/reservation_liste-slot-oneclick.html" status=$booking disabled=$disabled value=$config.time_value}
+                            {include file="cntnd_simple_booking/template/booking_slot-oneclick.html" status=$booking disabled=$disabled value=$config.time_value}
                         {else}
-                            {include file="cntnd_simple_booking/template/reservation_liste-slot.html" status=$booking disabled=$disabled dateIndex=$reservation.dateIndex timeIndex=$config.time_index}
+                            {include file="cntnd_simple_booking/template/booking_slot-default.html" status=$booking disabled=$disabled dateIndex=$reservation.dateIndex timeIndex=$config.time_index}
                         {/if}
                     {/foreach}
                 </div>
@@ -45,6 +45,6 @@
 {/foreach}
 </table>
 {if $pagination}
-{include file="cntnd_simple_booking/template/pagination.html"}
+{include file="cntnd_simple_booking/template/booking_pagination.html"}
 {/if}
-<!-- /cntnd_simple_booking/template/reservation_liste-recurrent.html -->
+<!-- /cntnd_simple_booking/template/booking-recurrent.html -->

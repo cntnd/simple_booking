@@ -1,0 +1,7 @@
+<!-- cntnd_simple_booking/template/form.html -->
+{if $recurrent}
+    {include file="cntnd_simple_booking/template/form-recurrent.html" data=$data pagination=$pagination one_click=$one_click}
+{else}
+    {include file="cntnd_simple_booking/template/form-default.html" data=$data pagination=$pagination one_click=$one_click}
+{/if}
+<!-- cntnd_simple_booking/template/form.html -->

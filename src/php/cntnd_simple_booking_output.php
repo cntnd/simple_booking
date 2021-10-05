@@ -197,16 +197,13 @@ else {
   echo '<div class="cntnd_booking">';
   echo '<form method="post" id="cntnd_booking-reservation" name="cntnd_booking-reservation">';
 
+  // display booking
   $data = $simple_booking->renderData($recurrent);
   $smarty->assign('data', $data);
+  $smarty->assign('recurrent', $recurrent);
   $smarty->assign('one_click', $one_click);
-  $smarty->assign('pagination', ($show_daterange!="all"));
-  if ($recurrent) {
-    $smarty->display('reservation_liste-recurrent.html');
-  }
-  else {
-    $smarty->display('reservation_liste.html');
-  }
+  $smarty->assign('pagination', ($show_daterange != "all"));
+  $smarty->display('booking.html');
 
   // show messages
   if ($_POST && !$success){
@@ -226,13 +223,11 @@ else {
   if ($error_free){
     echo '<div class="cntnd_alert cntnd_alert-danger">'.mi18n("VALIDATION_FREE_SLOTS").'</div>';
   }
-  // use template to display formular
-  if ($recurrent) {
-    $smarty->display('formular_reservation-recurrent.html');
-  }
-  else {
-    $smarty->display('formular_reservation.html');
-  }
+
+  // display form
+  $smarty->assign('recurrent', $recurrent);
+  $smarty->display('form.html');
+
   echo '<button type="submit" class="btn btn-primary">'.mi18n("SAVE").'</button>';
   echo '<button type="reset" class="btn">'.mi18n("RESET").'</button>';
   echo '<input type="hidden" name="required" id="cntnd_booking-required" />';

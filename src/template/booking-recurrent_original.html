@@ -1,4 +1,4 @@
-<!-- cntnd_simple-booking/template/reservation_liste-recurrent.html -->
+<!-- cntnd_simple-booking/template/booking-recurrent.html -->
 {foreach name=reservation item=reservation from=$data}
     {if $reservation.entries.dateConfigs|@count > 0}
         <h6>{$reservation.entries.title}</h6>
@@ -43,4 +43,4 @@
         </table>
     {/if}
 {/foreach}
-<!-- /cntnd_simple-booking/template/reservation_liste-recurrent.html -->
+<!-- /cntnd_simple-booking/template/booking-recurrent.html -->

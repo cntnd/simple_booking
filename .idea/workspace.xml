@@ -4,12 +4,20 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="fix #5">
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="add title of booking for emails">
+      <change afterPath="$PROJECT_DIR$/src/template/booking.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/template/form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/email_reservation-abgelehnt.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/email_reservation-abgelehnt.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/email_reservation-definitiv.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/email_reservation-definitiv.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/email_reservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/email_reservation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/email_reservation-abgelehnt.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/email-decline.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/email_reservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/email-booking.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/formular_reservation-recurrent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/form-recurrent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/formular_reservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/form-default.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/reservation_liste-recurrent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/booking-recurrent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/reservation_liste-recurrent_original.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/reservation_liste-recurrent_original.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/reservation_liste.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/booking-default.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633466019579</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add title of booking for emails">
+      <created>1633466475846</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1633466475846</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +189,7 @@
     <MESSAGE value="clients" />
     <MESSAGE value="init #5" />
     <MESSAGE value="fix #5" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix #5" />
+    <MESSAGE value="add title of booking for emails" />
+    <option name="LAST_COMMIT_MESSAGE" value="add title of booking for emails" />
   </component>
 </project>
