@@ -4,20 +4,9 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="add title of booking for emails">
-      <change afterPath="$PROJECT_DIR$/src/template/booking.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/template/form.html" afterDir="false" />
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/email_reservation-abgelehnt.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/email-decline.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/email_reservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/email-booking.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/formular_reservation-recurrent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/form-recurrent.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/formular_reservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/form-default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/reservation_liste-recurrent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/booking-recurrent.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/reservation_liste-recurrent_original.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/reservation_liste-recurrent_original.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/reservation_liste.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/booking-default.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +23,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1ynqkZikLT4gj9Bg2K75iyZgX6m" />
   <component name="ProjectViewState">
@@ -46,7 +34,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/template" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -87,6 +75,7 @@
       <workItem from="1632930688234" duration="1900000" />
       <workItem from="1632943466445" duration="37578000" />
       <workItem from="1633340324402" duration="11432000" />
+      <workItem from="1643743153526" duration="1708000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1632898020246</created>
@@ -158,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633466475846</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="refactoring">
+      <created>1633467288195</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1633467288195</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,6 +186,7 @@
     <MESSAGE value="init #5" />
     <MESSAGE value="fix #5" />
     <MESSAGE value="add title of booking for emails" />
-    <option name="LAST_COMMIT_MESSAGE" value="add title of booking for emails" />
+    <MESSAGE value="refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
   </component>
 </project>

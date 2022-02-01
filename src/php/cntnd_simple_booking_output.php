@@ -88,6 +88,13 @@ if ($editmode){
   if ($admin_success){
     echo '<hr />';
     echo '<div class="cntnd_alert cntnd_alert-primary">'.mi18n("ADMIN_SUCCESS").'</div>';
+    echo '<script>'."\n";
+    echo '$(document).ready(function (){'."\n";
+    echo '  $("html, body").animate({'."\n";
+    echo '    scrollTop: $("[data-resid='.$_POST['resid'].']").offset().top'."\n";
+    echo '  }, 100);'."\n";
+    echo '});'."\n";
+    echo '</script>'."\n";
   }
   if ($admin_error){
     echo '<hr />';
