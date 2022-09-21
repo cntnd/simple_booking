@@ -120,4 +120,10 @@ $(document).ready(function(){
       behavior: 'smooth'
     });
   }
+
+  $('.cntnd_booking-form').click(function(){
+    document.querySelector('#cntnd_booking-reservation_form').scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
 });
