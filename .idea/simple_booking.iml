@@ -2,7 +2,12 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/vendor/simple-cli/simple-cli" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/z4kn4fein/php-semver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/cntnd/cntnd-skeleton-cli" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

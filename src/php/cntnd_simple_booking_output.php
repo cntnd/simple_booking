@@ -37,6 +37,24 @@ $blocked_days[5] = (empty("CMS_VALUE[15]")) ? false : true;
 $blocked_days[6] = (empty("CMS_VALUE[16]")) ? false : true;
 $blocked_days[0] = (empty("CMS_VALUE[10]")) ? false : true;
 
+$interval = (bool) "CMS_VALUE[30]";
+$interval_slots = "CMS_VALUE[31]";
+$timerange_from = "CMS_VALUE[32]";
+$timerange_to = "CMS_VALUE[33]";
+
+$email_copy_default = (bool) "CMS_VALUE[40]";
+$email_copy_reserved = (bool) "CMS_VALUE[41]";
+$email_copy_declined = (bool) "CMS_VALUE[42]";
+$email_copy_mailto = "CMS_VALUE[43]";
+if (empty($email_copy_mailto)) {
+  $email_copy_mailto = $mailto;
+}
+$email_copy = array(
+    'default'=>$email_copy_default,
+    'reserved'=>$email_copy_reserved,
+    'declined'=>$email_copy_declined,
+    'mailto'=>$email_copy_mailto);
+
 $bootstrap_fallback = true;
 
 // includes
@@ -52,7 +70,11 @@ if ($editmode){
 
 // other/vars
 $smarty = cSmartyFrontend::getInstance();
-$simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart);
+$simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $email_copy, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart);
+// interval
+if ($interval && $editmode){
+  $simple_booking->interval($interval_slots, $timerange_from, $timerange_to);
+}
 
 $has_config = $simple_booking->hasConfig();
 
@@ -104,14 +126,17 @@ if ($editmode){
   // TABS
 
   echo '<ul class="tabs" id="simple_booking_admin" role="tablist">';
-  echo '<li class="tabs__tab '.($has_config ? "active" : "").'" data-toggle="tabs" data-target="simple_booking_admin-content">Admin</li>';
-  echo '<li class="tabs__tab '.(!$has_config ? "active" : "").'" data-toggle="tabs" data-target="simple_booking_config_content">Konfiguration</li>';
+  echo '<li class="tabs__tab '.($has_config || $interval ? "active" : "").'" data-toggle="tabs" data-target="simple_booking_admin-content">Admin</li>';
+  // todo check
+  if (!$interval){
+    echo '<li class="tabs__tab '.(!$has_config ? "active" : "").'" data-toggle="tabs" data-target="simple_booking_config_content">Konfiguration</li>';
+  }
   echo '</ul>';
 
   // CONTENT
   echo '<div class="tabs__content">';
   // CONTENT: ADMIN
-  echo '<div  id="simple_booking_admin-content" class="tabs__content--pane '.($has_config ? "active" : "").'">';
+  echo '<div  id="simple_booking_admin-content" class="tabs__content--pane '.($has_config || $interval ? "active" : "").'">';
 
   echo '<div class="d-flex pt-2">';
 
@@ -158,7 +183,7 @@ if ($editmode){
   // endregion
 
   // CONTENT: CONFIG
-  echo '<div id="simple_booking_config_content" class="tabs__content--pane '.(!$has_config ? "active" : "").'">';
+  echo '<div id="simple_booking_config_content" class="tabs__content--pane '.(!$has_config && !$interval ? "active" : "").'">';
 
   echo '<div class="m-2">';
 
@@ -182,7 +207,7 @@ else {
   if ($_POST){
     if (CntndSimpleBooking::validate($_POST, $_SESSION['rand'])){
       if (CntndSimpleBooking::validateFree($_POST, $idart)) {
-        $success = $simple_booking->store($_POST, $recurrent);
+        $success = $simple_booking->store($_POST, $recurrent, $interval);
         $error = !$success;
         $error_free=false;
       }
@@ -208,6 +233,7 @@ else {
   $data = $simple_booking->renderData($recurrent);
   $smarty->assign('data', $data);
   $smarty->assign('recurrent', $recurrent);
+  $smarty->assign('interval', $interval);
   $smarty->assign('one_click', $one_click);
   $smarty->assign('pagination', ($show_daterange != "all"));
   $smarty->display('booking.html');
@@ -233,6 +259,7 @@ else {
 
   // display form
   $smarty->assign('recurrent', $recurrent);
+  $smarty->assign('interval', $interval);
   $smarty->display('form.html');
 
   echo '<button type="submit" class="btn btn-primary">'.mi18n("SAVE").'</button>';

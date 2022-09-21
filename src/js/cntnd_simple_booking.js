@@ -11,14 +11,42 @@ $(document).ready(function(){
   });
 
   $('.cntnd_booking-date_vertical').click(function(){
-    $('.cntnd_booking-checkbox:checked').prop( "checked", false);
+    var slot = $(this).attr('data-slot');
+    toggleInterval(slot, "cntnd_booking_slots--vertical");
+  });
+
+  $('.cntnd_booking-date_interval').click(function(){
+    var slot = $(this).attr('data-slot');
+    toggleInterval(slot,"cntnd_booking_slots--interval");
+  });
+
+
+  $('.cntnd_booking--action').click(function(){
+    var slot = $(this).attr('data-slot');
+    toggleInterval(slot,"cntnd_booking_slots--interval");
+
+    var type = $(this).attr('data-action-type');
+    toggleType(type);
+  });
+
+  function toggleInterval(slot, className) {
+    $('.cntnd_booking-checkbox:checked').prop("checked", false);
     $('.cntnd_booking__slot').removeAttr('data-booking');
 
-    $('.cntnd_booking_slots--vertical').removeClass('highlight');
+    $('.'+className).removeClass('highlight');
+    $("."+className+"[data-slot='"+slot+"']").addClass('highlight');
+  }
 
-    var slot = $(this).attr('data-slot');
-    $(".cntnd_booking_slots--vertical[data-slot='"+slot+"']").addClass('highlight');
-  });
+  function toggleType(type) {
+    if (type!=="all"){
+      $('.highlight > .'+type+' .cntnd_booking-checkbox').prop("checked", true);
+      $('.highlight > .'+type+' .cntnd_booking-checkbox').parents('div').attr('data-booking','blocked');
+    }
+    else {
+      $('.highlight .cntnd_booking-checkbox').prop("checked", true);
+      $('.highlight .cntnd_booking-checkbox').parents('div').attr('data-booking','blocked');
+    }
+  }
 
   $('.cntnd_booking-checkbox').click(function(){
     if ($(this).is(':checked')){

@@ -23,8 +23,8 @@ class DateTimeUtil
     public static function getDaterange($daterange, $blocked_days = false, $past = true)
     {
         $range = [];
-        $dates = self::getDatesFromDaterange($daterange,$past);
-        $max = self::getDaysFromDateRange($daterange,$past);
+        $dates = self::getDatesFromDaterange($daterange, $past);
+        $max = self::getDaysFromDateRange($daterange, $past);
 
         for ($i = 0; $i <= $max; $i++) {
             if (!self::isBlockedDay($dates[0], $blocked_days)) {
@@ -40,7 +40,7 @@ class DateTimeUtil
     {
         $today = new DateTime();
         $range = self::getDatesFromDaterange($daterange);
-        if ($show_daterange!="all") {
+        if ($show_daterange != "all") {
             $d = $range[0];
             if ($today > $range[0]) {
                 $d = $today;
@@ -56,7 +56,7 @@ class DateTimeUtil
         $dates = self::getStringsFromDaterange($daterange);
         $date_from = new DateTime($dates[0]);
         $date_now = new DateTime();
-        if (!$past && $date_from<$date_now){
+        if (!$past && $date_from < $date_now) {
             $date_from = $date_now;
         }
         return array($date_from, new DateTime($dates[1]));
@@ -65,9 +65,9 @@ class DateTimeUtil
     public static function getDateFromDaterange($daterange, $index, $past = true)
     {
         $dates = self::getDatesFromDaterange($daterange, $past);
-        if ($index>0){
+        if ($index > 0) {
             $date = $dates[0];
-            $date->modify('+'.$index.' day');
+            $date->modify('+' . $index . ' day');
             return $date;
         }
         return $dates[0];
@@ -122,7 +122,7 @@ class DateTimeUtil
     public static function getIndexFromDateAndTime($date, $time)
     {
         $d = self::checkDateTime($date)->format("d.m.Y");
-        $datetime = strtotime($d." ".$time);
+        $datetime = strtotime($d . " " . $time);
         return date("YmdHi", $datetime);
     }
 
@@ -134,12 +134,12 @@ class DateTimeUtil
 
     public static function getDateFromIndexDateTime($index)
     {
-        $year=substr($index,0,4);
-        $month=substr($index,4,2);
-        $day=substr($index,6,2);
-        $hour=substr($index,8,2);
-        $minute=substr($index,-2);
-        return new DateTime($day.'.'.$month.'.'.$year.' '.$hour.':'.$minute);
+        $year = substr($index, 0, 4);
+        $month = substr($index, 4, 2);
+        $day = substr($index, 6, 2);
+        $hour = substr($index, 8, 2);
+        $minute = substr($index, -2);
+        return new DateTime($day . '.' . $month . '.' . $year . ' ' . $hour . ':' . $minute);
     }
 
     public static function getTimeFromIndexDateTime($index)
@@ -163,7 +163,7 @@ class DateTimeUtil
     public static function getReadableTimeFromTime($time)
     {
         $d = self::getInsertDate(new DateTime());
-        $dt = new DateTime($d." ".$time);
+        $dt = new DateTime($d . " " . $time);
         return $dt->format('H:i');
     }
 
@@ -215,11 +215,11 @@ class DateTimeUtil
         return $wtag[$index];
     }
 
-    public static function getIndexFromWeekday($weekday){
-        if ($weekday==0){
+    public static function getIndexFromWeekday($weekday)
+    {
+        if ($weekday == 0) {
             return 7;
-        }
-        else {
+        } else {
             $index = $weekday - 1;
             return $index;
         }
@@ -268,7 +268,7 @@ class DateTimeUtil
     public static function getInsertDateTime($date, $time)
     {
         $d = self::getInsertDate($date);
-        $datetime = strtotime($d." ".$time);
+        $datetime = strtotime($d . " " . $time);
         return date("Y-m-d H:i:s", $datetime);
     }
 
@@ -287,8 +287,42 @@ class DateTimeUtil
         return self::checkDateTime($date)->format("w");
     }
 
-    public static function isPast($date){
+    public static function isPast($date)
+    {
         $now = new DateTime();
-        return self::checkDateTime($date)<$now;
+        return self::checkDateTime($date) < $now;
+    }
+
+    public static function getFirstMonday($dateRange)
+    {
+        $dates = self::getDatesFromDaterange($dateRange);
+        return $dates[0]->modify("first monday of this month");
+    }
+
+    public static function getFirstWeekday($dateRange, $weekday)
+    {
+        $dates = self::getDatesFromDaterange($dateRange);
+        return $dates[0]->modify("first ".self::weekday($weekday)." of this month");
+    }
+
+    private static function weekday($index) {
+        $weekday = "monday";
+        switch($index) {
+            case 0: $weekday = "sunday";
+                break;
+            case 1: $weekday = "monday";
+                break;
+            case 2: $weekday = "tuesday";
+                break;
+            case 3: $weekday = "wednesday";
+                break;
+            case 4: $weekday = "thursday";
+                break;
+            case 5: $weekday = "friday";
+                break;
+            case 6: $weekday = "saturday";
+                break;
+        }
+        return $weekday;
     }
 }
