@@ -3,3 +3,7 @@
 /.sass-cache
 node_modules/
 modules/
+/vendor/
+/composer.lock
+/src/php/composer.lock
+/src/php/vendor/

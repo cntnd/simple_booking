@@ -60,6 +60,7 @@ $bootstrap_fallback = true;
 // includes
 cInclude('module', 'includes/class.datetime.php');
 cInclude('module', 'includes/class.cntnd_simple_booking.php');
+cInclude('module', 'includes/class.cntnd_payment.php');
 if ($editmode){
   cInclude('module', 'includes/script.cntnd_simple_booking_output.php');
   if ($bootstrap_fallback){
@@ -71,6 +72,7 @@ if ($editmode){
 // other/vars
 $smarty = cSmartyFrontend::getInstance();
 $simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $email_copy, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart);
+$payment = new BookingPayment();
 // interval
 if ($interval && $editmode){
   $simple_booking->interval($interval_slots, $timerange_from, $timerange_to);
@@ -207,7 +209,10 @@ else {
   if ($_POST){
     if (CntndSimpleBooking::validate($_POST, $_SESSION['rand'])){
       if (CntndSimpleBooking::validateFree($_POST, $idart)) {
+        // payment!?
         $success = $simple_booking->store($_POST, $recurrent, $interval);
+        // payment!?
+
         $error = !$success;
         $error_free=false;
       }

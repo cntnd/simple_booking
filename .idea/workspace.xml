@@ -3,38 +3,124 @@
   <component name="AnalysisUIOptions">
     <option name="SCOPE_TYPE" value="3" />
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="2.1.1 admin fix">
-      <change afterPath="$PROJECT_DIR$/cli.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/template/booking-interval.html" afterDir="false" />
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="v2.2.0">
+      <change afterPath="$PROJECT_DIR$/src/php/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_payment.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/autoload.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/composer/ClassLoader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/composer/InstalledVersions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/composer/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/composer/autoload_namespaces.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/composer/autoload_real.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/composer/autoload_static.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/composer/installed.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/composer/installed.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/composer/platform_check.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/.github/workflows/ci.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/AuthTokenCreate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/DesignCreate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/DesignDelete.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/DesignGetAll.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/DesignGetOne.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/DesignUpdate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/GatewayCreate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/GatewayDelete.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/GatewayGetOne.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/InvoiceCreate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/InvoiceDelete.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/InvoiceGetOne.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/PageCreate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/PageGetAll.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/PageGetOne.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/PaymentMethodGetAll.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/PaymentMethodGetOne.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/PaymentProviderGetAll.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/PayoutDetails.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/PayoutGetAll.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/PayoutGetOne.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/QrCodeCreate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/QrCodeDelete.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/QrCodeGetOne.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/QrCodeScanDelete.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/SignatureCheckGetOne.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/SubscriptionCancel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/SubscriptionCreate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/SubscriptionUpdate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/TransactionCancel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/TransactionCapture.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/TransactionCharge.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/TransactionCreate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/TransactionGetAll.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/TransactionGetOne.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/TransactionPreAuthorize.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/TransactionReceipt.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/TransactionRefund.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/examples/payrexx-logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/CommunicationAdapter/AbstractCommunication.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/CommunicationAdapter/CurlCommunication.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Communicator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Base.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/AuthToken.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/Design.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/Gateway.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/Invoice.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/Page.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/PaymentMethod.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/PaymentProvider.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/Payout.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/QrCode.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/QrCodeScan.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/SignatureCheck.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/Subscription.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Request/Transaction.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/AuthToken.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/Design.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/Gateway.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/Invoice.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/Page.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/PaymentMethod.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/PaymentProvider.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/Payout.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/QrCode.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/QrCodeScan.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/SignatureCheck.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/Subscription.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Models/Response/Transaction.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/Payrexx.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/PayrexxException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/php/vendor/payrexx/payrexx/lib/Payrexx/certs/ca.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/css/cntnd_simple_booking.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/cntnd_simple_booking.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/cntnd_simple_booking.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/cntnd_simple_booking.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lang/lang_de_CH.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/lang/lang_de_CH.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_input.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_input.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gulpfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/info.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_output.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/class.datetime.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.datetime.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_input.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_input.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scss/_vars.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/_vars.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scss/cntnd_simple_booking.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/cntnd_simple_booking.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/booking.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/booking.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/form-recurrent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/form-recurrent.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/form.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/clients" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -47,23 +133,42 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/simple-cli/simple-cli" />
+      <path value="$PROJECT_DIR$/vendor/z4kn4fein/php-semver" />
+      <path value="$PROJECT_DIR$/vendor/cntnd/cntnd-skeleton-cli" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
   <component name="ProjectId" id="1ynqkZikLT4gj9Bg2K75iyZgX6m" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/template" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/work/workspace/cntnd/simple_booking/src/php",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\work\workspace\cntnd\simple_booking\src\php" />
       <recent name="C:\work\workspace\cntnd\simple_booking\src\template" />
       <recent name="C:\work\workspace\cntnd\simple_booking" />
       <recent name="C:\work\workspace\cntnd\simple_booking\src\php\includes" />
@@ -84,6 +189,14 @@
       </method>
     </configuration>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -101,6 +214,16 @@
       <workItem from="1643743153526" duration="2378000" />
       <workItem from="1644578452910" duration="35000" />
       <workItem from="1662802172880" duration="29532000" />
+      <workItem from="1663770569047" duration="1145000" />
+      <workItem from="1664188526482" duration="662000" />
+      <workItem from="1664281493084" duration="18000" />
+      <workItem from="1664443807717" duration="887000" />
+      <workItem from="1664447073278" duration="584000" />
+      <workItem from="1665042769401" duration="2289000" />
+      <workItem from="1665092007487" duration="21000" />
+      <workItem from="1665092189275" duration="11000" />
+      <workItem from="1703355454371" duration="2452000" />
+      <workItem from="1733869693892" duration="1618000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1632898020246</created>
@@ -186,7 +309,21 @@
       <option name="project" value="LOCAL" />
       <updated>1643745040164</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add admin copy">
+      <created>1663770874626</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1663770874626</updated>
+    </task>
+    <task id="LOCAL-00014" summary="v2.2.0">
+      <created>1663771688344</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1663771688344</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,7 +339,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
@@ -220,6 +356,8 @@
     <MESSAGE value="add title of booking for emails" />
     <MESSAGE value="refactoring" />
     <MESSAGE value="2.1.1 admin fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.1.1 admin fix" />
+    <MESSAGE value="add admin copy" />
+    <MESSAGE value="v2.2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="v2.2.0" />
   </component>
 </project>

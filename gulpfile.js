@@ -1,5 +1,5 @@
 var gulp        = require('gulp');
-var sass        = require('gulp-sass');
+var sass        = require('gulp-sass')(require('sass'));
 var minify      = require('gulp-minifier');
 var zip         = require('gulp-zip');
 var file        = require('gulp-file');
@@ -15,25 +15,25 @@ gulp.task('sass', function() {
     return gulp.src('src/scss/**/*.scss')
         .pipe(sass())
         .pipe(minify({
-          minify: true,
-          minifyCSS: true,
-          getKeptComment: function (content, filePath) {
-              var m = content.match(/\/\*![\s\S]*?\*\//img);
-              return m && m.join('\n') + '\n' || '';
-          }
+            minify: true,
+            minifyCSS: true,
+            getKeptComment: function (content, filePath) {
+                var m = content.match(/\/\*![\s\S]*?\*\//img);
+                return m && m.join('\n') + '\n' || '';
+            }
         }))
         .pipe(gulp.dest("src/css/"));
 });
 
-gulp.task('zip', function() {
-  return gulp.src(['src/**/*','!src/scss*'])
-  		.pipe(zip(pkg.name+'.zip'))
-  		.pipe(gulp.dest('dist/'));
+gulp.task('xampp', function () {
+    return gulp.src(['src/**','!src/{scss,scss/**}','!src/{sql,sql/**}'])
+        .pipe(gulp.dest('modules/'+pkg.name));
 });
 
-gulp.task('xampp', function () {
-    return gulp.src(['src/**/*','!src/scss*'])
-        .pipe(gulp.dest('modules/'+pkg.name));
+gulp.task('zip', function() {
+    return gulp.src(['src/**','!src/{scss,scss/**}','!src/{sql,sql/**}'])
+        .pipe(zip(pkg.name+'.zip'))
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('clean', function () {
@@ -67,3 +67,5 @@ gulp.task('default', gulp.series('sass','watch'));
 gulp.task('dist', gulp.series('clean','sass','info-xml','zip'));
 
 gulp.task('module', gulp.series('clean','sass','info-xml','xampp'));
+
+gulp.task('init', gulp.series('clean','sass','info-xml'));
