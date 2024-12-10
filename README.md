@@ -9,3 +9,8 @@
 * `$lang = cRegistry::getLanguageId();`  
 * `mi18n("SELECT_ARTICLE")`
 * `buildArticleSelect("CMS_VAR[2]", $oModule->cmsCatID, $oModule->cmsArtID);`
+
+## payrexx integration
+
+* [Docs](https://developers.payrexx.com/reference/create-a-gateway)
+* [SDK](https://github.com/payrexx/payrexx-php)
