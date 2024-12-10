@@ -14,3 +14,6 @@
 
 * [Docs](https://developers.payrexx.com/reference/create-a-gateway)
 * [SDK](https://github.com/payrexx/payrexx-php)
+  * [Accept Payment](https://docs.payrexx.com/developer/guides/gateway)
+  * [Webhook - after Transaction](https://docs.payrexx.com/developer/guides/webhook)
+  * [Transaction](https://docs.payrexx.com/developer/guides/webhook/transaction)
