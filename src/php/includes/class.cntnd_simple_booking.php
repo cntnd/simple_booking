@@ -29,7 +29,7 @@ class CntndSimpleBooking
     private static $_vars = array(
         "db" => array(
             "config" => "cntnd_simple_booking_config",
-            "bookings" => "cntnd_simple_booking"
+            "bookings" => "cntnd_simple_booking_payment"
         )
     );
 
@@ -362,11 +362,6 @@ class CntndSimpleBooking
         }
     }
 
-    public function daterange()
-    {
-        return $this->daterange;
-    }
-
     private function recurrentIndexByDate($date)
     {
         $weekday = DateTimeUtil::getWeekdayIndex($date);
@@ -445,92 +440,6 @@ class CntndSimpleBooking
         return "morning";
     }
 
-    public static function validate($post, $rand)
-    {
-        if (is_array($post) && $rand == $post['rand']) {
-            return (self::validateDates($post) && self::validateRequired($post));
-        }
-        return false;
-    }
-
-    public static function validateFree($post, $idart)
-    {
-        if (!self::isOneClick($post)) {
-            $date = key($post['bookings']);
-            $time = key($post['bookings'][$date]);
-            $slots = count($post['bookings'][$date][$time]);
-        } else {
-            $booking = $post['booking'];
-            $date = DateTimeUtil::getDateFromIndexDateTime($booking);
-            $time = DateTimeUtil::getTimeFromIndexDateTime($booking);
-            $slots = 1;
-        }
-
-        $db = new cDb;
-        $sql = "SELECT amount FROM :table WHERE idart = :idart AND time = ':time'";
-        $values = array(
-            'table' => self::$_vars['db']['bookings'],
-            'idart' => cSecurity::toInteger($idart),
-            'time' => DateTimeUtil::getInsertDateTime($date, $time));
-        $result = $db->query($sql, $values);
-        if ($result->num_rows > 0) {
-            $max = self::availableSlots($idart, $date, $time);
-            $amount = 0;
-            while ($db->next_record()) {
-                $amount = $amount + $db->f('amount');
-            }
-            $free = $max - $amount;
-            return ($free >= $slots);
-        }
-        return true;
-    }
-
-    private static function availableSlots($idart, $date, $time)
-    {
-        $db = new cDb;
-        $sql = "SELECT slots FROM :table WHERE idart = :idart AND time = ':time'";
-        $values = array(
-            'table' => self::$_vars['db']['config'],
-            'idart' => cSecurity::toInteger($idart),
-            'time' => DateTimeUtil::getInsertDateTime($date, $time));
-        $db->query($sql, $values);
-        return $db->getResultObject()->slots;
-    }
-
-    private static function validateDates($post)
-    {
-        if (!self::isOneClick($post)) {
-            return (array_key_exists('bookings', $post) && is_array($post['bookings']));
-        } else {
-            return (array_key_exists('booking', $post));
-        }
-    }
-
-    private static function isOneClick($post)
-    {
-        if (array_key_exists('one_click_booking', $post)) {
-            return (bool)$post['one_click_booking'];
-        }
-        return false;
-    }
-
-    private static function validateRequired($post)
-    {
-        $valid = false;
-        if (array_key_exists('required', $post)) {
-            $valid = true;
-            $required = json_decode(base64_decode($post['required']), true);
-            if (is_array($required)) {
-                foreach ($required as $value) {
-                    if (empty($post[$value])) {
-                        $valid = false;
-                    }
-                }
-            }
-        }
-        return $valid;
-    }
-
     public function store($post, $recurrent, $interval)
     {
         if (!$this->one_click) {
@@ -549,19 +458,21 @@ class CntndSimpleBooking
             $amount = $post['personen'];
         }
 
-        $sql = "INSERT INTO :table (idart, date, time, amount, name, address, po_box, email, phone, comment) VALUES (:idart, ':date', ':time', :amount, ':name', ':address', ':po_box', ':email', ':phone', ':comment')";
+        $sql = "INSERT INTO :table (idart, date, time, persons, forename, surename, street, postcode, place, email, phone, comment) VALUES (:idart, ':date', ':time', :persons, ':forename', ':surname', ':street', ':postcode', ':place', ':email', ':phone', ':comment')";
         $values = array(
             'table' => self::$_vars['db']['bookings'],
             'idart' => cSecurity::toInteger($this->idart),
             'date' => DateTimeUtil::getInsertDate($date),
             'time' => DateTimeUtil::getInsertDateTime($date, $time),
-            'amount' => cSecurity::toInteger($amount),
-            'name' => $this->escape($post['name']),
-            'address' => $this->escape($post['adresse']),
-            'po_box' => $this->escape($post['plz_ort']),
+            'persons' => cSecurity::toInteger($amount),
+            'forename' => $this->escape($post['forename']),
+            'surname' => $this->escape($post['surname']),
+            'street' => $this->escape($post['street']),
+            'postcode' => $this->escape($post['postcode']),
+            'place' => $this->escape($post['place']),
             'email' => $this->escape($post['email']),
-            'phone' => $this->escape($post['telefon']),
-            'comment' => $this->escape($post['bemerkungen'])
+            'phone' => $this->escape($post['phone']),
+            'comment' => $this->escape($post['comment'])
         );
         if ($this->db->query($sql, $values)) {
             $this->informationEmail($post, $date, $time, $amount);
@@ -578,22 +489,24 @@ class CntndSimpleBooking
 
         $amount = 1;
         if ($recurrent) {
-            $amount = $post['personen'];
+            $amount = $post['persons'];
         }
 
-        $sql = "INSERT INTO :table (idart, date, time, amount, name, address, po_box, email, phone, comment) VALUES (:idart, ':date', ':time', :amount, ':name', ':address', ':po_box', ':email', ':phone', ':comment')";
+        $sql = "INSERT INTO :table (idart, date, time, persons, forename, surename, street, postcode, place, email, phone, comment) VALUES (:idart, ':date', ':time', :persons, ':forename', ':surname', ':street', ':postcode', ':place', ':email', ':phone', ':comment')";
         $values = array(
             'table' => self::$_vars['db']['bookings'],
             'idart' => cSecurity::toInteger($this->idart),
             'date' => DateTimeUtil::getInsertDate($date),
             'time' => DateTimeUtil::getInsertDateTime($date, $time),
-            'amount' => cSecurity::toInteger($amount),
-            'name' => $this->escape($post['name']),
-            'address' => $this->escape($post['adresse']),
-            'po_box' => $this->escape($post['plz_ort']),
+            'persons' => cSecurity::toInteger($amount),
+            'forename' => $this->escape($post['forename']),
+            'surname' => $this->escape($post['surname']),
+            'street' => $this->escape($post['street']),
+            'postcode' => $this->escape($post['postcode']),
+            'place' => $this->escape($post['place']),
             'email' => $this->escape($post['email']),
-            'phone' => $this->escape($post['telefon']),
-            'comment' => $this->escape($post['bemerkungen'])
+            'phone' => $this->escape($post['phone']),
+            'comment' => $this->escape($post['comment'])
         );
         if ($this->db->query($sql, $values)) {
             $this->informationEmail($post, $date, $time, $amount);
@@ -609,11 +522,11 @@ class CntndSimpleBooking
         $smarty = cSmartyFrontend::getInstance();
         $smarty->assign('date', DateTimeUtil::getReadableDate($date));
         $smarty->assign('time', DateTimeUtil::getReadableTimeFromDate($time));
-        $smarty->assign('name', $post['name']);
-        $smarty->assign('adresse', $post['adresse']);
-        $smarty->assign('plz_ort', $post['plz_ort']);
-        $smarty->assign('telefon', $post['telefon']);
-        $smarty->assign('bemerkungen', $post['bemerkungen']);
+        $smarty->assign('name', $post['forename']." ".$post['surname']);
+        $smarty->assign('adresse', $post['street']);
+        $smarty->assign('plz_ort', $post['postcode']." ".$post['place']);
+        $smarty->assign('telefon', $post['phone']);
+        $smarty->assign('bemerkungen', $post['comment']);
         $smarty->assign('email', $post['email']);
         $smarty->assign('personen', $amount);
         $smarty->assign('sauna', $this->subject['booking_title']);
@@ -702,14 +615,16 @@ class CntndSimpleBooking
             $data_detail = array(
                 'id' => $this->db->f('id'),
                 'time' => $readableTime,
-                'name' => $this->db->f('name'),
-                'adresse' => $this->db->f('address'),
+                'forename' => $this->db->f('forename'),
+                'surname' => $this->db->f('surname'),
+                'street' => $this->db->f('street'),
                 'status' => $this->db->f('status'),
-                'plz_ort' => $this->db->f('po_box'),
+                'postcode' => $this->db->f('postcode'),
+                'place' => $this->db->f('place'),
                 'email' => $this->db->f('email'),
-                'telefon' => $this->db->f('phone'),
-                'personen' => $this->db->f('amount'),
-                'bemerkungen' => $this->db->f('comment'),
+                'phone' => $this->db->f('phone'),
+                'persons' => $this->db->f('persons'),
+                'comment' => $this->db->f('comment'),
                 'title' => $title,
                 'past' => $is_past);
             $data[date('d.m.Y', strtotime($this->db->f('date')))][] = $data_detail;
@@ -756,7 +671,7 @@ class CntndSimpleBooking
         $record = $this->loadById($post['resid']);
         $smarty->assign('date', DateTimeUtil::getReadableDate($record->date));
         $smarty->assign('time', DateTimeUtil::getReadableTimeFromDate($record->time));
-        $smarty->assign('personen', $record->amount);
+        $smarty->assign('personen', $record->persons);
         $smarty->assign('bemerkungen', $record->comment);
         $smarty->assign('message', $post['bemerkungen']);
         $smarty->assign('sauna', $this->subject['booking_title']);
@@ -793,7 +708,7 @@ class CntndSimpleBooking
         $record = $this->loadById($post['resid']);
         $smarty->assign('date', DateTimeUtil::getReadableDate($record->date));
         $smarty->assign('time', DateTimeUtil::getReadableTimeFromDate($record->time));
-        $smarty->assign('personen', $record->amount);
+        $smarty->assign('personen', $record->persons);
         $smarty->assign('bemerkungen', $record->comment);
         $smarty->assign('message', $post['bemerkungen']);
         $smarty->assign('sauna', $this->subject['booking_title']);

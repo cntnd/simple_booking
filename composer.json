@@ -1,5 +1,6 @@
 {
     "require": {
-        "cntnd/cntnd-skeleton-cli": "^1.0.0"
+        "cntnd/cntnd-skeleton-cli": "^1.0.0",
+        "ext-json": "*"
     }
 }

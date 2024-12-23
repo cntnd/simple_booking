@@ -60,7 +60,6 @@ $bootstrap_fallback = true;
 // includes
 cInclude('module', 'includes/class.datetime.php');
 cInclude('module', 'includes/class.cntnd_simple_booking.php');
-cInclude('module', 'includes/class.cntnd_payment.php');
 if ($editmode){
   cInclude('module', 'includes/script.cntnd_simple_booking_output.php');
   if ($bootstrap_fallback){
@@ -72,7 +71,6 @@ if ($editmode){
 // other/vars
 $smarty = cSmartyFrontend::getInstance();
 $simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $email_copy, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart);
-$payment = new BookingPayment();
 // interval
 if ($interval && $editmode){
   $simple_booking->interval($interval_slots, $timerange_from, $timerange_to);
@@ -206,33 +204,17 @@ if ($editmode){
 }
 else {
   // PUBLIC
-  if ($_POST){
-    if (CntndSimpleBooking::validate($_POST, $_SESSION['rand'])){
-      if (CntndSimpleBooking::validateFree($_POST, $idart)) {
-        // payment!?
-        $success = $simple_booking->store($_POST, $recurrent, $interval);
-        // payment!?
 
-        $error = !$success;
-        $error_free=false;
-      }
-      else {
-        $error_free=true;
-      }
-    }
-    else {
-      $failure=true;
-    }
-  }
-  // REFRESH
+  // REFRESH todo
   $rand = mt_rand();
   $_SESSION['rand']=$rand;
 
-  if ($success){
+  if (!empty($_GET['result']) && $_GET['result']=="success"){
     echo '<div class="cntnd_alert cntnd_alert-primary">'.mi18n("SUCCESS").'</div>';
   }
   echo '<div class="cntnd_booking">';
-  echo '<form method="post" id="cntnd_booking-reservation" name="cntnd_booking-reservation">';
+  // todo config action
+  echo '<form method="post" id="cntnd_booking-reservation" name="cntnd_booking-reservation" action="https://payment.schuepfenried.ch/order/">';
 
   // display booking
   $data = $simple_booking->renderData($recurrent);
@@ -244,10 +226,10 @@ else {
   $smarty->display('booking.html');
 
   // show messages
-  if ($_POST && !$success){
+  if (!empty($_GET['result']) && $_GET['result']=="failure"){
     echo '<div id="cntnd_booking-form"></div>';
   }
-  $failureMsg=($failure) ? '' : 'hide';
+  $failureMsg=(!empty($_GET['error']) && $_GET['error']=="failure") ? '' : 'hide';
   echo '<div class="cntnd_alert cntnd_alert-danger cntnd_booking-validation '.$failureMsg.'">';
   echo mi18n("VALIDATION");
   echo '<ul>';
@@ -255,10 +237,10 @@ else {
   echo '<li class="cntnd_booking-validation-dates">'.mi18n("VALIDATION_DATES").'</li>';
   echo '</ul>';
   echo '</div>';
-  if ($error){
+  if (!empty($_GET['error']) && $_GET['error']=="error"){
     echo '<div class="cntnd_alert cntnd_alert-danger">'.mi18n("FAILURE").'</li></div>';
   }
-  if ($error_free){
+  if (!empty($_GET['error']) && $_GET['error']=="error_free"){
     echo '<div class="cntnd_alert cntnd_alert-danger">'.mi18n("VALIDATION_FREE_SLOTS").'</div>';
   }
 
@@ -273,6 +255,8 @@ else {
   echo '<input type="hidden" name="fields" id="cntnd_booking-fields" />';
   echo '<input type="hidden" name="one_click_booking" value="'.$one_click.'" id="cntnd_booking-one_click_booking" />';
   echo '<input type="hidden" name="rand" value="'.$rand.'" />';
+  echo '<input type="hidden" name="idart" value="'.$idart.'" />';
+  echo '<input type="hidden" name="redirect" value="https://www.schuepfenried.ch'.$_SERVER['REQUEST_URI'].'" />';
   echo '</form>';
   echo '</div>';
 }

@@ -1,10 +1,10 @@
 <!-- cntnd_simple_booking/template/form.html -->
 <h2 id="cntnd_booking-reservation_form">Reservation</h2>
 {if $interval}
-{include file="cntnd_simple_booking/template/form-default.html" data=$data pagination=$pagination one_click=$one_click}
+{include file="cntnd_simple_booking_payment/template/form-default.html" data=$data pagination=$pagination one_click=$one_click}
 {else if $recurrent}
-    {include file="cntnd_simple_booking/template/form-recurrent.html" data=$data pagination=$pagination one_click=$one_click}
+    {include file="cntnd_simple_booking_payment/template/form-recurrent.html" data=$data pagination=$pagination one_click=$one_click}
 {else}
-    {include file="cntnd_simple_booking/template/form-default.html" data=$data pagination=$pagination one_click=$one_click}
+    {include file="cntnd_simple_booking_payment/template/form-default.html" data=$data pagination=$pagination one_click=$one_click}
 {/if}
 <!-- cntnd_simple_booking/template/form.html -->

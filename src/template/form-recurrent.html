@@ -1,30 +1,42 @@
 <div class="form-vertical">
 	<div class="form-group">
-		<label for="name">Vor- und Nachname<em>*</em></label>
-		<input type="text" name="name" id="name" value="" class="form-control required" />
+		<label for="forename">Vorname<em>*</em></label>
+		<input type="text" name="forename" id="forename" value="" class="form-control required" />
 	</div>
 	<div class="form-group">
-		<label for="adresse">Adresse</label>
-		<input type="text" name="adresse" id="adresse" value="" class="form-control" />
+		<label for="surname">Nachname<em>*</em></label>
+		<input type="text" name="surname" id="surname" value="" class="form-control required" />
 	</div>
 	<div class="form-group">
-		<label for="plz_ort">PLZ Ort</label>
-		<input type="text" name="plz_ort" id="plz_ort" value="" class="form-control" />
+		<label for="street">Adresse</label>
+		<input type="text" name="street" id="street" value="" class="form-control" />
 	</div>
+
+	<div class="d-flex">
+		<div class="w-33 form-group">
+			<label for="postcode">PLZ</label>
+			<input type="text" name="postcode" id="postcode" value="" class="form-control" />
+		</div>
+		<div class="w-66 form-group">
+			<label for="place">Ort</label>
+			<input type="text" name="place" id="place" value="" class="form-control" />
+		</div>
+	</div>
+
 	<div class="form-group">
 		<label for="email">E-Mail<em>*</em></label>
 		<input type="email" name="email" id="email" value="" class="required email form-control" />
 	</div>
 	<div class="form-group">
-		<label for="telefon">Telefon</label>
-		<input type="text" name="telefon" id="telefon" value="" class="form-control" />
+		<label for="phone">Telefon</label>
+		<input type="text" name="phone" id="phone" value="" class="form-control" />
 	</div>
 	<div class="form-group">
-		<label for="personen">Anzahl Personen<em>*</em></label>
-		<input type="number" name="personen" id="personen" min="1" value="" class="required number form-control">
+		<label for="persons">Anzahl Personen<em>*</em></label>
+		<input type="number" name="persons" id="persons" min="1" value="" class="required number form-control">
 	</div>
 	<div class="form-group">
-		<label for="bemerkungen">Bemerkungen</label>
-		<textarea name="bemerkungen" id="bemerkungen" class="form-control"></textarea>
+		<label for="comment">Bemerkungen</label>
+		<textarea name="comment" id="comment" class="form-control"></textarea>
 	</div>
 </div>

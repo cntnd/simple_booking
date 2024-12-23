@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-<name>cntnd_simple_booking</name>
+<name>cntnd_simple_booking_payment</name>
 <description>
-cntnd_simple_booking
-Reservationssystem (Simpel)
+cntnd_simple_booking_payment
+Reservationssystem (Simpel mit Payrexx Integration)
 
 Autor Thomas D Ascoli, thomas@dasco.li
 
 Version 3.0.0
 </description>
 <type/>
-<alias>cntnd_simple_booking</alias>
+<alias>cntnd_simple_booking_payment</alias>
 </module>
