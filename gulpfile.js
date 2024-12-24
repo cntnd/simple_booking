@@ -16,7 +16,7 @@ gulp.task('sass', function() {
         .pipe(sass())
         .pipe(minify({
             minify: true,
-            minifyCSS: true,
+            minifyCSS: false,
             getKeptComment: function (content, filePath) {
                 var m = content.match(/\/\*![\s\S]*?\*\//img);
                 return m && m.join('\n') + '\n' || '';

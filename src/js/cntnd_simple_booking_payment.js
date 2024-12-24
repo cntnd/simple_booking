@@ -80,21 +80,33 @@ $(document).ready(function(){
     return $('.cntnd_booking-checkbox:checked').length>0;
   }
 
+  function validateEmails(){
+    var email = $('#cntnd_booking-reservation #email').val();
+    var email2 = $('#cntnd_booking-reservation #email2').val();
+    return email===email2;
+  }
+
   $('#cntnd_booking-reservation').submit(function() {
     $('.cntnd_booking-validation').addClass('hide');
     $('.cntnd_booking-validation-required').hide();
     $('.cntnd_booking-validation-dates').hide();
+    $('.cntnd_booking-validation-email').hide();
     var required = $('#cntnd_booking-reservation .required').filter(function(){
       return ($(this).val()==='');
     });
     var bookings=validateBookings();
-    if (!bookings || required.length>0){
+    var email = validateEmails();
+
+    if (!bookings || required.length>0 || !email){
       $('.cntnd_booking-validation').removeClass('hide');
       if (required.length>0){
         $('.cntnd_booking-validation-required').show();
       }
       if (!bookings){
         $('.cntnd_booking-validation-dates').show();
+      }
+      if (!email){
+        $('.cntnd_booking-validation-email').show();
       }
       return false;
     }

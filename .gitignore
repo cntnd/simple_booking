@@ -7,3 +7,4 @@ modules/
 /composer.lock
 /src/php/composer.lock
 /src/php/vendor/
+/.idea/

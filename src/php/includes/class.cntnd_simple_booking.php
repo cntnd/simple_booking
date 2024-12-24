@@ -455,7 +455,7 @@ class CntndSimpleBooking
         $time = key($post['bookings'][$date]);
         $amount = count($post['bookings'][$date][$time]);
         if ($recurrent) {
-            $amount = $post['personen'];
+            $amount = $post['persons'];
         }
 
         $sql = "INSERT INTO :table (idart, date, time, persons, forename, surename, street, postcode, place, email, phone, comment) VALUES (:idart, ':date', ':time', :persons, ':forename', ':surname', ':street', ':postcode', ':place', ':email', ':phone', ':comment')";

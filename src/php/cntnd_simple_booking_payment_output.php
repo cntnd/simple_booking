@@ -131,6 +131,7 @@ if ($editmode){
   if (!$interval){
     echo '<li class="tabs__tab '.(!$has_config ? "active" : "").'" data-toggle="tabs" data-target="simple_booking_config_content">Konfiguration</li>';
   }
+  echo '<li class="tabs__tab" data-toggle="tabs" data-target="simple_booking_payment_content">Payrexx</li>';
   echo '</ul>';
 
   // CONTENT
@@ -157,7 +158,7 @@ if ($editmode){
           </div>
           <div class="form-group">
         		<label for="bemerkungen">Bemerkungen</label>
-        		<textarea name="bemerkungen" class="form-control"></textarea>
+        		<textarea name="bemerkungen" class="form-control" rows="3"></textarea>
         	</div>
           <button class="btn btn-primary" type="submit">'.mi18n("SAVE").'</button>
           <button class="btn btn-dark cntnd_booking-admin-delete" type="button">'.mi18n("DELETE").'</button>
@@ -197,6 +198,28 @@ if ($editmode){
 
   echo '</div>';
   // endregion
+
+  // CONTENT: PAYREXX
+  echo '<div id="simple_booking_payment_content" class="tabs__content--pane">';
+
+  echo '<div class="m-2">';
+
+  echo '<form method="post" id="cntnd_booking-payrexx" name="cntnd_booking-payrexx">';
+  echo '<h1>payment</h1>';
+
+  echo '<p>config für bestellung: lookAndFeelProfile (?), successMessage, buttonText, action</p>';
+
+  echo '<p>payrexx: instance und secret sind in .env file beim webhook bzw. order action</p>';
+
+  echo '<p>preise!!</p>';
+
+  echo '<input type="hidden" name="cntnd_booking-payrexx" value="save" />';
+  echo '</form>';
+
+  echo '</div>';
+
+  echo '</div>';
+  // endregion
   echo '</div>';
 
   // endregion
@@ -204,8 +227,7 @@ if ($editmode){
 }
 else {
   // PUBLIC
-
-  // REFRESH todo
+  // REFRESH
   $rand = mt_rand();
   $_SESSION['rand']=$rand;
 
