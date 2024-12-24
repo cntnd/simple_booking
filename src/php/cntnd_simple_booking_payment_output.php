@@ -165,9 +165,9 @@ if ($editmode){
           <button class="btn cntnd_booking-admin-cancel" type="reset">'.mi18n("RESET").'</button>
           <input type="hidden" name="resid" />
           <input type="hidden" name="action" value="save" />
-          <div class="form-group">
+          <div class="d-flex form-group">
             <span>'.mi18n("EMAIL").'</span>
-            <div class="form-check form-check-inline">
+            <div class="form-check form-check-inline w-auto">
               <input id="email_senden" class="form-check-input" type="checkbox" name="email_senden" value="true" checked />
               <label for="email_senden" class="form-check-label">'.mi18n("EMAIL_SEND").'</label>
             </div>

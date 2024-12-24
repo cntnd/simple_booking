@@ -29,7 +29,8 @@ class CntndSimpleBooking
     private static $_vars = array(
         "db" => array(
             "config" => "cntnd_simple_booking_config",
-            "bookings" => "cntnd_simple_booking_payment"
+            "bookings" => "cntnd_simple_booking_payment",
+            "payment" => "cntnd_payment"
         )
     );
 
@@ -741,6 +742,9 @@ class CntndSimpleBooking
         $escaped = htmlentities($string, ENT_QUOTES, "UTF-8");
         return $this->db->escape($escaped);
     }
+
+    // payment
+    // todo get all open/success from this range
 }
 
 ?>

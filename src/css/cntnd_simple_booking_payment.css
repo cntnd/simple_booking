@@ -141,6 +141,17 @@ textarea.form-control {
   display: none;
 }
 
+/* ADMIN */
+.form-check-inline {
+  margin-right: 0 !important;
+}
+.form-check-inline .form-check-input {
+  width: 0.9rem;
+}
+.form-check-inline label {
+  width: auto;
+}
+
 /* Booking */
 .cntnd_booking-form {
   background: rgba(204, 204, 204, 0.85);
