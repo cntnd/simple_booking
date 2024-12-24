@@ -131,7 +131,8 @@ if ($editmode){
   if (!$interval){
     echo '<li class="tabs__tab '.(!$has_config ? "active" : "").'" data-toggle="tabs" data-target="simple_booking_config_content">Konfiguration</li>';
   }
-  echo '<li class="tabs__tab" data-toggle="tabs" data-target="simple_booking_payment_content">Payrexx</li>';
+  echo '<li class="tabs__tab" data-toggle="tabs" data-target="simple_booking_payment_content">Transaktionen</li>';
+  echo '<li class="tabs__tab" data-toggle="tabs" data-target="simple_booking_payment_config_content">Payrexx Konfiguration</li>';
   echo '</ul>';
 
   // CONTENT
@@ -204,18 +205,35 @@ if ($editmode){
 
   echo '<div class="m-2">';
 
-  echo '<form method="post" id="cntnd_booking-payrexx" name="cntnd_booking-payrexx">';
   echo '<h5>Transaktionen</h5>';
   $smarty->assign('data', $simple_booking->payments());
   $smarty->display('admin-payments-liste.html');
 
+  echo '</div>';
+
+  echo '</div>';
+  // endregion
+
+
+  // CONTENT: PAYREXX CONFIG todo
+  echo '<div id="simple_booking_payment_config_content" class="tabs__content--pane">';
+
+  echo '<div class="m-2">';
+
+  echo '<form method="post" id="cntnd_booking-payrexx_price_config" name="cntnd_booking-payrexx_price_config">';
+  echo '<h5>Preise</h5>';
+  $simple_booking->renderPaymentPriceConfig();
+  echo '<input type="hidden" name="cntnd_booking-payrexx_price_config" value="save" />';
+  echo '</form>';
+  echo '<hr />';
+
+  echo '<form method="post" id="cntnd_booking-payrexx_config" name="cntnd_booking-payrexx_config">';
+  echo '<h5>Konfiguration</h5>';
+  echo '<p>Die konfiguration für das Payment Modul befindet sich unter payments.schuepfenried.ch (Order und Webhook) als .env Datei.</p>';
+
   echo '<p>config für bestellung: lookAndFeelProfile (?), successMessage, buttonText, action</p>';
 
-  echo '<p>payrexx: instance und secret sind in .env file beim webhook bzw. order action</p>';
-
-  echo '<p>preise!!</p>';
-
-  echo '<input type="hidden" name="cntnd_booking-payrexx" value="save" />';
+  echo '<input type="hidden" name="cntnd_booking-payrexx_config" value="save" />';
   echo '</form>';
 
   echo '</div>';

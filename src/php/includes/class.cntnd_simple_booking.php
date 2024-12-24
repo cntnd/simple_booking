@@ -28,7 +28,7 @@ class CntndSimpleBooking
 
     private static $_vars = array(
         "db" => array(
-            "config" => "cntnd_simple_booking_config",
+            "config" => "cntnd_simple_booking_payment_config",
             "bookings" => "cntnd_simple_booking_payment",
             "payment" => "cntnd_payment"
         )
@@ -180,7 +180,7 @@ class CntndSimpleBooking
                 echo '<table class="table order-list date__' . $index . '">';
                 echo '<thead><tr>';
                 echo '<th>Zeit</th>';
-                echo '<th>Anzahl Slots</th>';
+                echo '<th>Anzahl Slots / Preis</th>';
                 echo '<th colspan="2">Bemerkung (wird angezeigt)</th>';
                 echo '</tr></thead>';
 
@@ -203,12 +203,16 @@ class CntndSimpleBooking
                     }
                 }
 
+                // todo price_id
                 echo '<tr data-row="' . $i . '">';
                 echo '<td>';
                 echo '<input type="time" name="config[' . $index . '][' . $i . '][time]" class="form-control" placeholder="Zeit von (HH:mm)" required/>';
                 echo '<input type="time" name="config[' . $index . '][' . $i . '][time_until]" class="form-control" placeholder="Zeit bis (HH:mm)" />';
                 echo '</td>';
-                echo '<td><input type="number" name="config[' . $index . '][' . $i . '][slots]" class="form-control" placeholder="Anzahl Slots" required/></td>';
+                echo '<td>';
+                echo '<input type="number" name="config[' . $index . '][' . $i . '][slots]" class="form-control" placeholder="Anzahl Slots" required/><br />';
+                echo '<input type="number" name="config[' . $index . '][' . $i . '][price_id]" class="form-control" placeholder="Preis (wip)" /><br />';
+                echo '</td>';
                 echo '<td><input type="text" name="config[' . $index . '][' . $i . '][comment]" class="form-control" placeholder="Bemerkung"/></td>';
                 echo '<td><button type="button" class="btn btn-sm cntnd_booking-config-delete">Löschen</button></td>';
                 echo '</tr>';
@@ -238,7 +242,7 @@ class CntndSimpleBooking
             echo '<table class="table order-list date__' . $index . '">';
             echo '<thead><tr>';
             echo '<th>Zeit</th>';
-            echo '<th>Anzahl Slots</th>';
+            echo '<th>Anzahl Slots / Preis</th>';
             echo '<th colspan="2">Bemerkung (wird angezeigt)</th>';
             echo '</tr></thead>';
 
@@ -258,9 +262,13 @@ class CntndSimpleBooking
                 }
             }
 
+            // todo price_id
             echo '<tr data-row="' . $i . '">';
             echo '<td><input type="time" name="config[' . $index . '][' . $i . '][time]" class="form-control" placeholder="Zeit (HH:mm)" required/></td>';
-            echo '<td><input type="number" name="config[' . $index . '][' . $i . '][slots]" class="form-control" placeholder="Anzahl Slots" required/></td>';
+            echo '<td>';
+            echo '<input type="number" name="config[' . $index . '][' . $i . '][slots]" class="form-control" placeholder="Anzahl Slots" required/><br />';
+            echo '<input type="number" name="config[' . $index . '][' . $i . '][price_id]" class="form-control" placeholder="Preis (wip)" /><br />';
+            echo '</td>';
             echo '<td><input type="text" name="config[' . $index . '][' . $i . '][comment]" class="form-control" placeholder="Bemerkung"/></td>';
             echo '<td><button type="button" class="btn btn-sm cntnd_booking-config-delete">Löschen</button></td>';
             echo '</tr>';
@@ -745,6 +753,62 @@ class CntndSimpleBooking
     }
 
     // payment
+    // todo
+    public function renderPaymentPriceConfig()
+    {
+        $config = $this->config();
+        $daterange = DateTimeUtil::getDaterange($this->daterange, $this->blocked_days);
+
+        foreach ($daterange as $date) {
+            $index = DateTimeUtil::getIndexFromDate($date[0]);
+            echo '<h5>' . $date[1] . '</h5>';
+            echo '<table class="table order-list date__' . $index . '">';
+            echo '<thead><tr>';
+            echo '<th>Zeit</th>';
+            echo '<th>Anzahl Slots / Preis</th>';
+            echo '<th colspan="2">Bemerkung (wird angezeigt)</th>';
+            echo '</tr></thead>';
+
+            echo '<tbody>';
+
+            $i = 0;
+            if (!is_null($config) && array_key_exists($index, $config)) {
+                foreach ($config[$index] as $id => $dateConfig) {
+                    echo '<tr data-row="' . $id . '">';
+                    echo '<td><input type="time" name="config[' . $index . '][' . $id . '][time]" class="form-control" placeholder="Zeit (HH:mm)" value="' . $dateConfig['time'] . '" required/></td>';
+                    echo '<td><input type="number" name="config[' . $index . '][' . $id . '][slots]" class="form-control" placeholder="Anzahl Slots" value="' . $dateConfig['slots'] . '" required/></td>';
+                    echo '<td><input type="text" name="config[' . $index . '][' . $id . '][comment]" class="form-control" placeholder="Bemerkung" value="' . $dateConfig['comment'] . '" /></td>';
+                    echo '<td><button type="button" class="btn btn-sm cntnd_booking-config-delete">Löschen</button></td>';
+                    echo '</tr>';
+
+                    $i = $id + 1;
+                }
+            }
+
+            // todo price_id
+            echo '<tr data-row="' . $i . '">';
+            echo '<td><input type="time" name="config[' . $index . '][' . $i . '][time]" class="form-control" placeholder="Zeit (HH:mm)" required/></td>';
+            echo '<td>';
+            echo '<input type="number" name="config[' . $index . '][' . $i . '][slots]" class="form-control" placeholder="Anzahl Slots" required/><br />';
+            echo '<input type="number" name="config[' . $index . '][' . $i . '][price_id]" class="form-control" placeholder="Preis (wip)" /><br />';
+            echo '</td>';
+            echo '<td><input type="text" name="config[' . $index . '][' . $i . '][comment]" class="form-control" placeholder="Bemerkung"/></td>';
+            echo '<td><button type="button" class="btn btn-sm cntnd_booking-config-delete">Löschen</button></td>';
+            echo '</tr>';
+
+            echo '</tbody>';
+
+            echo '<tfoot><tr>';
+            echo '<td colspan="4">';
+            echo '<button type="button" class="btn btn-sm btn-light cntnd_booking-config-add" data-date="' . $index . '">Zeit hinzufügen</button>&nbsp;';
+            echo '<button type="button" class="btn btn-sm btn-primary cntnd_booking-config-save">Speichern</button>';
+            echo '</td>';
+            echo '</tr></tfoot>';
+
+            echo '</table>';
+        }
+    }
+
     // todo get all open/success from this range
     public function payments()
     {

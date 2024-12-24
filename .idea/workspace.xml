@@ -7,12 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="refactoring">
-      <change afterPath="$PROJECT_DIR$/src/template/admin-payments-liste.html" afterDir="false" />
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="add payments overview">
+      <change afterPath="$PROJECT_DIR$/src/sql/cntnd_simple_booking_payment_config.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/class.datetime.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.datetime.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/cntnd_simple_booking_config.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +80,9 @@
       <recent name="C:\work\workspace\cntnd\simple_booking" />
       <recent name="C:\work\workspace\cntnd\simple_booking\src\php\includes" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\work\workspace\cntnd\simple_booking\src\sql" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
@@ -132,7 +135,7 @@
       <workItem from="1703355454371" duration="2452000" />
       <workItem from="1733869693892" duration="2437000" />
       <workItem from="1733919162905" duration="1207000" />
-      <workItem from="1734980021252" duration="12821000" />
+      <workItem from="1734980021252" duration="14259000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1632898020246</created>
@@ -264,7 +267,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735062258922</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="add payments overview">
+      <option name="closed" value="true" />
+      <created>1735064527347</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1735064527347</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,6 +312,7 @@
     <MESSAGE value="v3.0.0 add payrexx dependency" />
     <MESSAGE value="fixed new field names" />
     <MESSAGE value="refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
+    <MESSAGE value="add payments overview" />
+    <option name="LAST_COMMIT_MESSAGE" value="add payments overview" />
   </component>
 </project>
