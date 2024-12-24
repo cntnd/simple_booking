@@ -232,6 +232,14 @@ class DateTimeUtil
         return $weekday . ' ' . $dt->format('d.m.Y');
     }
 
+
+    public static function getReadableDateTime($date)
+    {
+        $weekday = self::getWeekday($date);
+        $dt = self::checkDateTime($date);
+        return $weekday . ' ' . $dt->format('d.m.Y, H:i:s');
+    }
+
     public static function checkDateTime($date)
     {
         if (is_a($date, 'DateTime')) {

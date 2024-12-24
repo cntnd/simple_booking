@@ -205,7 +205,9 @@ if ($editmode){
   echo '<div class="m-2">';
 
   echo '<form method="post" id="cntnd_booking-payrexx" name="cntnd_booking-payrexx">';
-  echo '<h1>payment</h1>';
+  echo '<h5>Transaktionen</h5>';
+  $smarty->assign('data', $simple_booking->payments());
+  $smarty->display('admin-payments-liste.html');
 
   echo '<p>config für bestellung: lookAndFeelProfile (?), successMessage, buttonText, action</p>';
 

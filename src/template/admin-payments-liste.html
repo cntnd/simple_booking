@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <th>Buchung</th>
+      <th>Name</th>
+      <th>E-Mail</th>
+      <th>Telefon</th>
+      <th>Transaktion</th>
+      <th>Datum</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  {foreach item=payment from=$payments}
+  <tr>
+    <td>{$payment.title}</td>
+    <td>{$payment.name}</td>
+    <td>{$payment.email}</td>
+    <td>{$payment.phone}</td>
+    <td>{$payment.transaction_id}</td>
+    <td>{$payment.mut_date}</td>
+    <td>{$payment.status}</td>
+  </tr>
+  {/foreach}
+  </tbody>
+</table>

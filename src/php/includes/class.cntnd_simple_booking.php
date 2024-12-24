@@ -433,9 +433,10 @@ class CntndSimpleBooking
         return $displayData;
     }
 
-    private function dayType($value) {
+    private function dayType($value)
+    {
         $time = intval($value);
-        if ($time>1200) {
+        if ($time > 1200) {
             return "afternoon";
         }
         return "morning";
@@ -523,9 +524,9 @@ class CntndSimpleBooking
         $smarty = cSmartyFrontend::getInstance();
         $smarty->assign('date', DateTimeUtil::getReadableDate($date));
         $smarty->assign('time', DateTimeUtil::getReadableTimeFromDate($time));
-        $smarty->assign('name', $post['forename']." ".$post['surname']);
+        $smarty->assign('name', $post['forename'] . " " . $post['surname']);
         $smarty->assign('adresse', $post['street']);
-        $smarty->assign('plz_ort', $post['postcode']." ".$post['place']);
+        $smarty->assign('plz_ort', $post['postcode'] . " " . $post['place']);
         $smarty->assign('telefon', $post['phone']);
         $smarty->assign('bemerkungen', $post['comment']);
         $smarty->assign('email', $post['email']);
@@ -745,6 +746,46 @@ class CntndSimpleBooking
 
     // payment
     // todo get all open/success from this range
+    public function payments()
+    {
+        // bookings
+        $sql = "SELECT * FROM :table WHERE idart = :idart ORDER BY date, time";
+        $values = array(
+            'table' => self::$_vars['db']['bookings'],
+            'idart' => cSecurity::toInteger($this->idart));
+        $this->db->query($sql, $values);
+        $bookings = [];
+        while ($this->db->next_record()) {
+            $readableDate = DateTimeUtil::getReadableDate($this->db->f('date'));
+            $readableTime = DateTimeUtil::getReadableTimeFromDate($this->db->f('time'));
+            $title = $readableDate . " - " . $readableTime;
+            $bookings[$this->db->f('id')] = ["title" => $title];
+        }
+
+        // payments
+        $references = implode(",", array_keys($bookings));
+        $sql = "SELECT * FROM :table WHERE reference_id IN (:references) ORDER BY date, time";
+        $values = array(
+            'table' => self::$_vars['db']['payment'],
+            'references' => $references);
+        $result = $this->db->query($sql, $values);
+        $payments = [];
+        if ($result->num_rows > 0) {
+            while ($this->db->nextRecord()) {
+                $referenceId = $this->db->f('reference_id');
+                $payments[] = [
+                    "title" => $bookings[$referenceId]["title"],
+                    "name" => $this->db->f('forename') . " " . $this->db->f('surname'),
+                    "email" => $this->db->f('email'),
+                    "phone" => $this->db->f('phone'),
+                    "transaction_id" => $this->db->f('transaction_id'),
+                    "mut_date" => DateTimeUtil::getReadableDateTime($this->db->f('mut_date')),
+                    "status" => $this->db->f('status')
+                ];
+            }
+        }
+        return $payments;
+    }
 }
 
 ?>
