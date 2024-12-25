@@ -60,17 +60,23 @@ $bootstrap_fallback = true;
 // includes
 cInclude('module', 'includes/class.datetime.php');
 cInclude('module', 'includes/class.cntnd_simple_booking.php');
+
+// other/vars
+$smarty = cSmartyFrontend::getInstance();
+$simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $email_copy, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart);
+
 if ($editmode) {
+    cInclude('module', 'includes/script.cntnd_core_output.php');
+    echo "\n<script>\n$(document).ready(function() {\n";
+    echo "const prices = ".$simple_booking->priceConfigJson().";\n";
     cInclude('module', 'includes/script.cntnd_simple_booking_output.php');
+    echo "\n});\n</script>\n";
     if ($bootstrap_fallback) {
         cInclude('module', 'includes/style.cntnd_simple_booking_output-fallback.php');
     }
     cInclude('module', 'includes/style.cntnd_simple_booking_output.php');
 }
 
-// other/vars
-$smarty = cSmartyFrontend::getInstance();
-$simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $email_copy, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart);
 // interval
 if ($interval && $editmode) {
     $simple_booking->interval($interval_slots, $timerange_from, $timerange_to);
@@ -220,19 +226,13 @@ if ($editmode) {
     // endregion
 
 
-    // CONTENT: PAYREXX CONFIG todo
+    // CONTENT: PAYREXX CONFIG
     echo '<div id="simple_booking_payment_config_content" class="tabs__content--pane ' . ($is_payment ? "active" : "") . '">';
 
     echo '<div class="m-2">';
 
-    echo '<form method="post" id="cntnd_booking-payrexx_config" name="cntnd_booking-payrexx_config">';
     echo '<h5>Konfiguration</h5>';
     echo '<p>Die konfiguration für das Payment Modul befindet sich unter payments.schuepfenried.ch (Order und Webhook) als .env Datei.</p>';
-
-    echo '<p>config für bestellung: lookAndFeelProfile (?), successMessage, buttonText, action</p>';
-
-    echo '<input type="hidden" name="cntnd_booking-payrexx_config" value="save" />';
-    echo '</form>';
 
     echo '<hr />';
 

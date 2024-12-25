@@ -1,6 +1,3 @@
-<script src="https://cdn.jsdelivr.net/gh/cntnd/core_style@0.1.3/dist/core_script.min.js"></script>
-<script>
-$(document).ready(function(){
   // config
   $('.cntnd_booking-config-add').click(function (){
      var date = $(this).attr('data-date');
@@ -15,7 +12,15 @@ $(document).ready(function(){
      var cols = "";
 
      cols += '<td><input type="time" class="form-control" placeholder="Zeit (HH:mm)" name="config['+date+']['+counter+'][time]" required/></td>';
-     cols += '<td><input type="number" class="form-control" placeholder="Anzahl Slots" name="config['+date+']['+counter+'][slots]" required/></td>';
+     cols += '<td>';
+     cols += '<input type="number" class="form-control" placeholder="Anzahl Slots" name="config['+date+']['+counter+'][slots]" required/>';
+     cols += '<select name="config['+date+']['+counter+'][price_id]">';
+     cols += '<option> - Preise auswählen</option>';
+     $.each(prices, function (i, item) {
+        cols += '<option value="'+i+'">'+item+'</option>';
+     });
+     cols += '</select>';
+     cols += '</td>';
      cols += '<td><input type="text" class="form-control" placeholder="Bemerkung" name="config['+date+']['+counter+'][comment]"/></td>';
      cols += '<td><button type="button" class="btn btn-sm cntnd_booking-config-delete">Löschen</button></td>';
 
@@ -39,7 +44,15 @@ $(document).ready(function(){
         cols += '<input type="time" class="form-control" placeholder="Zeit von (HH:mm)" name="config['+date+']['+counter+'][time]" required/>';
         cols += '<input type="time" class="form-control" placeholder="Zeit bis (HH:mm)" name="config['+date+']['+counter+'][time_until]" />';
         cols += '</td>';
-        cols += '<td><input type="number" class="form-control" placeholder="Anzahl Slots" name="config['+date+']['+counter+'][slots]" required/></td>';
+        cols += '<td>';
+        cols += '<input type="number" class="form-control" placeholder="Anzahl Slots" name="config['+date+']['+counter+'][slots]" required/>';
+        cols += '<select name="config['+date+']['+counter+'][price_id]">';
+        cols += '<option> - Preise auswählen</option>';
+        $.each(prices, function (i, item) {
+            cols += '<option value="'+i+'">'+item+'</option>';
+        });
+        cols += '</select>';
+        cols += '</td>';
         cols += '<td><input type="text" class="form-control" placeholder="Bemerkung" name="config['+date+']['+counter+'][comment]"/></td>';
         cols += '<td><button type="button" class="btn btn-sm cntnd_booking-config-delete">Löschen</button></td>';
 
@@ -69,10 +82,6 @@ $(document).ready(function(){
 
     $('.cntnd_booking-payrexx_price_name-save').click(function (){
         $('#cntnd_booking-payrexx_price_name').submit();
-    });
-
-    $('.cntnd_booking-payrexx_config-save').click(function (){
-        $('#cntnd_booking-payrexx_config').submit();
     });
 
   // admin
@@ -119,5 +128,3 @@ $(document).ready(function(){
     $('.cntnd_booking-admin-timeslot > .timeslot').text('');
     $('.cntnd_booking-admin-timeslot').addClass('hide');
   }
-});
-</script>

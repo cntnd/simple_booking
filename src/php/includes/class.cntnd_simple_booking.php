@@ -926,6 +926,12 @@ class CntndSimpleBooking
         return $config;
     }
 
+    public function priceConfigJson()
+    {
+        $config = $this->priceConfig();
+        return json_encode($config, JSON_PRETTY_PRINT);
+    }
+
     private function priceConfigOptions($select = "")
     {
         $config = $this->priceConfig();

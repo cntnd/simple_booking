@@ -7,7 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="fix price config">
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="fix price config in date config">
+      <change afterPath="$PROJECT_DIR$/src/php/includes/script.cntnd_core_output.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
@@ -135,7 +136,7 @@
       <workItem from="1733869693892" duration="2437000" />
       <workItem from="1733919162905" duration="1207000" />
       <workItem from="1734980021252" duration="14642000" />
-      <workItem from="1735125618058" duration="17436000" />
+      <workItem from="1735125618058" duration="19231000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1632898020246</created>
@@ -315,7 +316,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735137537846</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fix price config in date config">
+      <option name="closed" value="true" />
+      <created>1735143491951</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1735143491951</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,7 +342,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="init" />
     <MESSAGE value="crud" />
     <MESSAGE value="extended simple booking" />
     <MESSAGE value="add some more features" />
@@ -358,6 +366,7 @@
     <MESSAGE value="payments overview" />
     <MESSAGE value="price config" />
     <MESSAGE value="fix price config" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix price config" />
+    <MESSAGE value="fix price config in date config" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix price config in date config" />
   </component>
 </project>
