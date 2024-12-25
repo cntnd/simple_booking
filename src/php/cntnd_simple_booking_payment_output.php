@@ -76,6 +76,12 @@ if ($editmode) {
     }
     cInclude('module', 'includes/style.cntnd_simple_booking_output.php');
 }
+else {
+    echo "\n<script>\n$(document).ready(function() {\n";
+    echo "const prices = ".$simple_booking->priceCartJson().";\n";
+    cInclude('module', 'includes/script.cntnd_simple_booking_cart_output.php');
+    echo "\n});\n</script>\n";
+}
 
 // interval
 if ($interval && $editmode) {

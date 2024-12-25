@@ -932,6 +932,18 @@ class CntndSimpleBooking
         return json_encode($config, JSON_PRETTY_PRINT);
     }
 
+    public function priceCartJson()
+    {
+        $prices = $this->paymentConfig();
+        $json = [];
+        foreach ($prices as $priceId => $price) {
+            foreach ($price as $config) {
+                $json[$priceId][$config['persons']] = $config['price'];
+            }
+        }
+        return json_encode($json, JSON_PRETTY_PRINT);
+    }
+
     private function priceConfigOptions($select = "")
     {
         $config = $this->priceConfig();

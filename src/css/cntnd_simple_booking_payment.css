@@ -163,6 +163,9 @@ textarea.form-control {
 .table.table-payments > tbody > tr:nth-of-type(odd) > * {
   background-color: #eeeeee;
 }
+.table.table-cart {
+  border-color: #eeeeee;
+}
 
 .form-check-label {
   font-size: 12px;
@@ -177,4 +180,9 @@ textarea.form-control {
   right: 0;
   cursor: pointer;
   font-weight: bold;
+}
+
+/* CART */
+#cart_giftcard {
+  display: none;
 }

@@ -7,12 +7,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="fix price config in date config">
-      <change afterPath="$PROJECT_DIR$/src/php/includes/script.cntnd_core_output.php" afterDir="false" />
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="fix price config in date config copy">
+      <change afterPath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_cart_output.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sql/simple_booking_payment.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/cntnd_simple_booking_payment.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/cntnd_simple_booking_payment.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/cntnd_simple_booking_payment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/cntnd_simple_booking_payment.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/cntnd_simple_booking_payment.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/cntnd_simple_booking_payment.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/cntnd_payment.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/cntnd_payment_config.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/cntnd_simple_booking_payment.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/cntnd_simple_booking_payment_config.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/booking-recurrent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/booking-recurrent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/booking_slot-default.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/booking_slot-default.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/booking_slot-oneclick.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/booking_slot-oneclick.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/form-default.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/form-default.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/form-recurrent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/form-recurrent.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +148,7 @@
       <workItem from="1733869693892" duration="2437000" />
       <workItem from="1733919162905" duration="1207000" />
       <workItem from="1734980021252" duration="14642000" />
-      <workItem from="1735125618058" duration="19231000" />
+      <workItem from="1735125618058" duration="22299000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1632898020246</created>
@@ -324,7 +336,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735143491951</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="fix price config in date config copy">
+      <option name="closed" value="true" />
+      <created>1735145362112</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1735145362112</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,7 +362,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="crud" />
     <MESSAGE value="extended simple booking" />
     <MESSAGE value="add some more features" />
     <MESSAGE value="fixes" />
@@ -367,6 +386,7 @@
     <MESSAGE value="price config" />
     <MESSAGE value="fix price config" />
     <MESSAGE value="fix price config in date config" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix price config in date config" />
+    <MESSAGE value="fix price config in date config copy" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix price config in date config copy" />
   </component>
 </project>
