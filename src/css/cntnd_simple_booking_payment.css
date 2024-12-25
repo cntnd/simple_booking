@@ -164,6 +164,10 @@ textarea.form-control {
   background-color: #eeeeee;
 }
 
+.form-check-label {
+  font-size: 12px;
+}
+
 /* Booking */
 .cntnd_booking-form {
   background: rgba(204, 204, 204, 0.85);

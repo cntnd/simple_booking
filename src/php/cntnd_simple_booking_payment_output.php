@@ -218,7 +218,7 @@ if ($editmode) {
 
 
     // CONTENT: PAYREXX CONFIG todo
-    echo '<div id="simple_booking_payment_config_content ' . ($is_payment ? "active" : "") . '" class="tabs__content--pane">';
+    echo '<div id="simple_booking_payment_config_content" class="tabs__content--pane ' . ($is_payment ? "active" : "") . '">';
 
     echo '<div class="m-2">';
 

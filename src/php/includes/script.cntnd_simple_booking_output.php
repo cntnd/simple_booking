@@ -51,6 +51,13 @@ $(document).ready(function(){
       $(this).closest("tr").remove();
   });
 
+    $(".cntnd_booking-payrexx_price_config-delete").click(function () {
+        const index = $(this).data("remove");
+        console.log(index);
+        $("#paymentConfig-" +index+ "-action").val("delete");
+        $("#paymentConfig-"+index+"-row").hide();
+    });
+
   $('.cntnd_booking-config-save').click(function (){
      $('#cntnd_booking-config').submit();
   });
