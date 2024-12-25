@@ -7,11 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="add more config">
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="fix redirect url">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/form-default.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/form-default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/template/form-recurrent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/form-recurrent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/cntnd_simple_booking_payment.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/cntnd_simple_booking_payment.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scss/cntnd_simple_booking_payment.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/scss/cntnd_simple_booking_payment.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/admin-payments-liste.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/admin-payments-liste.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +136,7 @@
       <workItem from="1733869693892" duration="2437000" />
       <workItem from="1733919162905" duration="1207000" />
       <workItem from="1734980021252" duration="14642000" />
-      <workItem from="1735125618058" duration="591000" />
+      <workItem from="1735125618058" duration="1629000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1632898020246</created>
@@ -283,7 +284,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735066018125</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fix redirect url">
+      <option name="closed" value="true" />
+      <created>1735126465638</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1735126465638</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,6 +331,7 @@
     <MESSAGE value="refactoring" />
     <MESSAGE value="add payments overview" />
     <MESSAGE value="add more config" />
-    <option name="LAST_COMMIT_MESSAGE" value="add more config" />
+    <MESSAGE value="fix redirect url" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix redirect url" />
   </component>
 </project>

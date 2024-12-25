@@ -203,7 +203,7 @@ if ($editmode) {
     echo '<div class="m-2">';
 
     echo '<h5>Transaktionen</h5>';
-    $smarty->assign('data', $simple_booking->payments());
+    $smarty->assign('payments', $simple_booking->payments());
     $smarty->display('admin-payments-liste.html');
 
     echo '</div>';

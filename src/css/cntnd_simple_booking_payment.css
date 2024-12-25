@@ -152,6 +152,18 @@ textarea.form-control {
   width: auto;
 }
 
+.table {
+  width: 100%;
+  vertical-align: top;
+  border-color: #85878a;
+}
+.table td {
+  font-size: 0.8rem;
+}
+.table.table-payments > tbody > tr:nth-of-type(odd) > * {
+  background-color: #eeeeee;
+}
+
 /* Booking */
 .cntnd_booking-form {
   background: rgba(204, 204, 204, 0.85);
