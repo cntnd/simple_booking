@@ -16,17 +16,17 @@ $subject_default = "CMS_VALUE[4]";
 $subject_declined = "CMS_VALUE[5]";
 $subject_reserved = "CMS_VALUE[6]";
 $subject = array(
-    'booking_title'=>$booking_title,
-    'default'=>$subject_default,
-    'declined'=>$subject_declined,
-    'reserved'=>$subject_reserved);
-$recurrent = (bool) "CMS_VALUE[7]";
-$one_click = (bool) "CMS_VALUE[8]";
+    'booking_title' => $booking_title,
+    'default' => $subject_default,
+    'declined' => $subject_declined,
+    'reserved' => $subject_reserved);
+$recurrent = (bool)"CMS_VALUE[7]";
+$one_click = (bool)"CMS_VALUE[8]";
 $show_daterange = "CMS_VALUE[9]";
-$show_past = (bool) "CMS_VALUE[20]";
-$show_past_admin = (bool) "CMS_VALUE[21]";
-if (empty($booking_title)){
-  $booking_title="booking";
+$show_past = (bool)"CMS_VALUE[20]";
+$show_past_admin = (bool)"CMS_VALUE[21]";
+if (empty($booking_title)) {
+    $booking_title = "booking";
 }
 
 $blocked_days[1] = (empty("CMS_VALUE[11]")) ? false : true;
@@ -37,122 +37,119 @@ $blocked_days[5] = (empty("CMS_VALUE[15]")) ? false : true;
 $blocked_days[6] = (empty("CMS_VALUE[16]")) ? false : true;
 $blocked_days[0] = (empty("CMS_VALUE[10]")) ? false : true;
 
-$interval = (bool) "CMS_VALUE[30]";
+$interval = (bool)"CMS_VALUE[30]";
 $interval_slots = "CMS_VALUE[31]";
 $timerange_from = "CMS_VALUE[32]";
 $timerange_to = "CMS_VALUE[33]";
 
-$email_copy_default = (bool) "CMS_VALUE[40]";
-$email_copy_reserved = (bool) "CMS_VALUE[41]";
-$email_copy_declined = (bool) "CMS_VALUE[42]";
+$email_copy_default = (bool)"CMS_VALUE[40]";
+$email_copy_reserved = (bool)"CMS_VALUE[41]";
+$email_copy_declined = (bool)"CMS_VALUE[42]";
 $email_copy_mailto = "CMS_VALUE[43]";
 if (empty($email_copy_mailto)) {
-  $email_copy_mailto = $mailto;
+    $email_copy_mailto = $mailto;
 }
 $email_copy = array(
-    'default'=>$email_copy_default,
-    'reserved'=>$email_copy_reserved,
-    'declined'=>$email_copy_declined,
-    'mailto'=>$email_copy_mailto);
+    'default' => $email_copy_default,
+    'reserved' => $email_copy_reserved,
+    'declined' => $email_copy_declined,
+    'mailto' => $email_copy_mailto);
 
 $bootstrap_fallback = true;
 
 // includes
 cInclude('module', 'includes/class.datetime.php');
 cInclude('module', 'includes/class.cntnd_simple_booking.php');
-if ($editmode){
-  cInclude('module', 'includes/script.cntnd_simple_booking_output.php');
-  if ($bootstrap_fallback){
-    cInclude('module', 'includes/style.cntnd_simple_booking_output-fallback.php');
-  }
-  cInclude('module', 'includes/style.cntnd_simple_booking_output.php');
+if ($editmode) {
+    cInclude('module', 'includes/script.cntnd_simple_booking_output.php');
+    if ($bootstrap_fallback) {
+        cInclude('module', 'includes/style.cntnd_simple_booking_output-fallback.php');
+    }
+    cInclude('module', 'includes/style.cntnd_simple_booking_output.php');
 }
 
 // other/vars
 $smarty = cSmartyFrontend::getInstance();
 $simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $email_copy, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart);
 // interval
-if ($interval && $editmode){
-  $simple_booking->interval($interval_slots, $timerange_from, $timerange_to);
+if ($interval && $editmode) {
+    $simple_booking->interval($interval_slots, $timerange_from, $timerange_to);
 }
 
 $has_config = $simple_booking->hasConfig();
 
-if (empty($daterange) OR !$has_config){
-  echo '<div class="cntnd_alert cntnd_alert-primary">';
-  if ($editmode){
-    echo mi18n("NO_CONFIG");
-  }
-  else {
-    mi18n("NO_BOOKING");
-  }
-  echo '</div>';
+if (empty($daterange) or !$has_config) {
+    echo '<div class="cntnd_alert cntnd_alert-primary">';
+    if ($editmode) {
+        echo mi18n("NO_CONFIG");
+    } else {
+        mi18n("NO_BOOKING");
+    }
+    echo '</div>';
 }
 
-if ($editmode){
-  // ADMIN
-  if ($_POST){
-    if ($_POST["cntnd_booking-config"]=="save"){
-      $simple_booking->saveConfig($_POST);
+if ($editmode) {
+    // ADMIN
+    if ($_POST) {
+        if ($_POST["cntnd_booking-config"] == "save") {
+            $simple_booking->saveConfig($_POST);
+        } else {
+            if (CntndSimpleBooking::validateUpdate($_POST)) {
+                $admin_success = $simple_booking->update($_POST);
+            } else {
+                $admin_error = true;
+            }
+        }
     }
-    else {
-      if (CntndSimpleBooking::validateUpdate($_POST)){
-        $admin_success=$simple_booking->update($_POST);
-      }
-      else {
-        $admin_error=true;
-      }
+
+    echo '<div class="content_box cntnd_simple-booking"><label class="content_type_label">' . mi18n("MODULE") . '</label>';
+    echo '<div class="cntnd_alert cntnd_alert-primary">' . mi18n("ADMIN_MODE") . '</div>';
+    if ($admin_success) {
+        echo '<hr />';
+        echo '<div class="cntnd_alert cntnd_alert-primary">' . mi18n("ADMIN_SUCCESS") . '</div>';
+        echo '<script>' . "\n";
+        echo '$(document).ready(function (){' . "\n";
+        echo '  $("html, body").animate({' . "\n";
+        echo '    scrollTop: $("[data-resid=' . $_POST['resid'] . ']").offset().top' . "\n";
+        echo '  }, 100);' . "\n";
+        echo '});' . "\n";
+        echo '</script>' . "\n";
     }
-  }
+    if ($admin_error) {
+        echo '<hr />';
+        echo '<div class="cntnd_alert cntnd_alert-danger">' . mi18n("ADMIN_FAILURE") . '</div>';
+    }
 
-  echo '<div class="content_box cntnd_simple-booking"><label class="content_type_label">'.mi18n("MODULE").'</label>';
-  echo '<div class="cntnd_alert cntnd_alert-primary">'.mi18n("ADMIN_MODE").'</div>';
-  if ($admin_success){
-    echo '<hr />';
-    echo '<div class="cntnd_alert cntnd_alert-primary">'.mi18n("ADMIN_SUCCESS").'</div>';
-    echo '<script>'."\n";
-    echo '$(document).ready(function (){'."\n";
-    echo '  $("html, body").animate({'."\n";
-    echo '    scrollTop: $("[data-resid='.$_POST['resid'].']").offset().top'."\n";
-    echo '  }, 100);'."\n";
-    echo '});'."\n";
-    echo '</script>'."\n";
-  }
-  if ($admin_error){
-    echo '<hr />';
-    echo '<div class="cntnd_alert cntnd_alert-danger">'.mi18n("ADMIN_FAILURE").'</div>';
-  }
+    // TABS
 
-  // TABS
+    echo '<ul class="tabs" id="simple_booking_admin" role="tablist">';
+    echo '<li class="tabs__tab ' . ($has_config || $interval ? "active" : "") . '" data-toggle="tabs" data-target="simple_booking_admin-content">Admin</li>';
+    // todo check
+    if (!$interval) {
+        echo '<li class="tabs__tab ' . (!$has_config ? "active" : "") . '" data-toggle="tabs" data-target="simple_booking_config_content">Konfiguration</li>';
+    }
+    echo '<li class="tabs__tab" data-toggle="tabs" data-target="simple_booking_payment_content">Transaktionen</li>';
+    echo '<li class="tabs__tab" data-toggle="tabs" data-target="simple_booking_payment_config_content">Payrexx Konfiguration</li>';
+    echo '</ul>';
 
-  echo '<ul class="tabs" id="simple_booking_admin" role="tablist">';
-  echo '<li class="tabs__tab '.($has_config || $interval ? "active" : "").'" data-toggle="tabs" data-target="simple_booking_admin-content">Admin</li>';
-  // todo check
-  if (!$interval){
-    echo '<li class="tabs__tab '.(!$has_config ? "active" : "").'" data-toggle="tabs" data-target="simple_booking_config_content">Konfiguration</li>';
-  }
-  echo '<li class="tabs__tab" data-toggle="tabs" data-target="simple_booking_payment_content">Transaktionen</li>';
-  echo '<li class="tabs__tab" data-toggle="tabs" data-target="simple_booking_payment_config_content">Payrexx Konfiguration</li>';
-  echo '</ul>';
+    // CONTENT
+    echo '<div class="tabs__content">';
+    // CONTENT: ADMIN
+    echo '<div  id="simple_booking_admin-content" class="tabs__content--pane ' . ($has_config || $interval ? "active" : "") . '">';
 
-  // CONTENT
-  echo '<div class="tabs__content">';
-  // CONTENT: ADMIN
-  echo '<div  id="simple_booking_admin-content" class="tabs__content--pane '.($has_config || $interval ? "active" : "").'">';
+    echo '<div class="d-flex pt-2">';
 
-  echo '<div class="d-flex pt-2">';
+    echo '<div class="w-50 pr-10">';
+    $smarty->assign('data', $simple_booking->listAll($show_past_admin));
+    $smarty->display('admin-liste.html');
+    echo '</div>';
 
-  echo '<div class="w-50 pr-10">';
-  $smarty->assign('data', $simple_booking->listAll($show_past_admin));
-  $smarty->display('admin-liste.html');
-  echo '</div>';
-
-  echo '<div class="w-50 pl-10">';
-  echo '<div class="cntnd_booking-admin-action">
-    <h5>'.mi18n("ADMIN_ACTION").'</h5>
+    echo '<div class="w-50 pl-10">';
+    echo '<div class="cntnd_booking-admin-action">
+    <h5>' . mi18n("ADMIN_ACTION") . '</h5>
     <div class="form-vertical card">
       <div class="card-body">
-        <div class="cntnd_booking-admin-error cntnd_alert cntnd_alert-primary hide">'.mi18n("ADMIN_SUBMIT_ERROR").'</div>
+        <div class="cntnd_booking-admin-error cntnd_alert cntnd_alert-primary hide">' . mi18n("ADMIN_SUBMIT_ERROR") . '</div>
         <form method="post" id="cntnd_booking-admin" name="cntnd_booking-admin">
           <div class="cntnd_booking-admin-timeslot hide">
             <span class="timeslot"></span>
@@ -161,145 +158,148 @@ if ($editmode){
         		<label for="bemerkungen">Bemerkungen</label>
         		<textarea name="bemerkungen" class="form-control" rows="3"></textarea>
         	</div>
-          <button class="btn btn-primary" type="submit">'.mi18n("SAVE").'</button>
-          <button class="btn btn-dark cntnd_booking-admin-delete" type="button">'.mi18n("DELETE").'</button>
-          <button class="btn cntnd_booking-admin-cancel" type="reset">'.mi18n("RESET").'</button>
+          <button class="btn btn-primary" type="submit">' . mi18n("SAVE") . '</button>
+          <button class="btn btn-dark cntnd_booking-admin-delete" type="button">' . mi18n("DELETE") . '</button>
+          <button class="btn cntnd_booking-admin-cancel" type="reset">' . mi18n("RESET") . '</button>
           <input type="hidden" name="resid" />
           <input type="hidden" name="action" value="save" />
           <div class="d-flex form-group">
-            <span>'.mi18n("EMAIL").'</span>
+            <span>' . mi18n("EMAIL") . '</span>
             <div class="form-check form-check-inline w-auto">
               <input id="email_senden" class="form-check-input" type="checkbox" name="email_senden" value="true" checked />
-              <label for="email_senden" class="form-check-label">'.mi18n("EMAIL_SEND").'</label>
+              <label for="email_senden" class="form-check-label">' . mi18n("EMAIL_SEND") . '</label>
             </div>
           </div>
         </form>
       </div>
     </div>
   </div>';
-  echo '</div>';
+    echo '</div>';
 
-  echo '</div>';
+    echo '</div>';
 
-  echo '</div>';
-  // endregion
+    echo '</div>';
+    // endregion
 
-  // CONTENT: CONFIG
-  echo '<div id="simple_booking_config_content" class="tabs__content--pane '.(!$has_config && !$interval ? "active" : "").'">';
+    // CONTENT: CONFIG
+    echo '<div id="simple_booking_config_content" class="tabs__content--pane ' . (!$has_config && !$interval ? "active" : "") . '">';
 
-  echo '<div class="m-2">';
+    echo '<div class="m-2">';
 
-  echo '<form method="post" id="cntnd_booking-config" name="cntnd_booking-config">';
-  $simple_booking->renderConfig($recurrent);
-  echo '<input type="hidden" name="cntnd_booking-config" value="save" />';
-  echo '<input type="hidden" name="cntnd_booking-recurrent" value="'.$recurrent.'" />';
-  echo '</form>';
+    echo '<form method="post" id="cntnd_booking-config" name="cntnd_booking-config">';
+    $simple_booking->renderConfig($recurrent);
+    echo '<input type="hidden" name="cntnd_booking-config" value="save" />';
+    echo '<input type="hidden" name="cntnd_booking-recurrent" value="' . $recurrent . '" />';
+    echo '</form>';
 
-  echo '</div>';
+    echo '</div>';
 
-  echo '</div>';
-  // endregion
+    echo '</div>';
+    // endregion
 
-  // CONTENT: PAYREXX
-  echo '<div id="simple_booking_payment_content" class="tabs__content--pane">';
+    // CONTENT: PAYREXX
+    echo '<div id="simple_booking_payment_content" class="tabs__content--pane">';
 
-  echo '<div class="m-2">';
+    echo '<div class="m-2">';
 
-  echo '<h5>Transaktionen</h5>';
-  $smarty->assign('data', $simple_booking->payments());
-  $smarty->display('admin-payments-liste.html');
+    echo '<h5>Transaktionen</h5>';
+    $smarty->assign('data', $simple_booking->payments());
+    $smarty->display('admin-payments-liste.html');
 
-  echo '</div>';
+    echo '</div>';
 
-  echo '</div>';
-  // endregion
+    echo '</div>';
+    // endregion
 
 
-  // CONTENT: PAYREXX CONFIG todo
-  echo '<div id="simple_booking_payment_config_content" class="tabs__content--pane">';
+    // CONTENT: PAYREXX CONFIG todo
+    echo '<div id="simple_booking_payment_config_content" class="tabs__content--pane">';
 
-  echo '<div class="m-2">';
+    echo '<div class="m-2">';
 
-  echo '<form method="post" id="cntnd_booking-payrexx_price_config" name="cntnd_booking-payrexx_price_config">';
-  echo '<h5>Preise</h5>';
-  $simple_booking->renderPaymentPriceConfig();
-  echo '<input type="hidden" name="cntnd_booking-payrexx_price_config" value="save" />';
-  echo '</form>';
-  echo '<hr />';
+    echo '<form method="post" id="cntnd_booking-payrexx_price_config" name="cntnd_booking-payrexx_price_config">';
+    echo '<h5>Preise</h5>';
+    $simple_booking->renderPaymentPriceConfig();
+    echo '<input type="hidden" name="cntnd_booking-payrexx_price_config" value="save" />';
+    echo '</form>';
+    echo '<hr />';
 
-  echo '<form method="post" id="cntnd_booking-payrexx_config" name="cntnd_booking-payrexx_config">';
-  echo '<h5>Konfiguration</h5>';
-  echo '<p>Die konfiguration für das Payment Modul befindet sich unter payments.schuepfenried.ch (Order und Webhook) als .env Datei.</p>';
+    echo '<form method="post" id="cntnd_booking-payrexx_config" name="cntnd_booking-payrexx_config">';
+    echo '<h5>Konfiguration</h5>';
+    echo '<p>Die konfiguration für das Payment Modul befindet sich unter payments.schuepfenried.ch (Order und Webhook) als .env Datei.</p>';
 
-  echo '<p>config für bestellung: lookAndFeelProfile (?), successMessage, buttonText, action</p>';
+    echo '<p>config für bestellung: lookAndFeelProfile (?), successMessage, buttonText, action</p>';
 
-  echo '<input type="hidden" name="cntnd_booking-payrexx_config" value="save" />';
-  echo '</form>';
+    echo '<input type="hidden" name="cntnd_booking-payrexx_config" value="save" />';
+    echo '</form>';
 
-  echo '</div>';
+    echo '</div>';
 
-  echo '</div>';
-  // endregion
-  echo '</div>';
+    echo '</div>';
+    // endregion
+    echo '</div>';
 
-  // endregion
-  echo '</div>';
-}
-else {
-  // PUBLIC
-  // REFRESH
-  $rand = mt_rand();
-  $_SESSION['rand']=$rand;
+    // endregion
+    echo '</div>';
+} else {
+    // PUBLIC
+    $uriBuilder = cUriBuilderFrontcontent::getInstance();
+    $uriBuilder->buildUrl(['idart' => $idart], true);
+    $redirect = $uriBuilder->getUrl();
 
-  if (!empty($_GET['result']) && $_GET['result']=="success"){
-    echo '<div class="cntnd_alert cntnd_alert-primary">'.mi18n("SUCCESS").'</div>';
-  }
-  echo '<div class="cntnd_booking">';
-  // todo config action
-  echo '<form method="post" id="cntnd_booking-reservation" name="cntnd_booking-reservation" action="https://payment.schuepfenried.ch/order/">';
+    // REFRESH
+    $rand = mt_rand();
+    $_SESSION['rand'] = $rand;
 
-  // display booking
-  $data = $simple_booking->renderData($recurrent);
-  $smarty->assign('data', $data);
-  $smarty->assign('recurrent', $recurrent);
-  $smarty->assign('interval', $interval);
-  $smarty->assign('one_click', $one_click);
-  $smarty->assign('pagination', ($show_daterange != "all"));
-  $smarty->display('booking.html');
+    if (!empty($_GET['result']) && $_GET['result'] == "success") {
+        echo '<div class="cntnd_alert cntnd_alert-primary">' . mi18n("SUCCESS") . '</div>';
+    }
+    echo '<div class="cntnd_booking">';
+    // todo config action
+    echo '<form method="post" id="cntnd_booking-reservation" name="cntnd_booking-reservation" action="https://payment.schuepfenried.ch/order/">';
 
-  // show messages
-  if (!empty($_GET['result']) && $_GET['result']=="failure"){
-    echo '<div id="cntnd_booking-form"></div>';
-  }
-  $failureMsg=(!empty($_GET['error']) && $_GET['error']=="failure") ? '' : 'hide';
-  echo '<div class="cntnd_alert cntnd_alert-danger cntnd_booking-validation '.$failureMsg.'">';
-  echo mi18n("VALIDATION");
-  echo '<ul>';
-  echo '<li class="cntnd_booking-validation-required">'.mi18n("VALIDATION_REQUIRED").'</li>';
-  echo '<li class="cntnd_booking-validation-dates">'.mi18n("VALIDATION_DATES").'</li>';
-  echo '</ul>';
-  echo '</div>';
-  if (!empty($_GET['error']) && $_GET['error']=="error"){
-    echo '<div class="cntnd_alert cntnd_alert-danger">'.mi18n("FAILURE").'</li></div>';
-  }
-  if (!empty($_GET['error']) && $_GET['error']=="error_free"){
-    echo '<div class="cntnd_alert cntnd_alert-danger">'.mi18n("VALIDATION_FREE_SLOTS").'</div>';
-  }
+    // display booking
+    $data = $simple_booking->renderData($recurrent);
+    $smarty->assign('data', $data);
+    $smarty->assign('recurrent', $recurrent);
+    $smarty->assign('interval', $interval);
+    $smarty->assign('one_click', $one_click);
+    $smarty->assign('pagination', ($show_daterange != "all"));
+    $smarty->display('booking.html');
 
-  // display form
-  $smarty->assign('recurrent', $recurrent);
-  $smarty->assign('interval', $interval);
-  $smarty->display('form.html');
+    // show messages
+    if (!empty($_GET['result']) && $_GET['result'] == "failure") {
+        echo '<div id="cntnd_booking-form"></div>';
+    }
+    $failureMsg = (!empty($_GET['error']) && $_GET['error'] == "failure") ? '' : 'hide';
+    echo '<div class="cntnd_alert cntnd_alert-danger cntnd_booking-validation ' . $failureMsg . '">';
+    echo mi18n("VALIDATION");
+    echo '<ul>';
+    echo '<li class="cntnd_booking-validation-required">' . mi18n("VALIDATION_REQUIRED") . '</li>';
+    echo '<li class="cntnd_booking-validation-dates">' . mi18n("VALIDATION_DATES") . '</li>';
+    echo '</ul>';
+    echo '</div>';
+    if (!empty($_GET['error']) && $_GET['error'] == "error") {
+        echo '<div class="cntnd_alert cntnd_alert-danger">' . mi18n("FAILURE") . '</li></div>';
+    }
+    if (!empty($_GET['error']) && $_GET['error'] == "error_free") {
+        echo '<div class="cntnd_alert cntnd_alert-danger">' . mi18n("VALIDATION_FREE_SLOTS") . '</div>';
+    }
 
-  echo '<button type="submit" class="btn btn-primary">'.mi18n("SAVE").'</button>';
-  echo '<button type="reset" class="btn">'.mi18n("RESET").'</button>';
-  echo '<input type="hidden" name="required" id="cntnd_booking-required" />';
-  echo '<input type="hidden" name="fields" id="cntnd_booking-fields" />';
-  echo '<input type="hidden" name="one_click_booking" value="'.$one_click.'" id="cntnd_booking-one_click_booking" />';
-  echo '<input type="hidden" name="rand" value="'.$rand.'" />';
-  echo '<input type="hidden" name="idart" value="'.$idart.'" />';
-  echo '<input type="hidden" name="redirect" value="https://www.schuepfenried.ch'.$_SERVER['REQUEST_URI'].'" />';
-  echo '</form>';
-  echo '</div>';
+    // display form
+    $smarty->assign('recurrent', $recurrent);
+    $smarty->assign('interval', $interval);
+    $smarty->display('form.html');
+
+    echo '<button type="submit" class="btn btn-primary">' . mi18n("SAVE") . '</button>';
+    echo '<button type="reset" class="btn">' . mi18n("RESET") . '</button>';
+    echo '<input type="hidden" name="required" id="cntnd_booking-required" />';
+    echo '<input type="hidden" name="fields" id="cntnd_booking-fields" />';
+    echo '<input type="hidden" name="one_click_booking" value="' . $one_click . '" id="cntnd_booking-one_click_booking" />';
+    echo '<input type="hidden" name="rand" value="' . $rand . '" />';
+    echo '<input type="hidden" name="idart" value="' . $idart . '" />';
+    echo '<input type="hidden" name="redirect" value="' . $redirect . '" />';
+    echo '</form>';
+    echo '</div>';
 }
 ?>

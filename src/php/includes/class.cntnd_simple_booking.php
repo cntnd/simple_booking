@@ -828,7 +828,7 @@ class CntndSimpleBooking
 
         // payments
         $references = implode(",", array_keys($bookings));
-        $sql = "SELECT * FROM :table WHERE reference_id IN (:references) ORDER BY date, time";
+        $sql = "SELECT * FROM :table WHERE reference_id IN (:references) ORDER BY id";
         $values = array(
             'table' => self::$_vars['db']['payment'],
             'references' => $references);
