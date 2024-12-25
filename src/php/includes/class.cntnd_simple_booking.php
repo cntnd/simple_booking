@@ -30,7 +30,8 @@ class CntndSimpleBooking
         "db" => array(
             "config" => "cntnd_simple_booking_payment_config",
             "bookings" => "cntnd_simple_booking_payment",
-            "payment" => "cntnd_payment"
+            "payment" => "cntnd_payment",
+            "payment_config" => "cntnd_payment_config"
         )
     );
 
@@ -753,63 +754,153 @@ class CntndSimpleBooking
     }
 
     // payment
-    // todo
-    public function renderPaymentPriceConfig()
+    public function savePaymentConfig($post, $interval = false)
     {
-        $config = $this->config();
-        $daterange = DateTimeUtil::getDaterange($this->daterange, $this->blocked_days);
-
-        foreach ($daterange as $date) {
-            $index = DateTimeUtil::getIndexFromDate($date[0]);
-            echo '<h5>' . $date[1] . '</h5>';
-            echo '<table class="table order-list date__' . $index . '">';
-            echo '<thead><tr>';
-            echo '<th>Zeit</th>';
-            echo '<th>Anzahl Slots / Preis</th>';
-            echo '<th colspan="2">Bemerkung (wird angezeigt)</th>';
-            echo '</tr></thead>';
-
-            echo '<tbody>';
-
-            $i = 0;
-            if (!is_null($config) && array_key_exists($index, $config)) {
-                foreach ($config[$index] as $id => $dateConfig) {
-                    echo '<tr data-row="' . $id . '">';
-                    echo '<td><input type="time" name="config[' . $index . '][' . $id . '][time]" class="form-control" placeholder="Zeit (HH:mm)" value="' . $dateConfig['time'] . '" required/></td>';
-                    echo '<td><input type="number" name="config[' . $index . '][' . $id . '][slots]" class="form-control" placeholder="Anzahl Slots" value="' . $dateConfig['slots'] . '" required/></td>';
-                    echo '<td><input type="text" name="config[' . $index . '][' . $id . '][comment]" class="form-control" placeholder="Bemerkung" value="' . $dateConfig['comment'] . '" /></td>';
-                    echo '<td><button type="button" class="btn btn-sm cntnd_booking-config-delete">Löschen</button></td>';
-                    echo '</tr>';
-
-                    $i = $id + 1;
+        if (is_array($post['paymentConfig'])) {
+            foreach ($post['paymentConfig'] as $index => $config) {
+                if ($index == "new") {
+                    $this->insertPaymentConfig($config);
+                } else {
+                    $this->updatePaymentConfig($index, $config);
                 }
             }
-
-            // todo price_id
-            echo '<tr data-row="' . $i . '">';
-            echo '<td><input type="time" name="config[' . $index . '][' . $i . '][time]" class="form-control" placeholder="Zeit (HH:mm)" required/></td>';
-            echo '<td>';
-            echo '<input type="number" name="config[' . $index . '][' . $i . '][slots]" class="form-control" placeholder="Anzahl Slots" required/><br />';
-            echo '<input type="number" name="config[' . $index . '][' . $i . '][price_id]" class="form-control" placeholder="Preis (wip)" /><br />';
-            echo '</td>';
-            echo '<td><input type="text" name="config[' . $index . '][' . $i . '][comment]" class="form-control" placeholder="Bemerkung"/></td>';
-            echo '<td><button type="button" class="btn btn-sm cntnd_booking-config-delete">Löschen</button></td>';
-            echo '</tr>';
-
-            echo '</tbody>';
-
-            echo '<tfoot><tr>';
-            echo '<td colspan="4">';
-            echo '<button type="button" class="btn btn-sm btn-light cntnd_booking-config-add" data-date="' . $index . '">Zeit hinzufügen</button>&nbsp;';
-            echo '<button type="button" class="btn btn-sm btn-primary cntnd_booking-config-save">Speichern</button>';
-            echo '</td>';
-            echo '</tr></tfoot>';
-
-            echo '</table>';
         }
     }
 
-    // todo get all open/success from this range
+    private function insertPaymentConfig($config)
+    {
+        $sql = "INSERT INTO :table (persons, price) VALUES (:persons, :price)";
+        $values = array(
+            'table' => self::$_vars['db']['payment_config'],
+            'persons' => cSecurity::toInteger($config['persons']),
+            'price' => cSecurity::toInteger($config['price'])
+        );
+        if (!empty($config['idart'])) {
+            $sql = "INSERT INTO :table (idart, persons, price) VALUES (:idart, :persons, :price)";
+            $values = array(
+                'table' => self::$_vars['db']['payment_config'],
+                'idart' => cSecurity::toInteger($config['idart']),
+                'persons' => cSecurity::toInteger($config['persons']),
+                'price' => cSecurity::toInteger($config['price'])
+            );
+        }
+        $this->db->query($sql, $values);
+    }
+
+
+    private function updatePaymentConfig($id, $config)
+    {
+        $sql = "UPDATE :table SET persons = :persons, price = :price WHERE id = :id";
+        $values = array(
+            'table' => self::$_vars['db']['payment_config'],
+            'persons' => cSecurity::toInteger($config['persons']),
+            'price' => cSecurity::toInteger($config['price']),
+            'id' => cSecurity::toInteger($id)
+        );
+        if (!empty($config['idart'])) {
+            $sql = "UPDATE :table SET idart = :idart, persons = :persons, price = :price WHERE id = :id";
+            $values = array(
+                'table' => self::$_vars['db']['payment_config'],
+                'idart' => cSecurity::toInteger($config['idart']),
+                'persons' => cSecurity::toInteger($config['persons']),
+                'price' => cSecurity::toInteger($config['price']),
+                'id' => cSecurity::toInteger($id)
+            );
+        }
+        $this->db->query($sql, $values);
+    }
+
+    public function renderPaymentPriceConfig()
+    {
+        $config = $this->paymentConfig();
+
+        echo '<table class="table order-list">';
+        echo '<thead><tr>';
+        echo '<th>Anzahl Personen</th>';
+        echo '<th>Preis</th>';
+        echo '<th colspan="2">Allgemein / Exklusiv</th>';
+        echo '</tr></thead>';
+
+        echo '<tbody>';
+
+        foreach ($config as $value) {
+            $index = $value['id'];
+            $exclusiv_checked = "";
+            $general_checked = "";
+            if (!empty($value['idart']) && $value['idart'] == $this->idart) {
+                $exclusiv_checked = "checked";
+            } else {
+                $general_checked = "checked";
+            }
+            echo '<tr data-row="' . $index . '">';
+            echo '<td><input type="number" name="paymentConfig[' . $index . '][persons]" class="form-control" placeholder="Anzahl Personen" value="' . $value['persons'] . '" required/></td>';
+            echo '<td><input type="number" name="paymentConfig[' . $index . '][price]" class="form-control" placeholder="Preis" value="' . $value['price'] . '" required/></td>';
+            echo '<td>';
+            echo '<div><input type="radio" name="paymentConfig[' . $index . '][idart]" id="type[' . $index . '][value1]" value="" ' . $general_checked . '/>&nbsp;<label for="type[' . $index . '][value1]">Allgemein (für alle Seiten)</label></div>';
+            echo '<div><input type="radio" name="paymentConfig[' . $index . '][idart]" id="type[' . $index . '][value2]" value="' . $this->idart . '" ' . $exclusiv_checked . '/>&nbsp;<label for="type[' . $index . '][value2]">Nur für diese Seite (Exklusiv)</label></div>';
+            echo '</td>';
+            echo '<td><button type="button" class="btn btn-sm cntnd_booking-payrexx_price_config-delete">Löschen</button></td>';
+            echo '</tr>';
+        }
+
+        $newIndex = $index + 1;
+        echo '<tr data-row="' . $newIndex . '">';
+        echo '<td><input type="number" name="paymentConfig[new][persons]" class="form-control" placeholder="Anzahl Personen" required/></td>';
+        echo '<td><input type="number" name="paymentConfig[new][price]" class="form-control" placeholder="Preis" required/>';
+        echo '<td>';
+        echo '<div><input type="radio" name="paymentConfig[new][idart]" id="type[new][value1]" value="" checked/>&nbsp;<label for="type[new][value1]">Allgemein (für alle Seiten)</label></div>';
+        echo '<div><input type="radio" name="paymentConfig[new][idart]" id="type[new][value2]" value="' . $this->idart . '" />&nbsp;<label for="type[new][value2]">Nur für diese Seite (Exklusiv)</label></div>';
+        echo '</td>';
+        echo '<td><button type="button" class="btn btn-sm cntnd_booking-payrexx_price_config-delete">Löschen</button></td>';
+        echo '</tr>';
+
+        echo '</tbody>';
+
+        echo '<tfoot><tr>';
+        echo '<td colspan="4">';
+        echo '<button type="button" class="btn btn-sm btn-primary cntnd_booking-payrexx_price_config-save">Speichern</button>';
+        echo '</td>';
+        echo '</tr></tfoot>';
+
+        echo '</table>';
+    }
+
+
+    private function paymentConfig()
+    {
+        $sql = "SELECT * FROM :table WHERE idart = :idart ORDER BY persons";
+        $values = array(
+            'table' => self::$_vars['db']['payment_config'],
+            'idart' => $this->idart);
+        $result = $this->db->query($sql, $values);
+        $config = array();
+        if ($result->num_rows > 0) {
+            $config = $this->getPaymentConfig();
+        }
+
+        $sql = "SELECT * FROM :table WHERE idart = '' OR idart IS NULL ORDER BY persons";
+        $values = array(
+            'table' => self::$_vars['db']['payment_config']);
+        $result = $this->db->query($sql, $values);
+        if ($result->num_rows > 0) {
+            $config = array_merge($config, $this->getPaymentConfig());
+        }
+        return $config;
+    }
+
+    private function getPaymentConfig()
+    {
+        $config = array();
+        while ($this->db->nextRecord()) {
+            $config[] = array(
+                'id' => (int)$this->db->f('id'),
+                'idart' => (int)$this->db->f('idart'),
+                'persons' => (int)$this->db->f('persons'),
+                'price' => (int)$this->db->f('price'));
+        }
+        return $config;
+    }
+
     public function payments()
     {
         // bookings
@@ -844,11 +935,22 @@ class CntndSimpleBooking
                     "phone" => $this->db->f('phone'),
                     "transaction_id" => $this->db->f('transaction_id'),
                     "mut_date" => DateTimeUtil::getReadableDateTime($this->db->f('mut_date')),
-                    "status" => $this->db->f('status')
+                    "status" => $this->paymentStatus($this->db->f('status'))
                 ];
             }
         }
         return $payments;
+    }
+
+    private function paymentStatus($status)
+    {
+        switch ($status) {
+            case "open":
+                return "Betrag offen";
+            case "success":
+                return "Bezahlt";
+        }
+        return "unbekannter Status";
     }
 }
 

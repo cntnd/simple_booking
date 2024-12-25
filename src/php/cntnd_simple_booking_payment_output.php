@@ -93,6 +93,11 @@ if ($editmode) {
     if ($_POST) {
         if ($_POST["cntnd_booking-config"] == "save") {
             $simple_booking->saveConfig($_POST);
+        } else if ($_POST["cntnd_booking-payrexx_price_config"] == "save") {
+            $simple_booking->savePaymentConfig($_POST);
+            $is_payment = true;
+        } else if ($_POST["cntnd_booking-payrexx_config"] == "save") {
+            var_dump($_POST);
         } else {
             if (CntndSimpleBooking::validateUpdate($_POST)) {
                 $admin_success = $simple_booking->update($_POST);
@@ -123,19 +128,19 @@ if ($editmode) {
     // TABS
 
     echo '<ul class="tabs" id="simple_booking_admin" role="tablist">';
-    echo '<li class="tabs__tab ' . ($has_config || $interval ? "active" : "") . '" data-toggle="tabs" data-target="simple_booking_admin-content">Admin</li>';
+    echo '<li class="tabs__tab ' . (($has_config || $interval) && !$is_payment ? "active" : "") . '" data-toggle="tabs" data-target="simple_booking_admin-content">Admin</li>';
     // todo check
     if (!$interval) {
         echo '<li class="tabs__tab ' . (!$has_config ? "active" : "") . '" data-toggle="tabs" data-target="simple_booking_config_content">Konfiguration</li>';
     }
     echo '<li class="tabs__tab" data-toggle="tabs" data-target="simple_booking_payment_content">Transaktionen</li>';
-    echo '<li class="tabs__tab" data-toggle="tabs" data-target="simple_booking_payment_config_content">Payrexx Konfiguration</li>';
+    echo '<li class="tabs__tab ' . ($is_payment ? "active" : "") . '" data-toggle="tabs" data-target="simple_booking_payment_config_content">Payrexx Konfiguration</li>';
     echo '</ul>';
 
     // CONTENT
     echo '<div class="tabs__content">';
     // CONTENT: ADMIN
-    echo '<div  id="simple_booking_admin-content" class="tabs__content--pane ' . ($has_config || $interval ? "active" : "") . '">';
+    echo '<div  id="simple_booking_admin-content" class="tabs__content--pane ' . (($has_config || $interval) && !$is_payment ? "active" : "") . '">';
 
     echo '<div class="d-flex pt-2">';
 
@@ -213,16 +218,9 @@ if ($editmode) {
 
 
     // CONTENT: PAYREXX CONFIG todo
-    echo '<div id="simple_booking_payment_config_content" class="tabs__content--pane">';
+    echo '<div id="simple_booking_payment_config_content ' . ($is_payment ? "active" : "") . '" class="tabs__content--pane">';
 
     echo '<div class="m-2">';
-
-    echo '<form method="post" id="cntnd_booking-payrexx_price_config" name="cntnd_booking-payrexx_price_config">';
-    echo '<h5>Preise</h5>';
-    $simple_booking->renderPaymentPriceConfig();
-    echo '<input type="hidden" name="cntnd_booking-payrexx_price_config" value="save" />';
-    echo '</form>';
-    echo '<hr />';
 
     echo '<form method="post" id="cntnd_booking-payrexx_config" name="cntnd_booking-payrexx_config">';
     echo '<h5>Konfiguration</h5>';
@@ -231,6 +229,14 @@ if ($editmode) {
     echo '<p>config für bestellung: lookAndFeelProfile (?), successMessage, buttonText, action</p>';
 
     echo '<input type="hidden" name="cntnd_booking-payrexx_config" value="save" />';
+    echo '</form>';
+
+    echo '<hr />';
+
+    echo '<form method="post" id="cntnd_booking-payrexx_price_config" name="cntnd_booking-payrexx_price_config">';
+    echo '<h5>Preise</h5>';
+    $simple_booking->renderPaymentPriceConfig();
+    echo '<input type="hidden" name="cntnd_booking-payrexx_price_config" value="save" />';
     echo '</form>';
 
     echo '</div>';

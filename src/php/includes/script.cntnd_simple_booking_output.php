@@ -55,6 +55,14 @@ $(document).ready(function(){
      $('#cntnd_booking-config').submit();
   });
 
+    $('.cntnd_booking-payrexx_price_config-save').click(function (){
+        $('#cntnd_booking-payrexx_price_config').submit();
+    });
+
+    $('.cntnd_booking-payrexx_config-save').click(function (){
+        $('#cntnd_booking-payrexx_config').submit();
+    });
+
   // admin
   $('.cntnd_booking-admin-choose').click(function(){
     $('.card.cntnd_booking').removeClass('focus');
