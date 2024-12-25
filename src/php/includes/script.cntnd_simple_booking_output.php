@@ -66,6 +66,11 @@ $(document).ready(function(){
         $('#cntnd_booking-payrexx_price_config').submit();
     });
 
+
+    $('.cntnd_booking-payrexx_price_name-save').click(function (){
+        $('#cntnd_booking-payrexx_price_name').submit();
+    });
+
     $('.cntnd_booking-payrexx_config-save').click(function (){
         $('#cntnd_booking-payrexx_config').submit();
     });

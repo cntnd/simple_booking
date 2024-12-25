@@ -31,7 +31,8 @@ class CntndSimpleBooking
             "config" => "cntnd_simple_booking_payment_config",
             "bookings" => "cntnd_simple_booking_payment",
             "payment" => "cntnd_payment",
-            "payment_config" => "cntnd_payment_config"
+            "payment_config" => "cntnd_payment_config",
+            "price_config" => "cntnd_payment_price_config"
         )
     );
 
@@ -75,6 +76,7 @@ class CntndSimpleBooking
                         'time' => DateTimeUtil::getReadableTimeFromDate($rs->time),
                         'time_until' => $this->getTimeUntilOrEmpty($rs->time_until),
                         'slots' => (int)$rs->slots,
+                        'price_id' => (int)$rs->price_id,
                         'comment' => $rs->comment,
                         'recurrent' => $recurrent);
                 }
@@ -195,7 +197,13 @@ class CntndSimpleBooking
                         echo '<input type="time" name="config[' . $index . '][' . $id . '][time]" class="form-control" placeholder="Zeit von (HH:mm)" value="' . CntndUtil::emptyIfNull($dateConfig['time']) . '" required/>';
                         echo '<input type="time" name="config[' . $index . '][' . $id . '][time_until]" class="form-control" placeholder="Zeit bis (HH:mm)" value="' . CntndUtil::emptyIfNull($dateConfig['time_until']) . '" />';
                         echo '</td>';
-                        echo '<td><input type="number" name="config[' . $index . '][' . $id . '][slots]" class="form-control" placeholder="Anzahl Slots" value="' . $dateConfig['slots'] . '" required/></td>';
+                        echo '<td>';
+                        echo '<input type="number" name="config[' . $index . '][' . $id . '][slots]" class="form-control" placeholder="Anzahl Slots" value="' . $dateConfig['slots'] . '" required/><br />';
+                        echo '<select name="config[' . $index . '][' . $id . '][price_id]">';
+                        echo '<option> - Preise auswählen</option>';
+                        echo $this->priceConfigOptions($dateConfig['price_id']);
+                        echo '</select>';
+                        echo '</td>';
                         echo '<td><input type="text" name="config[' . $index . '][' . $id . '][comment]" class="form-control" placeholder="Bemerkung" value="' . $dateConfig['comment'] . '" /></td>';
                         echo '<td><button type="button" class="btn btn-sm cntnd_booking-config-delete">Löschen</button></td>';
                         echo '</tr>';
@@ -204,7 +212,6 @@ class CntndSimpleBooking
                     }
                 }
 
-                // todo price_id
                 echo '<tr data-row="' . $i . '">';
                 echo '<td>';
                 echo '<input type="time" name="config[' . $index . '][' . $i . '][time]" class="form-control" placeholder="Zeit von (HH:mm)" required/>';
@@ -212,7 +219,10 @@ class CntndSimpleBooking
                 echo '</td>';
                 echo '<td>';
                 echo '<input type="number" name="config[' . $index . '][' . $i . '][slots]" class="form-control" placeholder="Anzahl Slots" required/><br />';
-                echo '<input type="number" name="config[' . $index . '][' . $i . '][price_id]" class="form-control" placeholder="Preis (wip)" /><br />';
+                echo '<select name="config[' . $index . '][' . $i . '][price_id]">';
+                echo '<option> - Preise auswählen</option>';
+                echo $this->priceConfigOptions();
+                echo '</select>';
                 echo '</td>';
                 echo '<td><input type="text" name="config[' . $index . '][' . $i . '][comment]" class="form-control" placeholder="Bemerkung"/></td>';
                 echo '<td><button type="button" class="btn btn-sm cntnd_booking-config-delete">Löschen</button></td>';
@@ -254,7 +264,13 @@ class CntndSimpleBooking
                 foreach ($config[$index] as $id => $dateConfig) {
                     echo '<tr data-row="' . $id . '">';
                     echo '<td><input type="time" name="config[' . $index . '][' . $id . '][time]" class="form-control" placeholder="Zeit (HH:mm)" value="' . $dateConfig['time'] . '" required/></td>';
-                    echo '<td><input type="number" name="config[' . $index . '][' . $id . '][slots]" class="form-control" placeholder="Anzahl Slots" value="' . $dateConfig['slots'] . '" required/></td>';
+                    echo '<td>';
+                    echo '<input type="number" name="config[' . $index . '][' . $id . '][slots]" class="form-control" placeholder="Anzahl Slots" value="'.$dateConfig['slots'].'" required/><br />';
+                    echo '<select name="config[' . $index . '][' . $id . '][price_id]">';
+                    echo '<option> - Preise auswählen</option>';
+                    echo $this->priceConfigOptions($dateConfig['price_id']);
+                    echo '</select>';
+                    echo '</td>';
                     echo '<td><input type="text" name="config[' . $index . '][' . $id . '][comment]" class="form-control" placeholder="Bemerkung" value="' . $dateConfig['comment'] . '" /></td>';
                     echo '<td><button type="button" class="btn btn-sm cntnd_booking-config-delete">Löschen</button></td>';
                     echo '</tr>';
@@ -263,12 +279,14 @@ class CntndSimpleBooking
                 }
             }
 
-            // todo price_id
             echo '<tr data-row="' . $i . '">';
             echo '<td><input type="time" name="config[' . $index . '][' . $i . '][time]" class="form-control" placeholder="Zeit (HH:mm)" required/></td>';
             echo '<td>';
             echo '<input type="number" name="config[' . $index . '][' . $i . '][slots]" class="form-control" placeholder="Anzahl Slots" required/><br />';
-            echo '<input type="number" name="config[' . $index . '][' . $i . '][price_id]" class="form-control" placeholder="Preis (wip)" /><br />';
+            echo '<select name="config[' . $index . '][' . $i . '][price_id]">';
+            echo '<option> - Preise auswählen</option>';
+            echo $this->priceConfigOptions();
+            echo '</select>';
             echo '</td>';
             echo '<td><input type="text" name="config[' . $index . '][' . $i . '][comment]" class="form-control" placeholder="Bemerkung"/></td>';
             echo '<td><button type="button" class="btn btn-sm cntnd_booking-config-delete">Löschen</button></td>';
@@ -325,7 +343,7 @@ class CntndSimpleBooking
     private function insertDateTimeConfig($date, $config)
     {
         if ($this->checkDateTimeConfig($config)) {
-            $sql = "INSERT INTO :table (idart, date, time, time_until, day, slots, comment, recurrent) VALUES (:idart, ':date', ':time', ':until', :day, :slots, ':comment', :recurrent)";
+            $sql = "INSERT INTO :table (idart, date, time, time_until, day, slots, price_id, comment, recurrent) VALUES (:idart, ':date', ':time', ':until', :day, :slots, :price_id, ':comment', :recurrent)";
             $values = array(
                 'table' => self::$_vars['db']['config'],
                 'idart' => cSecurity::toInteger($this->idart),
@@ -334,6 +352,7 @@ class CntndSimpleBooking
                 'until' => DateTimeUtil::getInsertTimeOrNull($config['time_until']),
                 'day' => DateTimeUtil::getInsertDay($date),
                 'slots' => cSecurity::toInteger($config['slots']),
+                'price_id' => cSecurity::toInteger($config['price_id']),
                 'comment' => $this->escape($config['comment']),
                 'recurrent' => CntndUtil::boolToInt($config['recurrent'])
             );
@@ -355,7 +374,7 @@ class CntndSimpleBooking
     private function updateDateTimeConfig($id, $date, $config)
     {
         if ($this->checkDateTimeConfig($config)) {
-            $sql = "UPDATE :table SET idart = :idart, date = ':date', time = ':time', time_until = ':until', day = :day, slots = :slots, comment = ':comment', recurrent = :recurrent WHERE id = :uid";
+            $sql = "UPDATE :table SET idart = :idart, date = ':date', time = ':time', time_until = ':until', day = :day, slots = :slots, price_id = :price_id, comment = ':comment', recurrent = :recurrent WHERE id = :uid";
             $values = array(
                 'table' => self::$_vars['db']['config'],
                 'uid' => cSecurity::toInteger($id),
@@ -365,6 +384,7 @@ class CntndSimpleBooking
                 'until' => DateTimeUtil::getInsertTimeOrNull($config['time_until']),
                 'day' => DateTimeUtil::getInsertDay($date),
                 'slots' => cSecurity::toInteger($config['slots']),
+                'price_id' => cSecurity::toInteger($config['price_id']),
                 'comment' => $this->escape($config['comment']),
                 'recurrent' => CntndUtil::boolToInt($config['recurrent'])
             );
@@ -757,64 +777,45 @@ class CntndSimpleBooking
     public function savePaymentConfig($post)
     {
         if (is_array($post['paymentConfig'])) {
-            foreach ($post['paymentConfig'] as $index => $config) {
-                if ($index == "new") {
-                    if (!empty($config['persons']) && !empty($config['price'])) {
-                        $this->insertPaymentConfig($config);
+            foreach ($post['paymentConfig'] as $price_id => $configs) {
+                foreach ($configs as $index => $config) {
+                    if ($index == "new") {
+                        if (!empty($config['persons']) && !empty($config['price'])) {
+                            $this->insertPaymentConfig($price_id, $config);
+                        }
+                    } else if ($config['action'] == "delete") {
+                        $this->deletePaymentConfig($index);
+                    } else {
+                        $this->updatePaymentConfig($index, $price_id, $config);
                     }
-                } else if ($config['action']=="delete") {
-                    $this->deletePaymentConfig($index);
-                } else {
-                    $this->updatePaymentConfig($index, $config);
                 }
             }
         }
     }
 
-    private function insertPaymentConfig($config)
+    private function insertPaymentConfig($price_id, $config)
     {
-        $sql = "INSERT INTO :table (name, persons, price) VALUES (':name', :persons, :price)";
+        $sql = "INSERT INTO :table (price_id, persons, price) VALUES (:price_id, :persons, :price)";
         $values = array(
             'table' => self::$_vars['db']['payment_config'],
-            'name' => $config['name'],
+            'price_id' => cSecurity::toInteger($price_id),
             'persons' => cSecurity::toInteger($config['persons']),
             'price' => cSecurity::toInteger($config['price'])
         );
-        if (!empty($config['idart'])) {
-            $sql = "INSERT INTO :table (idart, name, persons, price) VALUES (:idart, ':name', :persons, :price)";
-            $values = array(
-                'table' => self::$_vars['db']['payment_config'],
-                'idart' => cSecurity::toInteger($config['idart']),
-                'name' => $config['name'],
-                'persons' => cSecurity::toInteger($config['persons']),
-                'price' => cSecurity::toInteger($config['price'])
-            );
-        }
         $this->db->query($sql, $values);
     }
 
 
-    private function updatePaymentConfig($id, $config)
+    private function updatePaymentConfig($id, $price_id, $config)
     {
-        $sql = "UPDATE :table SET name = ':name', persons = :persons, price = :price WHERE id = :id";
+        $sql = "UPDATE :table SET price_id = :price_id, persons = :persons, price = :price WHERE id = :id";
         $values = array(
             'table' => self::$_vars['db']['payment_config'],
-            'name' => $config['name'],
+            'price_id' => cSecurity::toInteger($price_id),
             'persons' => cSecurity::toInteger($config['persons']),
             'price' => cSecurity::toInteger($config['price']),
             'id' => cSecurity::toInteger($id)
         );
-        if (!empty($config['idart'])) {
-            $sql = "UPDATE :table SET idart = :idart, name = ':name', persons = :persons, price = :price WHERE id = :id";
-            $values = array(
-                'table' => self::$_vars['db']['payment_config'],
-                'idart' => cSecurity::toInteger($config['idart']),
-                'name' => $config['name'],
-                'persons' => cSecurity::toInteger($config['persons']),
-                'price' => cSecurity::toInteger($config['price']),
-                'id' => cSecurity::toInteger($id)
-            );
-        }
         $this->db->query($sql, $values);
     }
 
@@ -831,84 +832,69 @@ class CntndSimpleBooking
     public function renderPaymentPriceConfig()
     {
         $config = $this->paymentConfig();
+        $prices = $this->priceConfig();
 
-        echo '<table class="table order-list">';
-        echo '<thead><tr>';
-        echo '<th>Name</th>';
-        echo '<th>Anzahl Personen</th>';
-        echo '<th>Preis</th>';
-        echo '<th colspan="2">Allgemein / Exklusiv</th>';
-        echo '</tr></thead>';
+        foreach ($prices as $price_id => $name) {
+            echo '<h6>Preise: ' . $name . '</h6>';
 
-        echo '<tbody>';
+            echo '<table class="table order-list">';
+            echo '<thead><tr>';
+            echo '<th>Anzahl Personen</th>';
+            echo '<th colspan="3">Preis</th>';
+            echo '</tr></thead>';
 
-        foreach ($config as $value) {
-            $index = $value['id'];
-            $name = $value['name'];
-            $exclusiv_checked = "";
-            $general_checked = "";
-            if (!empty($value['idart']) && $value['idart'] == $this->idart) {
-                $exclusiv_checked = "checked";
-            } else {
-                $general_checked = "checked";
+            echo '<tbody>';
+
+            foreach ($config[$price_id] as $value) {
+                $index = $value['id'];
+                echo '<tr data-row="' . $index . '" id="paymentConfig-' . $index . '-row">';
+                echo '<td><input type="number" name="paymentConfig[' . $price_id . '][' . $index . '][persons]" class="form-control" placeholder="Anzahl Personen" value="' . $value['persons'] . '" required/></td>';
+                echo '<td><input type="number" name="paymentConfig[' . $price_id . '][' . $index . '][price]" class="form-control" placeholder="Preis" value="' . $value['price'] . '" required/></td>';
+                echo '<td>';
+                echo '<button type="button" class="btn btn-sm cntnd_booking-payrexx_price_config-delete" data-remove="' . $index . '">Löschen</button>';
+                echo '<input type="hidden" name="paymentConfig[' . $price_id . '][' . $index . '][action]" id="paymentConfig-' . $index . '-action" value="save"/>';
+                echo '</td>';
+                echo '</tr>';
             }
-            echo '<tr data-row="' . $index . '" id="paymentConfig-'.$index.'-row">';
-            echo '<td><input type="text" name="paymentConfig[' . $index . '][name]" class="form-control" placeholder="Name" value="' . $name . '" required/></td>';
-            echo '<td><input type="number" name="paymentConfig[' . $index . '][persons]" class="form-control" placeholder="Anzahl Personen" value="' . $value['persons'] . '" required/></td>';
-            echo '<td><input type="number" name="paymentConfig[' . $index . '][price]" class="form-control" placeholder="Preis" value="' . $value['price'] . '" required/></td>';
-            echo '<td>';
-            echo '<div><input type="radio" name="paymentConfig[' . $index . '][idart]" id="type[' . $index . '][value1]" value="" ' . $general_checked . '/>&nbsp;<label for="type[' . $index . '][value1]" class="form-check-label">Allgemein</label></div>';
-            echo '<div><input type="radio" name="paymentConfig[' . $index . '][idart]" id="type[' . $index . '][value2]" value="' . $this->idart . '" ' . $exclusiv_checked . '/>&nbsp;<label for="type[' . $index . '][value2]" class="form-check-label">Nur diese Seite</label></div>';
-            echo '</td>';
-            echo '<td>';
-            echo '<button type="button" class="btn btn-sm cntnd_booking-payrexx_price_config-delete" data-remove="'.$index.'">Löschen</button>';
-            echo '<input type="hidden" name="paymentConfig[' . $index . '][action]" id="paymentConfig-' . $index . '-action" value="save"/>';
-            echo '</td>';
+
+            echo '<tr>';
+            echo '<td><input type="number" name="paymentConfig[' . $price_id . '][new][persons]" class="form-control" placeholder="Anzahl Personen" required/></td>';
+            echo '<td><input type="number" name="paymentConfig[' . $price_id . '][new][price]" class="form-control" placeholder="Preis" required/>';
+            echo '<td></td>';
             echo '</tr>';
+
+            echo '</tbody>';
+
+            echo '<tfoot><tr>';
+            echo '<td colspan="4">';
+            echo '<button type="button" class="btn btn-sm btn-primary cntnd_booking-payrexx_price_config-save">Speichern</button>';
+            echo '</td>';
+            echo '</tr></tfoot>';
+
+            echo '</table>';
         }
-
-        $newIndex = $index + 1;
-        echo '<tr data-row="' . $newIndex . '">';
-        echo '<td><input type="text" name="paymentConfig[new][name]" class="form-control" placeholder="Name" value="' . $name . '" required/></td>';
-        echo '<td><input type="number" name="paymentConfig[new][persons]" class="form-control" placeholder="Anzahl Personen" required/></td>';
-        echo '<td><input type="number" name="paymentConfig[new][price]" class="form-control" placeholder="Preis" required/>';
-        echo '<td>';
-        echo '<div><input type="radio" name="paymentConfig[new][idart]" id="type[new][value1]" value="" checked/>&nbsp;<label for="type[new][value1]" class="form-check-label">Allgemein</label></div>';
-        echo '<div><input type="radio" name="paymentConfig[new][idart]" id="type[new][value2]" value="' . $this->idart . '" />&nbsp;<label for="type[new][value2]" class="form-check-label">Nur diese Seite</label></div>';
-        echo '</td>';
-        echo '<td></td>';
-        echo '</tr>';
-
-        echo '</tbody>';
-
-        echo '<tfoot><tr>';
-        echo '<td colspan="5">';
-        echo '<button type="button" class="btn btn-sm btn-primary cntnd_booking-payrexx_price_config-save">Speichern</button>';
-        echo '</td>';
-        echo '</tr></tfoot>';
-
-        echo '</table>';
     }
 
+    public function renderPriceNameConfig()
+    {
+        echo '<div class="form-group">';
+        echo '<label for="paymentConfig[new][name]">Name</label>';
+        echo '<input type="text" name="paymentConfig[new][name]" id="paymentConfig[new][name]" class="form-control" />';
+        echo '</div>';
+        echo '<button type="button" class="btn btn-sm btn-primary cntnd_booking-payrexx_price_name-save">Erstellen</button>';
+    }
 
     private function paymentConfig()
     {
-        $sql = "SELECT * FROM :table WHERE idart = :idart ORDER BY name, persons";
+        $sql = "SELECT c.id as id, p.id as price_id, p.name as name, c.persons as persons, c.price as price FROM :table1 as c, :table2 as p WHERE c.price_id = p.id ORDER BY price_id, name, persons";
         $values = array(
-            'table' => self::$_vars['db']['payment_config'],
-            'idart' => $this->idart);
+            'table1' => self::$_vars['db']['payment_config'],
+            'table2' => self::$_vars['db']['price_config']
+        );
         $result = $this->db->query($sql, $values);
-        $config = array();
+        $config = [];
         if ($result->num_rows > 0) {
             $config = $this->getPaymentConfig();
-        }
-
-        $sql = "SELECT * FROM :table WHERE idart = '' OR idart IS NULL ORDER BY name, persons";
-        $values = array(
-            'table' => self::$_vars['db']['payment_config']);
-        $result = $this->db->query($sql, $values);
-        if ($result->num_rows > 0) {
-            $config = array_merge($config, $this->getPaymentConfig());
         }
         return $config;
     }
@@ -917,14 +903,90 @@ class CntndSimpleBooking
     {
         $config = array();
         while ($this->db->nextRecord()) {
-            $config[] = array(
+            $price_id = (int)$this->db->f('price_id');
+            $config[$price_id][] = array(
                 'id' => (int)$this->db->f('id'),
-                'idart' => (int)$this->db->f('idart'),
+                'price_id' => $price_id,
                 'name' => $this->db->f('name'),
                 'persons' => (int)$this->db->f('persons'),
                 'price' => (int)$this->db->f('price'));
         }
         return $config;
+    }
+
+    public function priceConfig()
+    {
+        $sql = "SELECT * FROM :table ORDER BY name";
+        $values = array('table' => self::$_vars['db']['price_config']);
+        $this->db->query($sql, $values);
+        $config = [];
+        while ($this->db->next_record()) {
+            $config[$this->db->f('id')] = $this->db->f('name');
+        }
+        return $config;
+    }
+
+    private function priceConfigOptions($select = "")
+    {
+        $config = $this->priceConfig();
+        $options = "";
+        foreach ($config as $price_id => $name) {
+            $checked = "";
+            if (!empty($select) && (int) $select == (int) $price_id) {
+                $checked = "selected";
+            }
+            $options = $options . '<option value="' . $price_id . '" ' . $checked . '>' . $name . '</option>' . "\n";
+        }
+        return $options;
+    }
+
+    public function savePaymentName($post)
+    {
+        if (is_array($post['paymentConfig'])) {
+            foreach ($post['paymentConfig'] as $index => $config) {
+                if (!empty($config['name'])) {
+                    if ($index == "new") {
+                        $this->insertPriceConfig($config['name']);
+                    } else if ($config['action'] == "delete") {
+                        $this->deletePriceConfig($index);
+                    } else {
+                        $this->updatePriceConfig($index, $config['name']);
+                    }
+                }
+            }
+        }
+    }
+
+    private function insertPriceConfig($name)
+    {
+        $sql = "INSERT INTO :table (name) VALUES (':name')";
+        $values = array(
+            'table' => self::$_vars['db']['price_config'],
+            'name' => $name
+        );
+        $this->db->query($sql, $values);
+    }
+
+
+    private function updatePriceConfig($id, $name)
+    {
+        $sql = "UPDATE :table SET name = ':name' WHERE id = :id";
+        $values = array(
+            'table' => self::$_vars['db']['price_config'],
+            'id' => cSecurity::toInteger($id),
+            'name' => $name
+        );
+        $this->db->query($sql, $values);
+    }
+
+    private function deletePriceConfig($id)
+    {
+        $sql = "DELETE FROM :table WHERE id = :id";
+        $values = array(
+            'table' => self::$_vars['db']['price_config'],
+            'id' => cSecurity::toInteger($id)
+        );
+        $this->db->query($sql, $values);
     }
 
     public function payments()

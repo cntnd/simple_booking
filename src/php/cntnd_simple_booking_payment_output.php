@@ -93,6 +93,9 @@ if ($editmode) {
     if ($_POST) {
         if ($_POST["cntnd_booking-config"] == "save") {
             $simple_booking->saveConfig($_POST);
+        } else if ($_POST["cntnd_booking-payrexx_price_name"] == "save") {
+            $simple_booking->savePaymentName($_POST);
+            $is_payment = true;
         } else if ($_POST["cntnd_booking-payrexx_price_config"] == "save") {
             $simple_booking->savePaymentConfig($_POST);
             $is_payment = true;
@@ -229,6 +232,14 @@ if ($editmode) {
     echo '<p>config für bestellung: lookAndFeelProfile (?), successMessage, buttonText, action</p>';
 
     echo '<input type="hidden" name="cntnd_booking-payrexx_config" value="save" />';
+    echo '</form>';
+
+    echo '<hr />';
+
+    echo '<form method="post" id="cntnd_booking-payrexx_price_name" name="cntnd_booking-payrexx_price_name">';
+    echo '<h5>Preis-Namen</h5>';
+    $simple_booking->renderPriceNameConfig();
+    echo '<input type="hidden" name="cntnd_booking-payrexx_price_name" value="save" />';
     echo '</form>';
 
     echo '<hr />';
