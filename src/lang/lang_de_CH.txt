@@ -19,6 +19,7 @@ EMAIL_COPY_RESERVED=Buchungsbestätigung
 EMAIL_SEND=Ja, senden
 EMAIL_TITLE=E-Mail Konfiguration
 FAILURE=Es gab ein Fehler, ihre Buchung wurde nicht gespeichert.
+PAYMENT_FAILURE=Es gab ein Fehler mit dem Bezahlsystem, ihre Buchung wurde nicht gespeichert. Bitte versuchen sie es erneut oder wenden Sie sich an das Schüfpfenried Team.
 INTERVAL=Intervall
 MODULE=Reservationssystem
 NO_BOOKING=Zurzeit keine Buchungen möglich

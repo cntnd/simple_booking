@@ -308,6 +308,9 @@ if ($editmode) {
     if (!empty($_GET['error']) && $_GET['error'] == "error_free") {
         echo '<div class="cntnd_alert cntnd_alert-danger">' . mi18n("VALIDATION_FREE_SLOTS") . '</div>';
     }
+    if (!empty($_GET['error']) && $_GET['error'] == "payment") {
+        echo '<div class="cntnd_alert cntnd_alert-danger">' . mi18n("PAYMENT_FAILURE") . '</li></div>';
+    }
 
     // display form
     $smarty->assign('recurrent', $recurrent);
