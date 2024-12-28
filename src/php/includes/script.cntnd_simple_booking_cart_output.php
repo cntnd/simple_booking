@@ -39,7 +39,7 @@
         if ((giftcard.val() !== undefined || giftcard.val() !== "") && amount !== undefined) {
             $.ajax({
                 method: "POST",
-                url: "https://giftcard.schuepfenried/api/balance",
+                url: "https://giftcard.schuepfenried.ch/api/giftcard/balance",
                 data: {giftcard: giftcard.val(), amount: amount}
             }).done(function (result) {
                 console.log(result);

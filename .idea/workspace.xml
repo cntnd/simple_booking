@@ -7,10 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="add payment failure">
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="add giftcard">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_cart_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_cart_output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sql/simple_booking_payment.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/simple_booking_payment.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/template/form-default.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/form-default.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/template/form-recurrent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/form-recurrent.html" afterDir="false" />
     </list>
@@ -58,20 +58,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/work/workspace/cntnd/simple_booking&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/work/workspace/cntnd/simple_booking/src/sql",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\work\workspace\cntnd\simple_booking\src\sql" />
@@ -138,7 +138,8 @@
       <workItem from="1734980021252" duration="14642000" />
       <workItem from="1735125618058" duration="22555000" />
       <workItem from="1735307131636" duration="2772000" />
-      <workItem from="1735391275587" duration="684000" />
+      <workItem from="1735391275587" duration="2406000" />
+      <workItem from="1735416181455" duration="4058000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1632898020246</created>
@@ -350,7 +351,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735308607595</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="add giftcard">
+      <option name="closed" value="true" />
+      <created>1735392004262</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1735392004262</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,7 +377,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixes" />
     <MESSAGE value="fix #1" />
     <MESSAGE value="fix #4" />
     <MESSAGE value="v2.0.0" />
@@ -393,6 +401,7 @@
     <MESSAGE value="fix price config in date config copy" />
     <MESSAGE value="cart" />
     <MESSAGE value="add payment failure" />
-    <option name="LAST_COMMIT_MESSAGE" value="add payment failure" />
+    <MESSAGE value="add giftcard" />
+    <option name="LAST_COMMIT_MESSAGE" value="add giftcard" />
   </component>
 </project>
