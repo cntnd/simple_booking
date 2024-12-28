@@ -325,6 +325,7 @@ if ($editmode) {
     echo '<input type="hidden" name="rand" value="' . $rand . '" />';
     echo '<input type="hidden" name="idart" value="' . $idart . '" />';
     echo '<input type="hidden" name="redirect" value="' . $redirect . '" />';
+    echo '<input type="hidden" name="giftcard_uuid" id="giftcard_uuid"/>';
     echo '</form>';
     echo '</div>';
 }
