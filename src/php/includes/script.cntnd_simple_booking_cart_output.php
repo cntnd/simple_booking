@@ -111,8 +111,8 @@
             amount = "n/a";
         }
         $("#cart_giftcard_title").text("Gutschein");
-        $("#cart_giftcard_price").text("-" + remaining + " CHF");
-        $("#cart_total").text(amount + " CHF");
+        $("#cart_giftcard_price").text("-" + amount + " CHF");
+        $("#cart_total").text(remaining + " CHF");
 
         $("#giftcard").prop("disabled", true);
         $("#button-giftcard").prop("disabled", true);
