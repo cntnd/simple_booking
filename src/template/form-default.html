@@ -1,64 +1,67 @@
 <div class="form-vertical">
-	<div class="form-group">
-		<label for="forename">Vorname<em>*</em></label>
-		<input type="text" name="forename" id="forename" value="" class="form-control required" />
-	</div>
-	<div class="form-group">
-		<label for="surname">Nachname<em>*</em></label>
-		<input type="text" name="surname" id="surname" value="" class="form-control required" />
-	</div>
-	<div class="form-group">
-		<label for="street">Adresse</label>
-		<input type="text" name="street" id="street" value="" class="form-control" />
-	</div>
+    <div class="form-group">
+        <label for="forename">Vorname<em>*</em></label>
+        <input type="text" name="forename" id="forename" value="" class="form-control required"/>
+    </div>
+    <div class="form-group">
+        <label for="surname">Nachname<em>*</em></label>
+        <input type="text" name="surname" id="surname" value="" class="form-control required"/>
+    </div>
+    <div class="form-group">
+        <label for="street">Adresse</label>
+        <input type="text" name="street" id="street" value="" class="form-control"/>
+    </div>
 
-	<div class="d-flex">
-		<div class="w-33 form-group">
-			<label for="postcode">PLZ</label>
-			<input type="text" name="postcode" id="postcode" value="" class="form-control" />
-		</div>
-		<div class="w-66 form-group">
-			<label for="place">Ort</label>
-			<input type="text" name="place" id="place" value="" class="form-control" />
-		</div>
-	</div>
+    <div class="d-flex">
+        <div class="w-33 form-group">
+            <label for="postcode">PLZ</label>
+            <input type="text" name="postcode" id="postcode" value="" class="form-control"/>
+        </div>
+        <div class="w-66 form-group">
+            <label for="place">Ort</label>
+            <input type="text" name="place" id="place" value="" class="form-control"/>
+        </div>
+    </div>
 
-	<div class="form-group">
-		<label for="email">E-Mail<em>*</em></label>
-		<input type="email" name="email" id="email" value="" class="required email form-control" />
-	</div>
-	<div class="form-group">
-		<label for="email2">E-Mail bestätigen<em>*</em></label>
-		<input type="email" name="email2" id="email2" value="" class="required email form-control" />
-	</div>
-	<div class="form-group">
-		<label for="phone">Telefon<em>*</em></label>
-		<input type="text" name="phone" id="phone" value="" class="required form-control" />
-	</div>
-	<div class="form-group">
-		<label for="comment">Bemerkungen</label>
-		<textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
-	</div>
-	<hr/>
-	<div class="form-group">
-		<label for="giftcard">Gutscheincode</label>
-		<input type="text" name="giftcard" id="giftcard" class="form-control"/>
-		<button class="btn btn-light" id="button-giftcard" type="button">Einlösen</button>
-	</div>
-	<hr/>
-	<strong>Ausgewählte Buchung:</strong>
-	<table class="table table-cart">
-		<tr>
-			<td><span id="cart_reservation_title">Keine Buchung ausgewählt</span></td>
-			<td><span id="cart_reservation_price"></span></td>
-		</tr>
-		<tr>
-			<td><span id="cart_giftcard_title">Kein Gutschein</span></td>
-			<td><span id="cart_giftcard_price"></span></td>
-		</tr>
-		<tr>
-			<th>Total</th>
-			<td><strong id="cart_total">-</strong></td>
-		</tr>
-	</table>
+    <div class="form-group">
+        <label for="email">E-Mail<em>*</em></label>
+        <input type="email" name="email" id="email" value="" class="required email form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="email2">E-Mail bestätigen<em>*</em></label>
+        <input type="email" name="email2" id="email2" value="" class="required email form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="phone">Telefon<em>*</em></label>
+        <input type="text" name="phone" id="phone" value="" class="required form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="comment">Bemerkungen</label>
+        <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
+    </div>
+    <hr/>
+    <div>
+        <div class="form-group">
+            <label for="giftcard">Gutscheincode</label>
+            <input type="text" name="giftcard" id="giftcard" class="form-control"/>
+            <button class="btn btn-light" id="button-giftcard" type="button">Einlösen</button>
+        </div>
+        <div class="form-text" id="giftcard-helper-text"></div>
+    </div>
+    <hr/>
+    <strong>Ausgewählte Buchung:</strong>
+    <table class="table table-cart">
+        <tr>
+            <td><span id="cart_reservation_title">Keine Buchung ausgewählt</span></td>
+            <td><span id="cart_reservation_price"></span></td>
+        </tr>
+        <tr>
+            <td><span id="cart_giftcard_title">Kein Gutschein</span></td>
+            <td><span id="cart_giftcard_price"></span></td>
+        </tr>
+        <tr>
+            <th>Total</th>
+            <td><strong id="cart_total">-</strong></td>
+        </tr>
+    </table>
 </div>
