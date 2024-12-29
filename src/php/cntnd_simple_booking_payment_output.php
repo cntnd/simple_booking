@@ -111,8 +111,6 @@ if ($editmode) {
         } else if ($_POST["cntnd_booking-payrexx_price_config"] == "save") {
             $simple_booking->savePaymentConfig($_POST);
             $is_payment = true;
-        } else if ($_POST["cntnd_booking-payrexx_config"] == "save") {
-            var_dump($_POST);
         } else {
             if (CntndSimpleBooking::validateUpdate($_POST)) {
                 $admin_success = $simple_booking->update($_POST);

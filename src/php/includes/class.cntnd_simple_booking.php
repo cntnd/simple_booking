@@ -471,121 +471,6 @@ class CntndSimpleBooking
         return "morning";
     }
 
-    public function store($post, $recurrent, $interval)
-    {
-        if (!$this->one_click) {
-            return $this->storeMany($post, $recurrent);
-        } else {
-            return $this->storeOne($post, $recurrent);
-        }
-    }
-
-    private function storeMany($post, $recurrent)
-    {
-        $date = key($post['bookings']);
-        $time = key($post['bookings'][$date]);
-        $amount = count($post['bookings'][$date][$time]);
-        if ($recurrent) {
-            $amount = $post['persons'];
-        }
-
-        $sql = "INSERT INTO :table (idart, date, time, persons, forename, surename, street, postcode, place, email, phone, comment) VALUES (:idart, ':date', ':time', :persons, ':forename', ':surname', ':street', ':postcode', ':place', ':email', ':phone', ':comment')";
-        $values = array(
-            'table' => self::$_vars['db']['bookings'],
-            'idart' => cSecurity::toInteger($this->idart),
-            'date' => DateTimeUtil::getInsertDate($date),
-            'time' => DateTimeUtil::getInsertDateTime($date, $time),
-            'persons' => cSecurity::toInteger($amount),
-            'forename' => $this->escape($post['forename']),
-            'surname' => $this->escape($post['surname']),
-            'street' => $this->escape($post['street']),
-            'postcode' => $this->escape($post['postcode']),
-            'place' => $this->escape($post['place']),
-            'email' => $this->escape($post['email']),
-            'phone' => $this->escape($post['phone']),
-            'comment' => $this->escape($post['comment'])
-        );
-        if ($this->db->query($sql, $values)) {
-            $this->informationEmail($post, $date, $time, $amount);
-            return true;
-        }
-        return false;
-    }
-
-    private function storeOne($post, $recurrent)
-    {
-        $booking = $post['booking'];
-        $date = DateTimeUtil::getDateFromIndexDateTime($booking);
-        $time = DateTimeUtil::getTimeFromIndexDateTime($booking);
-
-        $amount = 1;
-        if ($recurrent) {
-            $amount = $post['persons'];
-        }
-
-        $sql = "INSERT INTO :table (idart, date, time, persons, forename, surename, street, postcode, place, email, phone, comment) VALUES (:idart, ':date', ':time', :persons, ':forename', ':surname', ':street', ':postcode', ':place', ':email', ':phone', ':comment')";
-        $values = array(
-            'table' => self::$_vars['db']['bookings'],
-            'idart' => cSecurity::toInteger($this->idart),
-            'date' => DateTimeUtil::getInsertDate($date),
-            'time' => DateTimeUtil::getInsertDateTime($date, $time),
-            'persons' => cSecurity::toInteger($amount),
-            'forename' => $this->escape($post['forename']),
-            'surname' => $this->escape($post['surname']),
-            'street' => $this->escape($post['street']),
-            'postcode' => $this->escape($post['postcode']),
-            'place' => $this->escape($post['place']),
-            'email' => $this->escape($post['email']),
-            'phone' => $this->escape($post['phone']),
-            'comment' => $this->escape($post['comment'])
-        );
-        if ($this->db->query($sql, $values)) {
-            $this->informationEmail($post, $date, $time, $amount);
-            return true;
-        }
-        return false;
-    }
-
-    // legacy
-    private function informationEmail($post, $date, $time, $amount)
-    {
-        // use template to display email
-        $smarty = cSmartyFrontend::getInstance();
-        $smarty->assign('date', DateTimeUtil::getReadableDate($date));
-        $smarty->assign('time', DateTimeUtil::getReadableTimeFromDate($time));
-        $smarty->assign('name', $post['forename'] . " " . $post['surname']);
-        $smarty->assign('adresse', $post['street']);
-        $smarty->assign('plz_ort', $post['postcode'] . " " . $post['place']);
-        $smarty->assign('telefon', $post['phone']);
-        $smarty->assign('bemerkungen', $post['comment']);
-        $smarty->assign('email', $post['email']);
-        $smarty->assign('personen', $amount);
-        $smarty->assign('sauna', $this->subject['booking_title']);
-        $body = $smarty->fetch('email-booking.html');
-
-        if (!$this->debug) {
-            $mailer = new cMailer();
-
-            // Create a message
-            $mail = Swift_Message::newInstance($this->subject['default'])
-                ->setFrom($this->mailto)
-                ->setTo($post['email'])
-                ->setBody($body, 'text/html');
-
-            // Send copy
-            if ($this->email_copy['default']) {
-                $mail->addCc($this->email_copy['mailto']);
-            }
-
-            // Send the message
-            $result = $mailer->send($mail);
-        } else {
-            var_dump($body);
-            $result = true;
-        }
-        return $result;
-    }
-
     public function load($daterange)
     {
         $dates = DateTimeUtil::getDatesFromDaterange($daterange, $this->show_past);
@@ -675,6 +560,7 @@ class CntndSimpleBooking
         return false;
     }
 
+    // todo check if necessary
     public function update($post)
     {
         if ($post['action'] == 'delete') {

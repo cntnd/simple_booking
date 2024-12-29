@@ -259,6 +259,7 @@ cInclude('module', 'includes/style.cntnd_simple_booking_input.php');
         </div>
     </fieldset>
 
+    <!-- todo remove -->
     <fieldset name="email">
         <legend><?= mi18n("EMAIL_TITLE") ?></legend>
         <div class="form-group">
