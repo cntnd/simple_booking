@@ -34,6 +34,7 @@
     $("#button-giftcard").click(function () {
         const giftcard = $("#giftcard");
         const amount = price();
+        const helperText = $("#giftcard-helper-text");
 
         if ((giftcard.val() !== undefined || giftcard.val() !== "") && amount !== undefined) {
             $.ajax({
@@ -41,7 +42,6 @@
                 url: "https://giftcard.schuepfenried.ch/api/giftcard/balance",
                 data: {giftcard: giftcard.val(), amount: amount}
             }).done(function (result) {
-                const helperText = $("#giftcard-helper-text");
                 if (result.status === "sufficient" || result.status === "insufficient") {
                     $("#giftcard_uuid").val(giftcard.val());
                     updateGiftcard(result);
@@ -54,15 +54,9 @@
                 }
             });
         } else if (giftcard.val() === undefined || giftcard.val() === "") {
-            // todo
-            new bootstrap.Tooltip(giftcard, {
-                title: "Bitte einen Gutscheincode eingeben"
-            }).show();
+            helperText.text("Bitte einen Gutscheincode eingeben");
         } else {
-            // todo
-            new bootstrap.Tooltip(giftcard, {
-                title: "Bitte zuerst einen Termin und die Anzahl Personen auswählen"
-            }).show();
+            helperText.text("Bitte zuerst einen Termin und die Anzahl Personen auswählen");
         }
     });
 
