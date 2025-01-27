@@ -91,8 +91,12 @@
     function updateGiftcard(balance) {
         let amount = price();
         let remaining = amount;
+        console.log(balance);
         if (amount !== undefined) {
-            if (balance.remaining !== 0) {
+            if (balance.status === "sufficient") {
+                remaining = 0;
+            }
+            else if (balance.remaining !== 0) {
                 remaining = balance.remaining;
                 amount = amount - remaining;
             }

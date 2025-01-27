@@ -17,7 +17,7 @@ CREATE TABLE `cntnd_payment` (
   `booking_description` varchar(255) DEFAULT NULL,
   `booking_quantity` int(11) NOT NULL,
   `booking_amount` int(11) NOT NULL,
-  `transaction_id` int(11) DEFAULT NULL,
+  `transaction_id` varchar(255) DEFAULT NULL,
   `mut_date` datetime DEFAULT NULL,
   `status` varchar(255) NOT NULL DEFAULT 'open'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
