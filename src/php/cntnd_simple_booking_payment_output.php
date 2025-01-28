@@ -64,7 +64,7 @@ cInclude('module', 'includes/class.cntnd_simple_booking.php');
 
 // other/vars
 $smarty = cSmartyFrontend::getInstance();
-$simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $email_copy, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart);
+$simple_booking = new CntndSimpleBooking($booking_label, $daterange, $config_reset, $mailto, $email_copy, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart);
 
 if ($editmode) {
     cInclude('module', 'includes/script.cntnd_core_output.php');
