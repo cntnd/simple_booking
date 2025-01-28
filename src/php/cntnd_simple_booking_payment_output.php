@@ -9,6 +9,7 @@ $editmode = cRegistry::isBackendEditMode();
 
 // input/vars
 $booking_title = "CMS_VALUE[22]";
+$booking_label = "CMS_VALUE[50]";
 $daterange = "CMS_VALUE[1]";
 $config_reset = "CMS_VALUE[2]";
 $mailto = "CMS_VALUE[3]";
@@ -68,17 +69,16 @@ $simple_booking = new CntndSimpleBooking($daterange, $config_reset, $mailto, $em
 if ($editmode) {
     cInclude('module', 'includes/script.cntnd_core_output.php');
     echo "\n<script>\n$(document).ready(function() {\n";
-    echo "const prices = ".$simple_booking->priceConfigJson().";\n";
+    echo "const prices = " . $simple_booking->priceConfigJson() . ";\n";
     cInclude('module', 'includes/script.cntnd_simple_booking_output.php');
     echo "\n});\n</script>\n";
     if ($bootstrap_fallback) {
         cInclude('module', 'includes/style.cntnd_simple_booking_output-fallback.php');
     }
     cInclude('module', 'includes/style.cntnd_simple_booking_output.php');
-}
-else {
+} else {
     echo "\n<script>\n$(document).ready(function() {\n";
-    echo "const prices = ".$simple_booking->priceCartJson().";\n";
+    echo "const prices = " . $simple_booking->priceCartJson() . ";\n";
     cInclude('module', 'includes/script.cntnd_simple_booking_cart_output.php');
     echo "\n});\n</script>\n";
 }
@@ -324,6 +324,7 @@ if ($editmode) {
     echo '<input type="hidden" name="idart" value="' . $idart . '" />';
     echo '<input type="hidden" name="redirect" value="' . $redirect . '" />';
     echo '<input type="hidden" name="giftcard_uuid" id="giftcard_uuid"/>';
+    echo '<input type="hidden" name="booking_label" value="' . $booking_label . '"/>';
     echo '</form>';
     echo '</div>';
 }

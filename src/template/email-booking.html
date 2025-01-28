@@ -1,32 +1,79 @@
-<p>
-	<b>Sie haben folgende Reservation getätigt:</b><br />
-	<i>
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Sauna Schüpfenried</title>
+	<style type="text/css">
+		body {
+			background-color: #CCDDFF;
+			color: rgb(72,101,152);
+			font-family: Arial, Helvetica, sans-serif;
+			margin-top: 40px;
+		}
+
+		body > div {
+			width: 640px;
+			margin: 0 auto;
+		}
+
+		h1,h2,h3,p, i {
+			margin: 0 0 1rem 0;
+		}
+	</style>
+</head>
+<body>
+
+<div>
+	<img src="https://www.schuepfenried.ch/hof/upload/bilder/reservation.jpg" width="640" alt="Gutschein">
+
+	<h2>Sie haben folgende Reservation getätigt:</h2>
+	<p>
 		(Sie erhalten eine Nachricht, sobald die Reservation definitiv bestätigt wird;<br />
 		der gewählte Zeitraum wird dann im Kalender rot markiert.)
-	</i>
-</p>
-<table>
-	<tr>
-		<td><b>Sauna:</b></td><td><b>{$sauna}</b></td>
-		</tr><tr>
-		<td>Datum:</td><td>{$date}</td>
-		</tr><tr>
-		<td>Zeit:</td><td>{$time}</td>
-		</tr><tr>
-		<td>Anzahl Personen:</td><td>{$personen}</td>
-		</tr><tr>
-		<td colspan="2"><hr /></td>
-		</tr><tr>
-		<td>Name:</td><td>{$name}</td>
-		</tr><tr>
-		<td>Adresse:</td><td>{$adresse}</td>
-		</tr><tr>
-		<td>PLZ Ort:</td><td>{$plz_ort}</td>
-		</tr><tr>
-		<td>E-Mail:</td><td>{$email}</td>
-		</tr><tr>
-		<td>Telefon:</td><td>{$telefon}</td>
-		</tr><tr>
-		<td>Bemerkungen:</td><td>{$bemerkungen}</td>
-	</tr>
-</table>
+	</p>
+
+	<table width="100%">
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Sauna:</td>
+			<td><strong>{$sauna}</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Datum:</td>
+			<td><strong>{$date}</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Zeit:</td>
+			<td><strong>{$time}</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Anzahl Personen:</td>
+			<td><strong>{$personen}</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Ihre Bemerkungen:</td>
+			<td>{$bemerkungen}</td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Vorname, Name:</td>
+			<td>{$name}</td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Strasse:</td>
+			<td>{$adresse}</td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">PLZ Ort:</td>
+			<td>{$plz_ort}</td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">E-Mail:</td>
+			<td>{$email}</td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Telefon:</td>
+			<td>{$telefon}</td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>

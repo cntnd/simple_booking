@@ -9,6 +9,7 @@ cInclude('module', 'includes/class.cntnd_util.php');
 class CntndSimpleBooking
 {
 
+    private $booking_label;
     private $daterange;
     private $mailto;
     private $email_copy;
@@ -36,8 +37,9 @@ class CntndSimpleBooking
         )
     );
 
-    function __construct($daterange, $config_reset, $mailto, $email_copy, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart)
+    function __construct($booking_label, $daterange, $config_reset, $mailto, $email_copy, $subject, $blocked_days, $one_click, $show_daterange, $show_past, $lang, $client, $idart)
     {
+        $this->booking_label = $booking_label;
         $this->daterange = $daterange;
         $this->mailto = $mailto;
         $this->email_copy = $email_copy;
@@ -591,7 +593,7 @@ class CntndSimpleBooking
         $smarty->assign('personen', $record->persons);
         $smarty->assign('bemerkungen', $record->comment);
         $smarty->assign('message', $post['bemerkungen']);
-        $smarty->assign('sauna', $this->subject['booking_title']);
+        $smarty->assign('sauna', $this->booking_label);
         $body = $smarty->fetch('email-reserved.html');
 
         if (!$this->debug) {
@@ -628,7 +630,7 @@ class CntndSimpleBooking
         $smarty->assign('personen', $record->persons);
         $smarty->assign('bemerkungen', $record->comment);
         $smarty->assign('message', $post['bemerkungen']);
-        $smarty->assign('sauna', $this->subject['booking_title']);
+        $smarty->assign('sauna', $this->booking_label);
         $body = $smarty->fetch('email-declined.html');
 
         if (!$this->debug) {

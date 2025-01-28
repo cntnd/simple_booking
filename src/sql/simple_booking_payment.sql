@@ -60,6 +60,7 @@ CREATE TABLE `cntnd_simple_booking_payment` (
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `comment` text DEFAULT NULL,
+  `booking_label` varchar(255) DEFAULT NULL,
   `create_date` datetime NOT NULL DEFAULT current_timestamp(),
   `mut_date` datetime DEFAULT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'blocked'
@@ -119,6 +120,7 @@ CREATE TABLE `cntnd_simple_booking_payment_history` (
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `comment` text DEFAULT NULL,
+  `booking_label` varchar(255) DEFAULT NULL,
   `create_date` datetime NOT NULL DEFAULT current_timestamp(),
   `mut_date` datetime DEFAULT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'blocked'

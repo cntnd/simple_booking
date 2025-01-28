@@ -1,20 +1,60 @@
-<p>
-	<b>Wir bestätigen Ihnen folgende Reservation definitiv:</b><br />
-	<i>Der gewählte Zeitraum ist nun im Kalender rot markiert.</i>
-</p>
-<table>
-	<tr>
-		<td><b>Sauna:</b></td><td><b>{$sauna}</b></td>
-		</tr><tr>
-		<td>Datum:</td><td>{$date}</td>
-		</tr><tr>
-		<td>Zeit:</td><td>{$time}</td>
-		</tr><tr>
-		<td>Anzahl Personen:</td><td>{$personen}</td>
-		</tr><tr>
-		<td>Bemerkungen:</td><td>{$bemerkungen}</td>
-	</tr>
-</table>
-<hr />
-Nachricht:<br />
-{$message}
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Sauna Schüpfenried</title>
+	<style type="text/css">
+		body {
+			background-color: #CCDDFF;
+			color: rgb(72,101,152);
+			font-family: Arial, Helvetica, sans-serif;
+			margin-top: 40px;
+		}
+
+		body > div {
+			width: 640px;
+			margin: 0 auto;
+		}
+
+		h1,h2,h3,p, i {
+			margin: 0 0 1rem 0;
+		}
+	</style>
+</head>
+<body>
+
+<div>
+	<img src="https://www.schuepfenried.ch/hof/upload/bilder/reservation.jpg" width="640" alt="Gutschein">
+
+	<h2>Wir bestätigen Ihnen folgende Reservation definitiv:</h2>
+	<p>Der gewählte Zeitraum ist nun im Kalender rot markiert.</p>
+
+	<table width="100%">
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Sauna:</td>
+			<td><strong>{$sauna}</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Datum:</td>
+			<td><strong>{$date}</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Zeit:</td>
+			<td><strong>{$time}</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Anzahl Personen:</td>
+			<td><strong>{$personen}</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Ihre Bemerkungen:</td>
+			<td>{$bemerkungen}</td>
+		</tr>
+		<tr>
+			<td style="width: 33%; padding: 10px 0;">Nachricht:</td>
+			<td>{$message}</td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>

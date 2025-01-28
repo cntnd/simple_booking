@@ -66,6 +66,7 @@ $email_copy_declined = (bool) "CMS_VALUE[42]";
 if (!is_bool($email_copy_declined)) {
     $email_copy_declined = false;
 }
+$booking_label = "CMS_VALUE[50]";
 
 // other/vars
 if (empty($interval_slots) || empty($timerange_from)) {
@@ -164,6 +165,12 @@ cInclude('module', 'includes/style.cntnd_simple_booking_input.php');
 
     <fieldset name="configuration">
         <legend><?= mi18n("RESERVATION_TITLE") ?></legend>
+
+        <div class="form-group">
+            <label for="booking_label"><?= mi18n("BOOKING_LABEL") ?></label>
+            <input id="booking_label" type="text" name="CMS_VAR[50]" value="<?= $booking_label ?>"/>
+        </div>
+
         <div class="form-group">
             <div class="form-check form-check-inline">
                 <input id="recurrent" class="form-check-input" type="checkbox" name="CMS_VAR[7]" value="true" <?php if ($recurrent) { echo 'checked'; } ?> />

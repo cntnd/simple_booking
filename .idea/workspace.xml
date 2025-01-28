@@ -7,10 +7,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="fix #14">
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="change transaction_id to string">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_cart_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_cart_output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_input.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_input.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sql/simple_booking_payment.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/simple_booking_payment.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/email-booking.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/email-booking.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/email-declined.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/email-declined.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/template/email-reserved.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/template/email-reserved.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +145,8 @@
       <workItem from="1735416181455" duration="12224000" />
       <workItem from="1737374236258" duration="1908000" />
       <workItem from="1737385464298" duration="629000" />
-      <workItem from="1737980823845" duration="1345000" />
+      <workItem from="1737980823845" duration="2102000" />
+      <workItem from="1737990815463" duration="2428000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1632898020246</created>
@@ -408,7 +414,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735652678543</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="change transaction_id to string">
+      <option name="closed" value="true" />
+      <created>1737983617501</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1737983617501</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -426,7 +440,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix #5" />
     <MESSAGE value="add title of booking for emails" />
     <MESSAGE value="2.1.1 admin fix" />
     <MESSAGE value="add admin copy" />
@@ -451,6 +464,7 @@
     <MESSAGE value="remove stuff #11" />
     <MESSAGE value="fix #15" />
     <MESSAGE value="fix #14" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix #14" />
+    <MESSAGE value="change transaction_id to string" />
+    <option name="LAST_COMMIT_MESSAGE" value="change transaction_id to string" />
   </component>
 </project>
