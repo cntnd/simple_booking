@@ -7,7 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="add booking label" />
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="templates">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/includes/class.datetime.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.datetime.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -138,6 +142,9 @@
       <workItem from="1737385464298" duration="629000" />
       <workItem from="1737980823845" duration="2102000" />
       <workItem from="1737990815463" duration="2491000" />
+      <workItem from="1738051859487" duration="961000" />
+      <workItem from="1738055168170" duration="3709000" />
+      <workItem from="1739538525432" duration="718000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1632898020246</created>
@@ -421,7 +428,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738051610137</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="add booking label">
+      <option name="closed" value="true" />
+      <created>1738051884023</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1738051884023</updated>
+    </task>
+    <task id="LOCAL-00039" summary="templates">
+      <option name="closed" value="true" />
+      <created>1738052830247</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1738052830247</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -439,7 +462,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2.1.1 admin fix" />
     <MESSAGE value="add admin copy" />
     <MESSAGE value="v2.2.0" />
     <MESSAGE value="v3.0.0 add payrexx dependency" />
@@ -464,6 +486,7 @@
     <MESSAGE value="fix #14" />
     <MESSAGE value="change transaction_id to string" />
     <MESSAGE value="add booking label" />
-    <option name="LAST_COMMIT_MESSAGE" value="add booking label" />
+    <MESSAGE value="templates" />
+    <option name="LAST_COMMIT_MESSAGE" value="templates" />
   </component>
 </project>

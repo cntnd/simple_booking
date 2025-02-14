@@ -168,8 +168,7 @@ class CntndSimpleBooking
 
     private function reccurentIndexByWeekday($weekday)
     {
-        $index_date = DateTimeUtil::getIndexFromWeekday($weekday);
-        $index = DateTimeUtil::getIndexFromDate(DateTimeUtil::getDateFromDaterange($this->daterange, $index_date));
+        $index = DateTimeUtil::getIndexFromDate(DateTimeUtil::getDateFromDaterange($this->daterange, $weekday));
         return $index;
     }
 

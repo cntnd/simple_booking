@@ -64,13 +64,16 @@ class DateTimeUtil
 
     public static function getDateFromDaterange($daterange, $index, $past = true)
     {
-        $dates = self::getDatesFromDaterange($daterange, $past);
-        if ($index > 0) {
-            $date = $dates[0];
-            $date->modify('+' . $index . ' day');
-            return $date;
+        $dates = DateTimeUtil::getStringsFromDaterange($daterange);
+        $result = new DateTime();
+        for ($i = 0; $i < 7; $i++) {
+            $date = new DateTime($dates[0]);
+            $date->modify("+" . $i . " days");
+            if ($date->format("w") == $index) {
+                $result = $date;
+            }
         }
-        return $dates[0];
+        return $result;
     }
 
     public static function getStringsFromDaterange($daterange)
