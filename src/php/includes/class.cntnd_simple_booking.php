@@ -175,7 +175,7 @@ class CntndSimpleBooking
     private function recurrentConfig()
     {
         $config = $this->config();
-
+		
         foreach ($this->blocked_days as $day => $blocked) {
             if (!$blocked) {
                 $index = $this->reccurentIndexByWeekday($day);
@@ -897,7 +897,7 @@ class CntndSimpleBooking
     public function payments()
     {
         // bookings
-        $sql = "SELECT * FROM :table WHERE idart = :idart ORDER BY date, time";
+        $sql = "SELECT * FROM :table WHERE idart = :idart ORDER BY date ASC, time";
         $values = array(
             'table' => self::$_vars['db']['bookings'],
             'idart' => cSecurity::toInteger($this->idart));
@@ -906,13 +906,14 @@ class CntndSimpleBooking
         while ($this->db->next_record()) {
             $readableDate = DateTimeUtil::getReadableDate($this->db->f('date'));
             $readableTime = DateTimeUtil::getReadableTimeFromDate($this->db->f('time'));
+			$index = DateTimeUtil::getFullIndexFromDateTime($this->db->f('time'));
             $title = $readableDate . " - " . $readableTime;
-            $bookings[$this->db->f('id')] = ["title" => $title];
+            $bookings[$this->db->f('id')] = ["title" => $title, "index" => $index];
         }
 
         // payments
         $references = implode(",", array_keys($bookings));
-        $sql = "SELECT * FROM :table WHERE reference_id IN (:references) ORDER BY id";
+        $sql = "SELECT * FROM :table WHERE reference_id IN (:references)";
         $values = array(
             'table' => self::$_vars['db']['payment'],
             'references' => $references);
@@ -921,7 +922,7 @@ class CntndSimpleBooking
         if ($result->num_rows > 0) {
             while ($this->db->nextRecord()) {
                 $referenceId = $this->db->f('reference_id');
-                $payments[] = [
+                $payments[$bookings[$referenceId]["index"]] = [
                     "title" => $bookings[$referenceId]["title"],
                     "name" => $this->db->f('forename') . " " . $this->db->f('surname'),
                     "email" => $this->db->f('email'),
@@ -932,6 +933,7 @@ class CntndSimpleBooking
                 ];
             }
         }
+		krsort($payments);
         return $payments;
     }
 
