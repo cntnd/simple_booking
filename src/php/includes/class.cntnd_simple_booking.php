@@ -175,7 +175,7 @@ class CntndSimpleBooking
     private function recurrentConfig()
     {
         $config = $this->config();
-		
+
         foreach ($this->blocked_days as $day => $blocked) {
             if (!$blocked) {
                 $index = $this->reccurentIndexByWeekday($day);
@@ -266,7 +266,7 @@ class CntndSimpleBooking
                     echo '<tr data-row="' . $id . '">';
                     echo '<td><input type="time" name="config[' . $index . '][' . $id . '][time]" class="form-control" placeholder="Zeit (HH:mm)" value="' . $dateConfig['time'] . '" required/></td>';
                     echo '<td>';
-                    echo '<input type="number" name="config[' . $index . '][' . $id . '][slots]" class="form-control" placeholder="Anzahl Slots" value="'.$dateConfig['slots'].'" required/><br />';
+                    echo '<input type="number" name="config[' . $index . '][' . $id . '][slots]" class="form-control" placeholder="Anzahl Slots" value="' . $dateConfig['slots'] . '" required/><br />';
                     echo '<select name="config[' . $index . '][' . $id . '][price_id]">';
                     echo '<option> - Preise auswählen</option>';
                     echo $this->priceConfigOptions($dateConfig['price_id']);
@@ -561,7 +561,6 @@ class CntndSimpleBooking
         return false;
     }
 
-    // todo check if necessary
     public function update($post)
     {
         if ($post['action'] == 'delete') {
@@ -579,6 +578,60 @@ class CntndSimpleBooking
             $this->confirmationEmail($post);
         }
         return $this->db->query($sql, $values);
+    }
+
+    public function order($post, $idart, $booking_label)
+    {
+        $date = DateTimeUtil::getDateFromIndexDateTime($post['booking']);
+        $time = DateTimeUtil::getTimeFromIndexDateTime($post['booking']);
+
+        $insert_data = DateTimeUtil::getInsertDate($date);
+        $insert_time = DateTimeUtil::getInsertDateTime($date, $time);
+
+        // booking
+        $sql = "INSERT INTO :table (idart, date, time, persons, forename, surname, street, postcode, place, email, phone, comment, booking_label, status) VALUES (:idart, ':date', ':time', :persons, ':forename', ':surname', ':street', ':postcode', ':place', ':email', ':phone', ':comment', ':booking_label', ':status')";
+        $values = array(
+            'table' => self::$_vars['db']['bookings'],
+            'idart' => $idart,
+            'date' => $insert_data,
+            'time' => $insert_time,
+            'persons' => $post['persons'],
+            'forename' => $post['forename'],
+            'surname' => $post['surname'],
+            'street' => $post['street'],
+            'postcode' => $post['postcode'],
+            'place' => $post['place'],
+            'email' => $post['email'],
+            'phone' => $post['phone'],
+            'comment' => $post['comment'],
+            'booking_label' => $booking_label,
+            'status' => 'reserved');
+        $result = $this->db->query($sql, $values);
+        $reference_id = $this->db->getLastInsertedId();
+
+        // payment
+        $sql = "INSERT INTO :table (reference_id, amount, forename, surname, street, postcode, place, email, phone, booking_description, status) VALUES (:reference_id, :amount, ':forename', ':surname', ':street', ':postcode', ':place', ':email', ':phone', ':booking_description', ':status')";
+        $values = array(
+            'table' => self::$_vars['db']['payment'],
+            'reference_id' => $reference_id,
+            'amount' => 0,
+            'forename' => $post['forename'],
+            'surname' => $post['surname'],
+            'street' => $post['street'],
+            'postcode' => $post['postcode'],
+            'place' => $post['place'],
+            'email' => $post['email'],
+            'phone' => $post['phone'],
+            'comment' => $post['comment'],
+            'booking_description' => 'Manuelle Buchung',
+            'status' => 'directOrder');
+        $this->db->query($sql, $values);
+
+        if ($result) {
+            $data = ['resid' => $reference_id, 'bemerkungen' => $post['comment']];
+            $this->confirmationEmail($data);
+        }
+        return $result;
     }
 
     // legacy
@@ -837,7 +890,7 @@ class CntndSimpleBooking
         $options = "";
         foreach ($config as $price_id => $name) {
             $checked = "";
-            if (!empty($select) && (int) $select == (int) $price_id) {
+            if (!empty($select) && (int)$select == (int)$price_id) {
                 $checked = "selected";
             }
             $options = $options . '<option value="' . $price_id . '" ' . $checked . '>' . $name . '</option>' . "\n";
@@ -906,7 +959,7 @@ class CntndSimpleBooking
         while ($this->db->next_record()) {
             $readableDate = DateTimeUtil::getReadableDate($this->db->f('date'));
             $readableTime = DateTimeUtil::getReadableTimeFromDate($this->db->f('time'));
-			$index = DateTimeUtil::getFullIndexFromDateTime($this->db->f('time'));
+            $index = DateTimeUtil::getFullIndexFromDateTime($this->db->f('time'));
             $title = $readableDate . " - " . $readableTime;
             $bookings[$this->db->f('id')] = ["title" => $title, "index" => $index];
         }
@@ -933,7 +986,7 @@ class CntndSimpleBooking
                 ];
             }
         }
-		krsort($payments);
+        krsort($payments);
         return $payments;
     }
 
@@ -944,6 +997,8 @@ class CntndSimpleBooking
                 return "Betrag offen";
             case "success":
                 return "Bezahlt";
+            case "directOrder":
+                return "Manuelle Buchung";
         }
         return "unbekannter Status";
     }

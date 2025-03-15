@@ -7,10 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="templates">
+    <list default="true" id="6581b78f-763c-457d-bfe2-55a68a732193" name="Default Changelist" comment="fixes">
+      <change afterPath="$PROJECT_DIR$/src/template/admin-order-form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/template/admin-order-liste.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lang/lang_de_CH.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/lang/lang_de_CH.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/cntnd_simple_booking_payment_output.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.cntnd_simple_booking.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/php/includes/class.datetime.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/class.datetime.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_output.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/php/includes/script.cntnd_simple_booking_output.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,24 +60,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/work/workspace/cntnd/simple_booking&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/work/workspace/cntnd/simple_booking/src/template",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\work\workspace\cntnd\simple_booking\src\sql" />
       <recent name="C:\work\workspace\cntnd\simple_booking\src\template" />
+      <recent name="C:\work\workspace\cntnd\simple_booking\src\sql" />
       <recent name="C:\work\workspace\cntnd\simple_booking\src\php" />
       <recent name="C:\work\workspace\cntnd\simple_booking" />
       <recent name="C:\work\workspace\cntnd\simple_booking\src\php\includes" />
@@ -144,7 +148,10 @@
       <workItem from="1737990815463" duration="2491000" />
       <workItem from="1738051859487" duration="961000" />
       <workItem from="1738055168170" duration="3709000" />
-      <workItem from="1739538525432" duration="718000" />
+      <workItem from="1739538525432" duration="788000" />
+      <workItem from="1740155580051" duration="1277000" />
+      <workItem from="1741962790014" duration="946000" />
+      <workItem from="1741964193795" duration="9954000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1632898020246</created>
@@ -444,7 +451,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738052830247</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="fixes">
+      <option name="closed" value="true" />
+      <created>1739539443252</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1739539443253</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -462,7 +477,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add admin copy" />
     <MESSAGE value="v2.2.0" />
     <MESSAGE value="v3.0.0 add payrexx dependency" />
     <MESSAGE value="fixed new field names" />
@@ -487,6 +501,7 @@
     <MESSAGE value="change transaction_id to string" />
     <MESSAGE value="add booking label" />
     <MESSAGE value="templates" />
-    <option name="LAST_COMMIT_MESSAGE" value="templates" />
+    <MESSAGE value="fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes" />
   </component>
 </project>

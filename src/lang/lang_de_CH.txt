@@ -45,3 +45,4 @@ VALIDATION=Es gab ein Fehler:
 VALIDATION_DATES=Bitte wählen Sie mindestens einen freien Platz aus
 VALIDATION_FREE_SLOTS=Es ist möglich, dass in der Zwischenzeit alle Slots ausgebucht oder zu wenig Freie Slots verfügbar sind. Bitte wählen sie einen anderen Zeitraum aus.
 VALIDATION_REQUIRED=Bitte füllen Sie alle Felder mit "*" aus
+ADMIN_ORDER_FAILURE=Bei der manuellen Buchung gab es einen Fehler.

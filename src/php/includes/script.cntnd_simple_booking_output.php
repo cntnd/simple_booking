@@ -128,3 +128,20 @@
     $('.cntnd_booking-admin-timeslot > .timeslot').text('');
     $('.cntnd_booking-admin-timeslot').addClass('hide');
   }
+
+  // order
+  $('.cntnd_booking-admin-order-booking').click(function(){
+      let booking = $(this).val();
+      $('#cntnd_booking-admin-order_booking').val(booking);
+
+      let res = $(this).parent();
+      console.log(res.position());
+      let admin = $('.cntnd_booking-admin-order-action');
+      admin.width(admin.width());
+      admin.css('position','absolute').css('top',res.position().top);
+  });
+
+  $('#cntnd_booking-admin-order').submit(function() {
+      alert('cntnd_booking-admin-order');
+      return false;
+  });

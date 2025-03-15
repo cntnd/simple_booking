@@ -103,7 +103,9 @@ if (empty($daterange) or !$has_config) {
 if ($editmode) {
     // ADMIN
     if ($_POST) {
-        if ($_POST["cntnd_booking-config"] == "save") {
+        if ($_POST["cntnd_booking-order"] == "save") {
+            $order_error = !$simple_booking->order($_POST['cntnd_booking-admin-order'], $idart, $booking_label);
+        } else if ($_POST["cntnd_booking-config"] == "save") {
             $simple_booking->saveConfig($_POST);
         } else if ($_POST["cntnd_booking-payrexx_price_name"] == "save") {
             $simple_booking->savePaymentName($_POST);
@@ -137,11 +139,16 @@ if ($editmode) {
         echo '<hr />';
         echo '<div class="cntnd_alert cntnd_alert-danger">' . mi18n("ADMIN_FAILURE") . '</div>';
     }
+    if ($order_error) {
+        echo '<hr />';
+        echo '<div class="cntnd_alert cntnd_alert-danger">' . mi18n("ADMIN_ORDER_FAILURE") . '</div>';
+    }
 
     // TABS
 
     echo '<ul class="tabs" id="simple_booking_admin" role="tablist">';
     echo '<li class="tabs__tab ' . (($has_config || $interval) && !$is_payment ? "active" : "") . '" data-toggle="tabs" data-target="simple_booking_admin-content">Admin</li>';
+    echo '<li class="tabs__tab" data-toggle="tabs" data-target="simple_booking_order">Buchung</li>';
     // todo check
     if (!$interval) {
         echo '<li class="tabs__tab ' . (!$has_config ? "active" : "") . '" data-toggle="tabs" data-target="simple_booking_config_content">Konfiguration</li>';
@@ -196,6 +203,41 @@ if ($editmode) {
 
     echo '</div>';
 
+    echo '</div>';
+    // endregion
+
+    // CONTENT: ORDER
+    echo '<div id="simple_booking_order" class="tabs__content--pane">';
+
+    echo '<div class="m-2">';
+
+    echo '<h5>Manuelle Buchungen</h5>';
+
+    echo '<div class="d-flex pt-2">';
+    echo '<div class="w-50 pr-10">';
+    $smarty->assign('data', $simple_booking->renderData($recurrent));
+    $smarty->display('admin-order-liste.html');
+    echo '</div>';
+    echo '<div class="w-50 pl-10">';
+
+    echo '<div class="cntnd_booking-admin-order-action">';
+    echo '<div class="form-vertical card">
+            <div class="card-body">
+                <div class="cntnd_booking-admin-error cntnd_alert cntnd_alert-primary hide">' . mi18n("ADMIN_SUBMIT_ERROR") . '</div>
+                <form method="post" id="cntnd_booking-admin-order" name="cntnd_booking-admin-order">';
+    $smarty->display('admin-order-form.html');
+    echo'           <input type="hidden" name="cntnd_booking-admin-order[booking]" id="cntnd_booking-admin-order_booking" />
+                    <input type="hidden" name="cntnd_booking-order" value="save" />
+                    <button class="btn btn-primary" type="submit">' . mi18n("SAVE") . '</button>
+                </form>
+            </div>
+          </div>';
+    echo '</div>';
+
+    echo '</div>';
+
+    echo '</div>';
+    echo '</div>';
     echo '</div>';
     // endregion
 
